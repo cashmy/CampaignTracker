@@ -1,0 +1,13 @@
+The user will need the following items:
+
+display name
+email 
+role (admin, user)
+photoURL (avatar)
+allowMultiLanguage
+initialUrl (?) (after logging in)
+
+Layout (default)
+Theme Mode (dark)
+Nav Style (Mini-toggle)
+Layout Type (full-width)
