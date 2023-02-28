@@ -2,7 +2,7 @@
 import { BsFillPeopleFill } from "react-icons/bs";
 import { CgRename } from "react-icons/cg";
 import { BsTable } from "react-icons/bs";
-import { MdCampaign, MdOutlineContactPhone } from "react-icons/md";
+import { MdCampaign, MdOutlineContactPhone, MdDashboard } from "react-icons/md";
 
 const routesConfig = [
   {
@@ -16,8 +16,16 @@ const routesConfig = [
         title: "Dashboard",
         messageId: "sidebar.app.dashboard.campaigns",
         type: "item",
-        icon: <MdCampaign />,
+        icon: <MdDashboard />,
         url: "/dashboards/campaigns",
+      },
+      {
+        id: 'campaigns',
+        title: 'Campaigns',
+        messageId: 'sidebar.apps.campaigns',
+        type: 'item',
+        icon: <MdCampaign />,
+        url: '/campaigns',
       },
       {
         id: 'players',

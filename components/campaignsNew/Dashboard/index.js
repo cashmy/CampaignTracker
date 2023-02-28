@@ -4,13 +4,13 @@ import { Card, Grid, Typography } from "@mui/material";
 
 import CampaignHeader from "./CampaignHeader";
 import CampaignList from "./CampaignList";
-import AdventureList from "../adventures/AdventureList";
+import AdventureList from "../../adventures/AdventureList";
 import { CampaignRecord as emptyCampaignRecord } from "dataModels/campaign";
 import { AdventureRecord as emptyAdventureRecord } from "dataModels/adventure";
-import SessionList from "../sessions/SessionList";
-import TimeLineList from "../timelines/TimeLineList";
+import SessionList from "../../sessions/SessionList";
+import TimeLineList from "../../timelines/TimeLineList";
 
-const CampaignDashboard = () => {
+const Sessions = () => {
   const [campaign, setCampaign] = useState(emptyCampaignRecord);
   const [adventure, setAdventure] = useState(emptyAdventureRecord);
 
@@ -63,4 +63,4 @@ const CampaignDashboard = () => {
     </>
   );
 };
-export default CampaignDashboard;
+export default Sessions;
