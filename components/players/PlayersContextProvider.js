@@ -3,44 +3,36 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useGetDataApi } from '@/../../lib/hooks/APIHooks';
 import { useRouter } from 'next/router';
-import { blue, green, red } from '@mui/material/colors';
+import { blue, green, red, orange } from '@mui/material/colors';
 
 const PlayersContext = createContext();
 const PlayersActionsContext = createContext();
 
 export const usePlayersContext = () => useContext(PlayersContext);
-
 export const usePlayersActionsContext = () => useContext(PlayersActionsContext);
 
 export const PlayersContextProvider = ({ children }) => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+  const API_URL = baseUrl + "players/";
   const router = useRouter();
   const { all } = router.query;
-  // const [{ apiData: labelList }] = useGetDataApi(
-  //   '/api/PlayersApp/labels/list',
-  //   []
-  // );
   const [{apiData: labelList }] = [
-      { id: 311, name: 'Crema', alias: 'crema', color: red[500] },
-      { id: 312, name: 'Personal', alias: 'personal', color: blue[500] },
-      { id: 313, name: 'Work', alias: 'work', color: green[500] },
+      { id: 311, name: 'Exp/Vet +DM', alias: 'crema', color: red[500] },
+      { id: 312, name: 'Veteran', alias: 'personal', color: blue[500] },
+      { id: 313, name: 'Experienced', alias: 'work', color: orange[500] },
+      { id: 314, name: 'Newbie', alias: 'work', color: green[500] },
   ] 
-  // const [{ apiData: folderList }] = useGetDataApi(
-  //   '/api/PlayersApp/folders/list',
-  //   []
   const [{ apiData: folderList }] = [
     { id: 121, name: 'All', alias: 'all' },
     { id: 122, name: 'Frequent', alias: 'frequent' },
     { id: 124, name: 'Starred', alias: 'starred' },
   ];
-
   const [pageView, setPageView] = useState('list');
-
   const [page, setPage] = useState(0);
-
   const [
     { apiData: PlayersList, loading },
     { setQueryParams, setData: setPlayersData, reCallAPI },
-  ] = useGetDataApi('/api/PlayersApp/Players/List', {}, {}, false);
+  ] = useGetDataApi(API_URL, {}, {}, false);
 
   useEffect(() => {
     setPage(0);

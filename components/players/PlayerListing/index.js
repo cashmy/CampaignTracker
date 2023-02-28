@@ -18,23 +18,15 @@ import {
 } from '../PlayersContextProvider';
 
 const PlayerListing = () => {
-  const { all, page, PlayerList } = usePlayersContext();
+  const { all, page, PlayersList } = usePlayersContext();
   const { onPageChange, setPlayerData } = usePlayersActionsContext();
-
   const infoViewActionsContext = useInfoViewActionsContext();
-
   const [filterText, onSetFilterText] = useState('');
-
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
-
   const [checkedPlayers, setCheckedPlayers] = useState([]);
-
   const [toDeletePlayers, setToDeletePlayers] = useState([]);
-
   const [isAddPlayer, onSetIsAddPlayer] = useState(false);
-
   const [isShowDetail, onShowDetail] = useState(false);
-
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 
   const handleAddPlayerOpen = () => {
@@ -85,28 +77,48 @@ const PlayerListing = () => {
     //   });
   };
 
+  const onChangeActive = (status, Player) => {
+    const selectedIdList = [Player.id];
+    alert('onChangeActive');
+    // putDataApi('/api/PlayerApp/update/starred', infoViewActionsContext, {
+    //   PlayerIds: selectedIdList,
+    //   status: status,
+    // })
+    //   .then((data) => {
+    //     onUpdateSelectedPlayer(data[0]);
+    //     infoViewActionsContext.showMessage(
+    //       data[0].isStarred
+    //         ? 'Player Marked as Starred Successfully'
+    //         : 'Player Marked as Unstarred Successfully'
+    //     );
+    //   })
+    //   .catch((error) => {
+    //     infoViewActionsContext.fetchError(error.message);
+    //   });
+  };
+
   const onUpdateSelectedPlayer = (Player) => {
     setPlayerData({
-      data: PlayerList?.data.map((item) => {
+      data: PlayersList?.map((item) => {
         if (item.id === Player.id) {
           return Player;
         }
         return item;
       }),
-      count: PlayerList?.count,
+      count: PlayersList?.length,
     });
   };
 
   const onUpdatePlayers = (Players) => {
     setPlayerData({
-      data: PlayerList?.data.map((item) => {
+      data: PlayersList?.map((item) => {
         const Player = Players.find((Player) => Player.id === item.id);
         if (Player) {
           return Player;
         }
         return item;
       }),
-      count: PlayerList?.count,
+      count: PlayersList?.length,
     });
   };
 
@@ -117,16 +129,16 @@ const PlayerListing = () => {
 
   const onGetFilteredItems = () => {
     if (filterText === '') {
-      return PlayerList?.data;
+      return PlayersList
     } else {
-      return PlayerList?.data.filter((Player) =>
-        Player.name.toUpperCase().includes(filterText.toUpperCase())
+      return PlayersList?.filter((Player) =>
+        Player.playerName.toUpperCase().includes(filterText.toUpperCase())
       );
     }
   };
 
   const onDeleteSelectedPlayers = () => {
-    postDataApi('/api/PlayerApp/delete/Player', infoViewActionsContext, {
+    postDataApi('http//localhost:5000/api/players/delete/player', infoViewActionsContext, {
       type: all[0],
       name: all[1],
       PlayerIds: toDeletePlayers,
@@ -148,6 +160,13 @@ const PlayerListing = () => {
     setDeleteDialogOpen(true);
   };
 
+  const onSelectPlayersForStatusChg = (PlayerIds) => {
+    // TODO : change status
+    alert("Changing status(es)")
+    // setToDeletePlayers(PlayerIds);
+    // setDeleteDialogOpen(true);
+  };
+
   const list = onGetFilteredItems();
 
   return (
@@ -159,6 +178,7 @@ const PlayerListing = () => {
           filterText={filterText}
           onUpdatePlayers={onUpdatePlayers}
           onSelectPlayersForDelete={onSelectPlayersForDelete}
+          onSelectPlayersForStatusChg={onSelectPlayersForStatusChg}
           onSetFilterText={onSetFilterText}
         />
       </AppsHeader>
@@ -168,6 +188,7 @@ const PlayerListing = () => {
           handleAddPlayerOpen={handleAddPlayerOpen}
           onChangeCheckedPlayers={onChangeCheckedPlayers}
           onChangeStarred={onChangeStarred}
+          onChangeActive={onChangeActive}
           checkedPlayers={checkedPlayers}
           onSelectPlayersForDelete={onSelectPlayersForDelete}
           onViewPlayerDetail={onViewPlayerDetail}
@@ -176,10 +197,10 @@ const PlayerListing = () => {
       </AppsContent>
 
       <Hidden smUp>
-        {PlayerList?.data?.length > 0 ? (
+        {PlayersList?.length > 0 ? (
           <AppsFooter>
             <AppsPagination
-              count={PlayerList?.count}
+              count={PlayersList?.length}
               page={page}
               onPageChange={onPageChange}
             />

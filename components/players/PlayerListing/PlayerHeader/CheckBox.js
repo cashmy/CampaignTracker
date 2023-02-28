@@ -9,7 +9,7 @@ const CheckBox = ({ checkedPlayers, setCheckedPlayers }) => {
 
   const onHandleMasterCheckbox = (event) => {
     if (event.target.checked) {
-      const PlayerIds = PlayersList?.data?.map((Player) => Player.id);
+      const PlayerIds = PlayersList?.map((Player) => Player.id);
       setCheckedPlayers(PlayerIds);
     } else {
       setCheckedPlayers([]);
@@ -29,11 +29,11 @@ const CheckBox = ({ checkedPlayers, setCheckedPlayers }) => {
         color="primary"
         indeterminate={
           checkedPlayers.length > 0 &&
-          checkedPlayers.length < PlayerList?.data.length
+          checkedPlayers.length < PlayersList?.length
         }
         checked={
-          PlayersList?.data.length > 0 &&
-          checkedPlayers.length === PlayersList?.data.length
+          PlayersList?.length > 0 &&
+          checkedPlayers.length === PlayersList?.length
         }
         onChange={onHandleMasterCheckbox}
       />

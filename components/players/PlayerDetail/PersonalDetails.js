@@ -8,125 +8,136 @@ import CakeOutlinedIcon from '@mui/icons-material/CakeOutlined';
 import { Fonts } from '@/../../lib/constants/AppEnums';
 import PropTypes from 'prop-types';
 
-const PersonalDetails = (props) => {
-  const { contact } = props;
-
+export const PersonalDetails = (props) => {
+  console.log("I am here")
   return (
-    <Box
-      sx={{
-        pb: 5,
-      }}
-    >
-      <Box
-        component="h4"
-        sx={{
-          mb: 4,
-          fontWeight: Fonts.SEMI_BOLD,
-        }}
-      >
-        {/* <IntlMessages id="contactApp.personalDetails" /> */}
-        Personal Details
-      </Box>
+    <div>Hi Cash</div>
+  )
+}
 
-      <div>
-        <Box
-          sx={{
-            mb: { xs: 2, md: 3 },
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <EmailOutlinedIcon
-            sx={{
-              color: (theme) => theme.palette.text.secondary,
-            }}
-          />
-          <Box
-            sx={{
-              ml: 3.5,
-            }}
-          >
-            {contact.email}
-          </Box>
-        </Box>
+// const PersonalDetails = (props) => {
+//   console.log("PROPS", props  )
+//   // const { player } = props;
+//   console.log('**PersonalDetails -> player', player);
+//   return (
+//     <Box
+//       sx={{
+//         pb: 5,
+//       }}
+//     >
+//       <Box
+//         component="h4"
+//         sx={{
+//           mb: 4,
+//           fontWeight: Fonts.SEMI_BOLD,
+//         }}
+//       >
+//         {/* <IntlMessages id="playerApp.personalDetails" /> */}
+//         Personal Details
+//       </Box>
 
-        <Box
-          sx={{
-            mb: { xs: 2, md: 3 },
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <PhoneOutlinedIcon
-            sx={{
-              color: (theme) => theme.palette.text.secondary,
-            }}
-          />
-          <Box
-            sx={{
-              ml: 3.5,
-            }}
-          >
-            {contact.contact}
-          </Box>
-        </Box>
+//       <div>
+//         <Box
+//           sx={{
+//             mb: { xs: 2, md: 3 },
+//             display: 'flex',
+//             alignItems: 'center',
+//           }}
+//         >
+//           <EmailOutlinedIcon
+//             sx={{
+//               color: (theme) => theme.palette.text.secondary,
+//             }}
+//           />
+//           <Box
+//             sx={{
+//               ml: 3.5,
+//             }}
+//           >
+//             Hi: {player.email}
+//           </Box>
+//         </Box>
 
-        <Box
-          sx={{
-            mb: { xs: 2, md: 3 },
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <LanguageIcon
-            sx={{
-              color: (theme) => theme.palette.text.secondary,
-            }}
-          />
-          <Box
-            sx={{
-              ml: 3.5,
-            }}
-          >
-            {contact.website ? (
-              contact.website
-            ) : (
-              // <IntlMessages id="common.na" />
-              NA
-            )}
-          </Box>
-        </Box>
+//         <Box
+//           sx={{
+//             mb: { xs: 2, md: 3 },
+//             display: 'flex',
+//             alignItems: 'center',
+//           }}
+//         >
+//           <PhoneOutlinedIcon
+//             sx={{
+//               color: (theme) => theme.palette.text.secondary,
+//             }}
+//           />
+//           <Box
+//             sx={{
+//               ml: 3.5,
+//             }}
+//           >
+//             {player.player}
+//           </Box>
+//         </Box>
 
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <CakeOutlinedIcon
-            sx={{
-              color: (theme) => theme.palette.text.secondary,
-            }}
-          />
-          <Box
-            sx={{
-              ml: 3.5,
-            }}
-          >
-            {contact.birthday ? (
-              contact.birthday
-            ) : (
-              // <IntlMessages id="common.na" />
-              NA
-            )}
-          </Box>
-        </Box>
-      </div>
-    </Box>
-  );
-};
+//         <Box
+//           sx={{
+//             mb: { xs: 2, md: 3 },
+//             display: 'flex',
+//             alignItems: 'center',
+//           }}
+//         >
+//           <LanguageIcon
+//             sx={{
+//               color: (theme) => theme.palette.text.secondary,
+//             }}
+//           />
+//           <Box
+//             sx={{
+//               ml: 3.5,
+//             }}
+//           >
+//             {player.website ? (
+//               player.website
+//             ) : (
+//               // <IntlMessages id="common.na" />
+//               NA
+//             )}
+//           </Box>
+//         </Box>
 
-export default PersonalDetails;
-PersonalDetails.propTypes = {
-  contact: PropTypes.object.isRequired,
-};
+//         <Box
+//           sx={{
+//             display: 'flex',
+//             alignItems: 'center',
+//           }}
+//         >
+//           <CakeOutlinedIcon
+//             sx={{
+//               color: (theme) => theme.palette.text.secondary,
+//             }}
+//           />
+//           <Box
+//             sx={{
+//               ml: 3.5,
+//             }}
+//           >
+//             {player.birthday ? (
+//               player.birthday
+//             ) : (
+//               // <IntlMessages id="common.na" />
+//               NA
+//             )}
+//           </Box>
+//         </Box>
+//       </div>
+//     </Box>
+//   );
+// };
+
+
+
+// export default PersonalDetails;
+
+// PersonalDetails.propTypes = {
+//   player: PropTypes.object.isRequired,
+// };

@@ -9,7 +9,7 @@ import { DialogActions } from '@mui/material';
 import Button from '@mui/material/Button';
 import PlayerActions from './PlayerActions';
 import OtherDetails from './OtherDetails';
-import PersonalDetails from './PersonalDetails';
+import { PersonalDetails } from './PersonalDetails';
 
 const PlayerDetail = (props) => {
   const {
@@ -21,14 +21,14 @@ const PlayerDetail = (props) => {
     onOpenEditPlayer,
   } = props;
 
-  const [Player, setPlayer] = useState(selectedPlayer);
+  const [player, setPlayer] = useState(selectedPlayer);
 
   useEffect(() => {
     setPlayer(selectedPlayer);
   }, [selectedPlayer]);
 
   const onDeletePlayer = () => {
-    onSelectPlayersForDelete([Player.id]);
+    onSelectPlayersForDelete([player.id]);
     onShowDetail(false);
   };
 
@@ -51,11 +51,11 @@ const PlayerDetail = (props) => {
             onChangeStarred={onChangeStarred}
             onDeletePlayer={onDeletePlayer}
             onOpenEditPlayer={onOpenEditPlayer}
-            Player={Player}
+            Player={player}
           />
         }
       >
-        {Player ? (
+        {player ? (
           <div>
             <Box
               sx={{
@@ -75,14 +75,14 @@ const PlayerDetail = (props) => {
                   alignItems: 'center',
                 }}
               >
-                {Player.image ? (
+                {player.avatarImage ? (
                   <Avatar
                     sx={{
                       width: 80,
                       height: 80,
                       mb: 2.5,
                     }}
-                    src={Player.image}
+                    src={"/assets/images/avatar/A12.jpg"}
                   />
                 ) : (
                   <Avatar
@@ -92,10 +92,10 @@ const PlayerDetail = (props) => {
                       mb: 2.5,
                     }}
                   >
-                    {Player.name[0].toUpperCase()}
+                    {player.playerName[0].toUpperCase()}
                   </Avatar>
                 )}
-                <Box component="h3">{Player.name}</Box>
+                <Box component="h3">{player.playerName}</Box>
               </Box>
             </Box>
 
@@ -106,11 +106,11 @@ const PlayerDetail = (props) => {
             >
               <AppGridContainer>
                 <Grid item xs={12} md={6}>
-                  <PersonalDetails Player={Player} />
+                  <PersonalDetails player={player} />
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                  <OtherDetails Player={Player} />
+                  <OtherDetails player={player} />
                 </Grid>
               </AppGridContainer>
             </Box>

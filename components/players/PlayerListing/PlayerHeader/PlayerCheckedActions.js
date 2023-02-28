@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { HiOutlineBolt } from 'react-icons/hi2';
 import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
 import PropTypes from 'prop-types';
 import IconButton from '@mui/material/IconButton';
@@ -12,12 +13,13 @@ import AppTooltip from '@/../../lib/components/AppTooltip';
 // import { putDataApi } from '@crema/hooks/APIHooks';
 import { useInfoViewActionsContext } from '@/../../lib/context/AppContextProvider/InfoViewContextProvider';
 
-const ContactCheckedActions = (props) => {
+const PlayerCheckedActions = (props) => {
   const {
-    checkedContacts,
-    setCheckedContacts,
-    onSelectContactsForDelete,
-    onUpdateContacts,
+    checkedPlayers,
+    setCheckedPlayers,
+    onSelectPlayersForDelete,
+    onSelectPlayersForStatusChg,
+    onUpdatePlayers,
   } = props;
 
   const infoViewActionsContext = useInfoViewActionsContext();
@@ -34,15 +36,15 @@ const ContactCheckedActions = (props) => {
 
   const onSelectLabel = (event) => {
     const labelType = event.target.value;
-    // TODO: Update the label for the selected contacts
+    // TODO: Update the label for the selected Players
     alert('onSelectLabel: ' + labelType);
     // putDataApi('/api/contactApp/update/label', infoViewActionsContext, {
-    //   contactIds: checkedContacts,
+    //   contactIds: checkedPlayers,
     //   type: +labelType,
     // })
     //   .then((data) => {
-    //     onUpdateContacts(data);
-    //     setCheckedContacts([]);
+    //     onUpdatePlayers(data);
+    //     setCheckedPlayers([]);
     //     onLabelClose();
     //     infoViewActionsContext.showMessage('Contact Updated Successfully');
     //   })
@@ -75,7 +77,26 @@ const ContactCheckedActions = (props) => {
               cursor: 'pointer',
               display: 'block',
             }}
-            onClick={() => onSelectContactsForDelete(checkedContacts)}
+            onClick={() => onSelectPlayersForDelete(checkedPlayers)}
+          />
+        </IconButton>
+      </AppTooltip>
+
+      <AppTooltip 
+        // title={<IntlMessages id="common.delete" />}
+        title="Change Status for Item(s)"
+      >
+        <IconButton
+          sx={{
+            color: (theme) => theme.palette.text.disabled,
+          }}
+        >
+          <HiOutlineBolt
+            sx={{
+              cursor: 'pointer',
+              display: 'block',
+            }}
+            onClick={() => onSelectPlayersForStatusChg(checkedPlayers)}
           />
         </IconButton>
       </AppTooltip>
@@ -112,26 +133,31 @@ const ContactCheckedActions = (props) => {
       >
         <MenuItem value={311} onClick={onSelectLabel}>
           {/* <IntlMessages id="common.crema" /> */}
-          Crema
+          Exp/Vet +DM
         </MenuItem>
         <MenuItem value={312} onClick={onSelectLabel}>
           {/* <IntlMessages id="common.personal" /> */}
-          Personal
+          Veteran
         </MenuItem>
         <MenuItem value={313} onClick={onSelectLabel}>
           {/* <IntlMessages id="common.work" /> */}
-          Work
+          Experienced
+        </MenuItem>
+        <MenuItem value={313} onClick={onSelectLabel}>
+          {/* <IntlMessages id="common.work" /> */}
+          Newbie
         </MenuItem>
       </Menu>
     </Box>
   );
 };
 
-export default ContactCheckedActions;
+export default PlayerCheckedActions;
 
-ContactCheckedActions.propTypes = {
-  checkedContacts: PropTypes.array.isRequired,
-  setCheckedContacts: PropTypes.func,
-  onSelectContactsForDelete: PropTypes.func,
-  onUpdateContacts: PropTypes.func,
+PlayerCheckedActions.propTypes = {
+  checkedPlayers: PropTypes.array.isRequired,
+  setCheckedPlayers: PropTypes.func,
+  onSelectPlayersForDelete: PropTypes.func,
+  onSelectPlayersForStatusChg: PropTypes.func,
+  onUpdatePlayers: PropTypes.func,
 };

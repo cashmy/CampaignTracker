@@ -8,7 +8,7 @@ import { Fonts } from '@/../../lib/constants/AppEnums';
 import { FiFacebook, FiTwitter } from 'react-icons/fi';
 
 const OtherDetails = (props) => {
-  const { contact } = props;
+  const { player } = props;
 
   return (
     <Box
@@ -46,11 +46,11 @@ const OtherDetails = (props) => {
               ml: 3.5,
             }}
           >
-            {contact.company ? (
-              contact.company
+            {player.company ? (
+              player.company
             ) : (
               // <IntlMessages id="common.na" />
-              NA
+              <text>NA</text>
             )}
           </Box>
         </Box>
@@ -73,11 +73,11 @@ const OtherDetails = (props) => {
               ml: 3.5,
             }}
           >
-            {contact.address ? (
-              contact.address
+            {player.address ? (
+              player.address
             ) : (
               // <IntlMessages id="common.na" />
-              NA
+              <text>NA</text>
             )}
           </Box>
         </Box>
@@ -100,11 +100,11 @@ const OtherDetails = (props) => {
               ml: 3.5,
             }}
           >
-            {contact.facebookId ? (
-              contact.facebookId
+            {player.facebookId ? (
+              player.facebookId
             ) : (
               // <IntlMessages id="common.na" />
-              NA
+              <text>NA</text>
             )}
           </Box>
         </Box>
@@ -126,11 +126,11 @@ const OtherDetails = (props) => {
               ml: 3.5,
             }}
           >
-            {contact.twitterId ? (
-              contact.twitterId
+            {player.twitterId ? (
+              player.twitterId
             ) : (
               // <IntlMessages id="common.na" />
-              NA
+              <text>NA</text>
             )}
           </Box>
         </Box>
@@ -142,5 +142,5 @@ const OtherDetails = (props) => {
 export default OtherDetails;
 
 OtherDetails.propTypes = {
-  contact: PropTypes.object.isRequired,
+  player: PropTypes.object.isRequired,
 };

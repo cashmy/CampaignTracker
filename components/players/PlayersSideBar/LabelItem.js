@@ -50,7 +50,7 @@ const PlayerSidebarListItemWrapper = styled(ListItem)(({ theme }) => {
 const LabelItem = ({ label }) => {
   return (
     <PlayerSidebarListItemWrapper
-      listItemButton
+      button
       to={`/apps/contact/label/${label.alias}`}
       component={AppNavLink}
       activeClassName="active"

@@ -76,14 +76,14 @@ const PlayerListItemMobile = ({
             }}
             component="span"
           >
-            {Player.image ? (
+            {Player.avatarImage ? (
               <Avatar
                 sx={{
                   backgroundColor: blue[500],
                   width: 36,
                   height: 36,
                 }}
-                src={Player.image}
+                src={Player.avatarImage}
               />
             ) : (
               <Avatar
@@ -93,7 +93,7 @@ const PlayerListItemMobile = ({
                   height: 36,
                 }}
               >
-                {Player.name[0].toUpperCase()}
+                {Player.playerName[0].toUpperCase()}
               </Avatar>
             )}
           </Box>
@@ -107,7 +107,7 @@ const PlayerListItemMobile = ({
               }}
               component="p"
             >
-              {Player.name}
+              {Player.playerName}
             </Box>
 
             <Box
@@ -119,7 +119,7 @@ const PlayerListItemMobile = ({
                 whiteSpace: 'nowrap',
               }}
             >
-              {Player.Player}
+              {Player.contact}
             </Box>
           </Box>
         </Box>

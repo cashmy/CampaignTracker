@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import AddPlayerForm from './AddPlayerForm';
 import AppDialog from '@/../../lib/components/AppDialog';
 import { useInfoViewActionsContext } from '@/../../lib/context/AppContextProvider/InfoViewContextProvider';
-// import { postDataApi, putDataApi } from '@@/../../lib/hooks/APIHooks';
-import { usePlayerActionsContext } from '../PlayersContextProvider';
+import { postDataApi, putDataApi } from '@@/../../lib/hooks/APIHooks';
+import { usePlayersActionsContext } from '../PlayersContextProvider';
 
 const validationSchema = yup.object({
   // name: yup.string().required(<IntlMessages id="validation.nameRequired" />),
@@ -31,22 +31,24 @@ const CreatePlayer = (props) => {
     selectPlayer,
     onUpdatePlayer,
   } = props;
-  // const infoViewActionsContext = useInfoViewActionsContext();
-  // const { reCallAPI } = usePlayerActionsContext();
-
+  const infoViewActionsContext = useInfoViewActionsContext();
+  const { reCallAPI } = usePlayersActionsContext();
   const [userImage, setUserImage] = useState(
-    selectPlayer && selectPlayer.image
+    selectPlayer && selectPlayer.avatarImage
       ? selectPlayer.image
       : '/assets/images/placeholder.jpg'
   );
+
   useEffect(() => {
     setUserImage(
-      selectPlayer && selectPlayer.image
-        ? selectPlayer.image
+      selectPlayer && selectPlayer.avatarImage
+        ? selectPlayer.avatarImage
         : '/assets/images/placeholder.jpg'
     );
   }, [selectPlayer]);
 
+  console.log({selectPlayer})
+  
   return (
     <AppDialog
       fullHeight
@@ -56,9 +58,9 @@ const CreatePlayer = (props) => {
       <Formik
         validateOnChange={true}
         initialValues={{
-          name: selectPlayer ? selectPlayer.name : '',
+          name: selectPlayer ? selectPlayer.playerName : '',
           email: selectPlayer ? selectPlayer.email : '',
-          Player: selectPlayer ? selectPlayer.Player : '',
+          contact: selectPlayer ? selectPlayer.contact : '',
           birthday:
             selectPlayer && selectPlayer.birthday
               ? selectPlayer.birthday
@@ -84,50 +86,51 @@ const CreatePlayer = (props) => {
         }}
         validationSchema={validationSchema}
         onSubmit={(data, { setSubmitting, resetForm }) => {
+          console.log("Saving Player", data)
           setSubmitting(true);
           if (selectPlayer) {
             const newPlayer = {
               id: selectPlayer.id,
               isStarred: selectPlayer.isStarred,
-              isFrequent: selectPlayer.isFrequent,
+              active: selectPlayer.active,
               image: userImage,
               ...data,
             };
             alert('Updating Player');
-            // putDataApi('/api/PlayerApp/Player/', infoViewActionsContext, {
-            //   Player: newPlayer,
-            // })
-            //   .then(() => {
-            //     reCallAPI();
-            //     infoViewActionsContext.showMessage(
-            //       'Player updated successfully!'
-            //     );
-            //   })
-            //   .catch((error) => {
-            //     infoViewActionsContext.fetchError(error.message);
-            //   });
+            putDataApi(`http:localhost:5000/api/players/${Player.id}/`, infoViewActionsContext, {
+              Player: newPlayer,
+            })
+              .then(() => {
+                reCallAPI();
+                infoViewActionsContext.showMessage(
+                  'Player updated successfully!'
+                );
+              })
+              .catch((error) => {
+                infoViewActionsContext.fetchError(error.message);
+              });
             onUpdatePlayer(newPlayer);
           } else {
             const newPlayer = {
-              id: Math.floor(Math.random() * 1000),
+              id: 0,
               isStarred: false,
-              isFrequent: Math.random() > 0.5,
+              active: true,
               image: userImage,
               ...data,
             };
             alert('Creating new Player');
-            // postDataApi('/api/PlayerApp/compose', infoViewActionsContext, {
-            //   Player: newPlayer,
-            // })
-            //   .then(() => {
-            //     reCallAPI();
-            //     infoViewActionsContext.showMessage(
-            //       'Player created successfully!'
-            //     );
-            //   })
-            //   .catch((error) => {
-            //     infoViewActionsContext.fetchError(error.message);
-            //   });
+            postDataApi(`http:localhost:5000/api/players/`, infoViewActionsContext, {
+              Player: newPlayer,
+            })
+              .then(() => {
+                reCallAPI();
+                infoViewActionsContext.showMessage(
+                  'Player created successfully!'
+                );
+              })
+              .catch((error) => {
+                infoViewActionsContext.fetchError(error.message);
+              });
           }
           handleAddPlayerClose();
           resetForm();

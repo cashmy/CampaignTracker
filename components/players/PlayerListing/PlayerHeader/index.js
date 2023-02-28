@@ -21,8 +21,9 @@ const PlayerHeader = (props) => {
     onSetFilterText,
     onUpdatePlayers,
     onSelectPlayersForDelete,
+    onSelectPlayersForStatusChg,
   } = props;
-  const { page, pageView, PlayerList } = usePlayersContext();
+  const { page, pageView, PlayersList } = usePlayersContext();
   const { onPageChange, onChangePageView } = usePlayersActionsContext();
 
   // const { messages } = useIntl();
@@ -53,6 +54,7 @@ const PlayerHeader = (props) => {
         {checkedPlayers.length > 0 ? (
           <PlayerCheckedActions
             onSelectPlayersForDelete={onSelectPlayersForDelete}
+            onSelectPlayersForStatusChg={onSelectPlayersForStatusChg}
             checkedPlayers={checkedPlayers}
             setCheckedPlayers={setCheckedPlayers}
             onUpdatePlayers={onUpdatePlayers}
@@ -65,10 +67,10 @@ const PlayerHeader = (props) => {
         />
       </Box>
       <Hidden smDown>
-        {PlayerList?.data?.length > 0 ? (
+        {PlayersList?.length > 0 ? (
           <AppsPagination
             sx={{ ml: 2 }}
-            count={PlayerList?.count}
+            count={PlayersList?.length}
             page={page}
             onPageChange={onPageChange}
           />
@@ -93,4 +95,5 @@ PlayerHeader.propTypes = {
   onSetFilterText: PropTypes.func,
   onUpdatePlayers: PropTypes.func,
   onSelectPlayersForDelete: PropTypes.func,
+  onSelectPlayersForStatusChg: PropTypes.func,
 };

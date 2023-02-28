@@ -7,7 +7,7 @@ import { Fonts } from '@/../../lib/constants/AppEnums';
 import TextField from '@mui/material/TextField';
 
 const Notes = (props) => {
-  const { contact } = props;
+  const { player } = props;
   const { messages } = useIntl();
 
   return (
@@ -37,7 +37,7 @@ const Notes = (props) => {
         rows="4"
         placeholder={messages['common.notes']}
         name="notes"
-        value={contact.notes}
+        value={player.notes}
         variant="outlined"
         disabled
       />
@@ -48,5 +48,5 @@ const Notes = (props) => {
 export default Notes;
 
 Notes.propTypes = {
-  contact: PropTypes.object.isRequired,
+  player: PropTypes.object.isRequired,
 };

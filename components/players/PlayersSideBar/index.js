@@ -15,7 +15,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { Zoom } from '@mui/material';
 import LabelItem from './LabelItem';
 // import { usePlayersContext } from '../PlayersContextProvider';
-import { blue, green, red } from '@mui/material/colors';
+import { blue, green, red, orange } from '@mui/material/colors';
 import CampaignService from 'services/campaign.service';
 
 const SideBarContent = () => {
@@ -28,9 +28,10 @@ const SideBarContent = () => {
     { id: 125, name: 'Inactive', alias: 'archive' },
   ];
   const labelList = [
-    { id: 311, name: 'Crema', alias: 'crema', color: red[500] },
-    { id: 312, name: 'Personal', alias: 'personal', color: blue[500] },
-    { id: 313, name: 'Work', alias: 'work', color: green[500] },
+    { id: 311, name: 'Exp/Vet +DM', alias: 'crema', color: red[500] },
+    { id: 312, name: 'Veteran', alias: 'personal', color: blue[500] },
+    { id: 313, name: 'Experienced', alias: 'work', color: orange[500] },
+    { id: 314, name: 'Newbie', alias: 'work', color: green[500] },
   ] 
   const [isAddPlayer, onSetIsAddPlayer] = useState(false);
   const [records, setRecords] = useState([]);

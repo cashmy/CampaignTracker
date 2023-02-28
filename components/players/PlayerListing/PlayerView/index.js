@@ -11,12 +11,14 @@ import PlayerGridItem from './PlayerGridItem';
 import PlayerListItem from './PlayerListItem';
 import PlayerListItemMobile from './PlayerListItem/PlayerListItemMobile';
 import { usePlayersContext } from '../../PlayersContextProvider';
+import { blue, green, red, orange } from '@mui/material/colors';
 
 const PlayerView = (props) => {
   const {
     list,
     handleAddPlayerOpen,
     onChangeStarred,
+    onChangeActive,
     onChangeCheckedPlayers,
     checkedPlayers,
     onSelectPlayersForDelete,
@@ -24,7 +26,14 @@ const PlayerView = (props) => {
     onViewPlayerDetail,
   } = props;
 
-  const { labelList, loading, pageView } = usePlayersContext();
+  // console.log ('list', list);
+  const { loading, pageView } = usePlayersContext();
+  const labelList = [
+    { id: 311, name: 'Exp/Vet +DM', alias: 'crema', color: red[500] },
+    { id: 312, name: 'Veteran', alias: 'personal', color: blue[500] },
+    { id: 313, name: 'Experienced', alias: 'work', color: orange[500] },
+    { id: 314, name: 'Newbie', alias: 'work', color: green[500] },
+  ] 
   return (
     <>
       {pageView === 'list' ? (
@@ -58,6 +67,7 @@ const PlayerView = (props) => {
                   checkedPlayers={checkedPlayers}
                   onSelectPlayersForDelete={onSelectPlayersForDelete}
                   onChangeStarred={onChangeStarred}
+                  onChangeActive={onChangeActive}
                   onViewPlayerDetail={onViewPlayerDetail}
                   onOpenEditPlayer={onOpenEditPlayer}
                 />
@@ -124,6 +134,7 @@ const PlayerView = (props) => {
                 onChangeCheckedPlayers={onChangeCheckedPlayers}
                 checkedPlayers={checkedPlayers}
                 onChangeStarred={onChangeStarred}
+                onChangeActive={onChangeActive}
                 onSelectPlayersForDelete={onSelectPlayersForDelete}
                 onViewPlayerDetail={onViewPlayerDetail}
                 onOpenEditPlayer={onOpenEditPlayer}
@@ -151,6 +162,7 @@ PlayerView.propTypes = {
   checkedPlayers: PropTypes.array,
   onChangeCheckedPlayers: PropTypes.func,
   onChangeStarred: PropTypes.func,
+  onChangeActive: PropTypes.func,
   onSelectPlayersForDelete: PropTypes.func,
   onOpenEditPlayer: PropTypes.func,
   onViewPlayerDetail: PropTypes.func,

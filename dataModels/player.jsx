@@ -15,6 +15,7 @@ export const playerRecord = {
   countryCode: "",    // Player country code
   isStarred: false,   // Player is starred
   avatarImage: "",    // Player avatar image
+  label: "",          // Player Experience label (Newbie, Experienced, Veteran, Exp/Vet +DM)
   active: true,
 };
 
@@ -32,6 +33,7 @@ export const playerColumnsDataX = [
   { id: "isStarred", label: "Is Starred"},
   { id: "active", label: "Active", disableSorting: true },
   { id: "avatarImage", label: "Avatar", disableSorting: true },
+  { id: "label", label: "Label"},
   { id: "actions", label: "Actions", disableSorting: true },
 ];
 
@@ -61,5 +63,6 @@ playerRecord.PropTypes = {
   countryCode: PropTypes.string,
   isStarred: PropTypes.bool,
   avatarImage: PropTypes.string,
+  label: PropTypes.string,
   active: PropTypes.bool,
 };

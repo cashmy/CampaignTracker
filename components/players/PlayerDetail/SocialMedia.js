@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Fonts } from '@/../../lib/constants/AppEnums';
 
 const SocialMedia = (props) => {
-  const { contact } = props;
+  const { player } = props;
 
   return (
     <Box
@@ -51,8 +51,8 @@ const SocialMedia = (props) => {
               color: 'text.secondary',
             }}
           >
-            {contact.facebookId ? (
-              contact.facebookId
+            {player.facebookId ? (
+              player.facebookId
             ) : (
               // <IntlMessages id="common.na" />
               NA
@@ -77,8 +77,8 @@ const SocialMedia = (props) => {
               color: 'text.secondary',
             }}
           >
-            {contact.twitterId ? (
-              contact.twitterId
+            {player.twitterId ? (
+              player.twitterId
             ) : (
               // <IntlMessages id="common.na" />
               NA
@@ -93,5 +93,5 @@ const SocialMedia = (props) => {
 export default SocialMedia;
 
 SocialMedia.propTypes = {
-  contact: PropTypes.object.isRequired,
+  player: PropTypes.object.isRequired,
 };

@@ -17,8 +17,7 @@ import AppTextField from '@/../../lib/components/AppFormComponents/AppTextField'
 import AppDateFiled from '@/../../lib/components/AppFormComponents/AppDateFiled';
 
 import { styled } from '@mui/material/styles';
-import { usePlayersContext } from '../PlayersContextProvider';
-import { blue, green, red } from '@mui/material/colors';
+import { blue, green, red, orange } from '@mui/material/colors';
 
 const HeaderWrapper = styled('div')(({ theme }) => {
   return {
@@ -69,9 +68,10 @@ const AddPlayerForm = (props) => {
   const { values, userImage, setUserImage, setFieldValue } = props;
   // const { labelList } = usesPlayerContext();
   const labelList = [
-    { id: 311, name: 'Crema', alias: 'crema', color: red[500] },
-    { id: 312, name: 'Personal', alias: 'personal', color: blue[500] },
-    { id: 313, name: 'Work', alias: 'work', color: green[500] },
+    { id: 311, name: 'Exp/Vet +DM', alias: 'crema', color: red[500] },
+    { id: 312, name: 'Veteran', alias: 'personal', color: blue[500] },
+    { id: 313, name: 'Experienced', alias: 'work', color: orange[500] },
+    { id: 314, name: 'Newbie', alias: 'work', color: green[500] },
   ] 
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -81,7 +81,11 @@ const AddPlayerForm = (props) => {
     },
   });
 
-  // const { messages } = useIntl();
+  const handleClick = (event) => {
+    event.target.onsubmit = true;
+    console.log(event.target)
+    console.log(event)
+  }
 
   return (
     <Form noValidate autoComplete="off">
@@ -146,7 +150,7 @@ const AddPlayerForm = (props) => {
               }}
               variant="outlined"
               // label={<IntlMessages id="common.name" />}
-              label="Name"
+              label="Player Name"
               name="name"
             />
 
@@ -169,7 +173,7 @@ const AddPlayerForm = (props) => {
               variant="outlined"
               // label={<IntlMessages id="common.phone" />}
               label="Phone"
-              name="Player"
+              name="contact"
             />
             <AppGridContainer spacing={5}>
               <Grid item xs={12} md={6}>
@@ -372,8 +376,9 @@ const AddPlayerForm = (props) => {
             minWidth: 100,
           }}
           color="primary"
-          variant="outlined"
+          variant="contained"
           type="submit"
+          onClick={handleClick}
         >
           {/* <IntlMessages id="common.save" /> */}
           Save

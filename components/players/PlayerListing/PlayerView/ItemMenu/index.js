@@ -1,30 +1,32 @@
-import React from 'react';
+import React from "react";
 // import IntlMessages from '@/../../lib/helpers/IntlMessages';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import PropTypes from 'prop-types';
-import IconButton from '@mui/material/IconButton';
-import StarIcon from '@mui/icons-material/Star';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import AppTooltip from '@/../../lib/components/AppTooltip';
-import Box from '@mui/material/Box';
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import PropTypes from "prop-types";
+import IconButton from "@mui/material/IconButton";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import {HiBolt, HiOutlineBolt} from 'react-icons/hi2';
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import AppTooltip from "@/../../lib/components/AppTooltip";
+import Box from "@mui/material/Box";
+import Controls from "/components/controls/Controls";
 
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 
-const PlayerActionHoverWrapper = styled('div')(() => {
+const PlayerActionHoverWrapper = styled("div")(() => {
   return {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    position: 'absolute',
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    position: "absolute",
     right: -30,
-    top: '50%',
+    top: "50%",
     zIndex: 1,
-    transform: 'translateY(-50%)',
-    transition: 'all 0.4s ease',
+    transform: "translateY(-50%)",
+    transition: "all 0.4s ease",
     opacity: 0,
-    visibility: 'hidden',
+    visibility: "hidden",
   };
 });
 
@@ -33,6 +35,7 @@ const ItemMenu = (props) => {
     onSelectPlayersForDelete,
     Player,
     onChangeStarred,
+    onChangeActive,
     onOpenEditPlayer,
   } = props;
 
@@ -46,6 +49,11 @@ const ItemMenu = (props) => {
     e.stopPropagation();
   };
 
+  const onChangeActiveStatus = (e) => {
+    onChangeActive(!Player.active, Player);
+    e.stopPropagation();
+  };
+
   const onClickEditOption = (e) => {
     onOpenEditPlayer(Player);
     e.stopPropagation();
@@ -55,22 +63,22 @@ const ItemMenu = (props) => {
     <Box
       component="span"
       sx={{
-        display: 'flex',
-        alignItems: 'center',
-        marginLeft: 'auto',
-        position: 'relative',
+        display: "flex",
+        alignItems: "center",
+        marginLeft: "auto",
+        position: "relative",
       }}
     >
       <span className="conActionHoverHideRoot">
-        <AppTooltip 
+        <AppTooltip
           // title={<IntlMessages id="common.more" />}
           title="more"
-          >
+        >
           <IconButton
             sx={{
               color: (theme) => theme.palette.text.disabled,
               padding: 2,
-              '& .MuiSvgIcon-root': {
+              "& .MuiSvgIcon-root": {
                 fontSize: 22,
               },
             }}
@@ -82,45 +90,48 @@ const ItemMenu = (props) => {
       </span>
 
       <PlayerActionHoverWrapper className="conActionHoverRoot">
-        <IconButton
-          sx={{
-            color: (theme) => theme.palette.warning.main,
-            padding: 2,
-            '& .MuiSvgIcon-root': {
-              fontSize: 22,
-            },
-          }}
+        {/* //& Toggle Active Status */}
+        <Controls.ActionButton
+          filled={false}
+          color="darkgoldenrod"
+          tooltipText={"Change active status"}
+          size="small"
+          onClick={onChangeActiveStatus}
+        >
+          {Player.active ? <HiOutlineBolt fontSize='large' /> : <HiBolt fontSize='large' />}
+        </Controls.ActionButton>
+        {/* //& Toggle Starred Status */}
+        <Controls.ActionButton
+          filled={false}
+          color="dodgerblue"
+          tooltipText={"Change starred status"}
+          size="small"
           onClick={onChangeStarredStatus}
-          size="large"
         >
-          {Player.isStarred ? <StarBorderIcon /> : <StarIcon />}
-        </IconButton>
-        <IconButton
-          sx={{
-            color: (theme) => theme.palette.text.disabled,
-            padding: 2,
-            '& .MuiSvgIcon-root': {
-              fontSize: 22,
-            },
-          }}
-          onClick={onClickEditOption}
-          size="large"
-        >
-          <EditOutlinedIcon />
-        </IconButton>
-        <IconButton
-          sx={{
-            color: (theme) => theme.palette.text.disabled,
-            padding: 2,
-            '& .MuiSvgIcon-root': {
-              fontSize: 22,
-            },
-          }}
+          {Player.isStarred ? <StarBorderIcon /> : <StarIcon  />}
+        </Controls.ActionButton>
+
+        {/* //& Delete Item */}
+        <Controls.ActionButton
+          filled={true}
+          color="red"
+          tooltipText={"Delete an item"}
+          size="small"
           onClick={onDeletePlayer}
-          size="large"
         >
-          <DeleteOutlinedIcon />
-        </IconButton>
+          <DeleteOutlinedIcon fontSize="small" />
+        </Controls.ActionButton>
+
+        {/* //& Edit Item */}
+        <Controls.ActionButton
+          filled={true}
+          color="darkcyan"
+          tooltipText={"Edit an item"}
+          size="small"
+          onClick={onClickEditOption}
+        >
+          <EditOutlinedIcon fontSize="small" />
+        </Controls.ActionButton>
       </PlayerActionHoverWrapper>
     </Box>
   );
@@ -132,5 +143,6 @@ ItemMenu.propTypes = {
   onSelectPlayersForDelete: PropTypes.func,
   Player: PropTypes.object.isRequired,
   onChangeStarred: PropTypes.func,
+  onChangeActive: PropTypes.func,
   onOpenEditPlayer: PropTypes.func,
 };
