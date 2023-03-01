@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 11:29:57
- * @modify date 2023-02-28 17:27:25
+ * @modify date 2023-02-28 19:06:49
  * @desc [description]
  */
 
@@ -98,6 +98,9 @@ const CampaignViews = () => {
     // setToDeletePlayers(PlayerIds);
     // setDeleteDialogOpen(true);
   };
+  const handleSchedule = (record) => {
+    alert("Scheduling record " + record.id);
+  }
   const onGetFilteredItems = () => {
     if (filterText === "") {
       return RecordsList;
@@ -132,7 +135,8 @@ const CampaignViews = () => {
           onChangeActive={onChangeActive}
           onSelectRecordsForDelete={onSelectRecordsForDelete}
           onOpenEditRecord={onOpenEditRecord}
-          onViewRecordDetail={onViewRecordDetail}       
+          onViewRecordDetail={onViewRecordDetail}
+          handleSchedule={handleSchedule}       
         />
       </AppContent>
 

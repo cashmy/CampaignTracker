@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 12:47:54
- * @modify date 2023-02-28 17:31:58
+ * @modify date 2023-02-28 19:07:14
  * @desc [description]
  */
 
@@ -32,6 +32,7 @@ const CampaignViewList = (props) => {
     onSelectRecordsForDelete,
     onOpenEditRecord,
     onViewRecordDetail,
+    handleSchedule,
   } = props;
   const { loading, pageView } = useCampaignsContext();
 
@@ -70,6 +71,7 @@ const CampaignViewList = (props) => {
                   onChangeActive={onChangeActive}
                   onViewRecordDetail={onViewRecordDetail}
                   onOpenEditRecord={onOpenEditRecord}
+                  handleSchedule={handleSchedule}
                 />
               )}
             />
@@ -169,4 +171,5 @@ CampaignViewList.propTypes = {
   onSelectRecordsForDelete: PropTypes.func.isRequired,
   onOpenEditRecord: PropTypes.func.isRequired,
   onViewRecordDetail: PropTypes.func.isRequired,
+  handleSchedule: PropTypes.func.isRequired,
 };

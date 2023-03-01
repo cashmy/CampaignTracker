@@ -8,6 +8,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import {HiBolt, HiOutlineBolt} from 'react-icons/hi2';
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AppTooltip from "@/../../lib/components/AppTooltip";
 import Box from "@mui/material/Box";
 import Controls from "/components/controls/Controls";
@@ -34,9 +35,9 @@ const ItemMenu = (props) => {
   const {
     onSelectRecordsForDelete,
     record,
-    onChangeStarred,
     onChangeActive,
     onOpenEditRecord,
+    handleSchedule,
   } = props;
 
   const onDeleteRecord = (e) => {
@@ -107,6 +108,17 @@ const ItemMenu = (props) => {
           <DeleteOutlinedIcon fontSize="small" />
         </Controls.ActionButton>
 
+          {/* //& Calendar Item */}
+          <Controls.ActionButton
+            filled={true}
+            color="darkblue"
+            tooltipText={"Schedule an item"}
+            size="small"
+            onClick={() => handleSchedule(record)}
+          >
+            <CalendarMonthIcon fontSize="small" />
+          </Controls.ActionButton>
+
         {/* //& Edit Item */}
         <Controls.ActionButton
           filled={true}
@@ -127,7 +139,7 @@ export default ItemMenu;
 ItemMenu.propTypes = {
   onSelectRecordsForDelete: PropTypes.func,
   record: PropTypes.object.isRequired,
-  onChangeStarred: PropTypes.func,
   onChangeActive: PropTypes.func,
   onOpenEditRecord: PropTypes.func,
+  handleSchedule: PropTypes.func,
 };

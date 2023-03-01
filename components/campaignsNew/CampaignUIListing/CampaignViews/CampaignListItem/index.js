@@ -2,13 +2,14 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-27 18:10:43
- * @modify date 2023-02-28 18:44:06
+ * @modify date 2023-02-28 19:26:41
  * @desc [description]
  */
 
 // #region //* Imports
 import React from "react";
 import PropTypes from "prop-types";
+import Image from "next/image";
 import clsx from "clsx";
 // Material UI
 import Box from "@mui/material/Box";
@@ -76,105 +77,106 @@ const CampaignListItem = (props) => {
     onSelectRecordsForDelete,
     onViewRecordDetail,
     onOpenEditRecord,
+    handleSchedule,
   } = props;
 
-// #region // *Event Handlers
-const dowText = (dow) => {
-  switch (dow) {
-    case 1:
-      return "Sun";
-    case 2:
-      return "Mon";
-    case 3:
-      return "Tue";
-    case 4:
-      return "Wed";
-    case 5:
-      return "Thu";
-    case 6:
-      return "Fri";
-    case 7:
-      return "Sat";
-    default:
-      return "None";
-  }
-};
-const frequencyText = (frequency) => {
-  switch (frequency) {
-    case "w":
-      return "Weekly";
-    case "b":
-      return "Bi-Weekly";
-    case "m":
-      return "Monthly";
-    case "v":
-      return "Varies";
-    case "o":
-      return "Once";
-    case "n":
-      return "Never";
-    case "t":
-      return "TBD";
-    default:
-      return "Unknown";
-  }
-};
-const typeText = (type) => {
-  switch (type) {
-    case "o":
-      return (
-        <ActionIconButton
-          filled={true}
-          color="darkgoldenrod"
-          tooltipText="One-Shot"
-        >
-          <BiTargetLock />
-        </ActionIconButton>
-      ); // One-Shot
-    case "a":
-      return (
-        <ActionIconButton
-          filled={true}
-          color="purple"
-          tooltipText="Adventure: multiple sessions"
-        >
-          <GiPistolGun />
-        </ActionIconButton>
-      ); // Adv
-    case "c":
-      return (
-        <ActionIconButton
-          filled={true}
-          color="darkred"
-          tooltipText="Campaign: a 'Zero to Hero' approach"
-        >
-          <MdCampaign />
-        </ActionIconButton>
-      ); // Cmgn
+  // #region // *Event Handlers
+  const dowText = (dow) => {
+    switch (dow) {
+      case 1:
+        return "Sun";
+      case 2:
+        return "Mon";
+      case 3:
+        return "Tue";
+      case 4:
+        return "Wed";
+      case 5:
+        return "Thu";
+      case 6:
+        return "Fri";
+      case 7:
+        return "Sat";
+      default:
+        return "Not set";
+    }
+  };
+  const frequencyText = (frequency) => {
+    switch (frequency) {
+      case "w":
+        return "Weekly";
+      case "b":
+        return "Bi-Weekly";
+      case "m":
+        return "Monthly";
+      case "v":
+        return "Varies";
+      case "o":
+        return "Once";
+      case "n":
+        return "Never";
+      case "t":
+        return "TBD";
+      default:
+        return "Unknown";
+    }
+  };
+  const typeText = (type) => {
+    switch (type) {
+      case "o":
+        return (
+          <ActionIconButton
+            filled={true}
+            color="darkgoldenrod"
+            tooltipText="One-Shot"
+          >
+            <BiTargetLock />
+          </ActionIconButton>
+        ); // One-Shot
+      case "a":
+        return (
+          <ActionIconButton
+            filled={true}
+            color="purple"
+            tooltipText="Adventure: multiple sessions"
+          >
+            <GiPistolGun />
+          </ActionIconButton>
+        ); // Adv
+      case "c":
+        return (
+          <ActionIconButton
+            filled={true}
+            color="darkred"
+            tooltipText="Campaign: a 'Zero to Hero' approach"
+          >
+            <MdCampaign />
+          </ActionIconButton>
+        ); // Cmgn
 
-    default:
-      return "None";
-  }
-};
-const timeSlotText = (frequency) => {
-  switch (frequency) {
-    case 1:
-      return "Morning";
-    case 2:
-      return "Noon";
-    case 3:
-      return "Afternoon";
-    case 4:
-      return "Evening";
-    case 5:
-      return "Late Night";
-    default:
-      return "Not Set";
-  }
-};
-// #endregion
-  
-return (
+      default:
+        return "None";
+    }
+  };
+  const timeSlotText = (frequency) => {
+    switch (frequency) {
+      case 1:
+        return "Morning";
+      case 2:
+        return "Noon";
+      case 3:
+        return "Afternoon";
+      case 4:
+        return "Evening";
+      case 5:
+        return "Late Night";
+      default:
+        return "Not set";
+    }
+  };
+  // #endregion
+
+  return (
     <CampaignListItemWrapper
       dense
       button
@@ -202,7 +204,7 @@ return (
             color="primary"
           />
         </span>
-        
+
         {/* // & Active Icon Toggle */}
         <Box
           component="span"
@@ -213,6 +215,22 @@ return (
         </Box>
 
         {/* //& Avatar/Image? */}
+        <Box
+          component="span"
+          sx={{
+            maxWidth: 50,
+            // mr: 4,
+            flex: 1,
+            overflow: "hidden",
+          }}
+        >
+          <Image 
+            src={record.imageUrl || '/assets/images/1444575.gif'}
+            // alt={record.name}
+            width={30}
+            height={30}
+          />
+        </Box>
 
         {/* //& Name */}
         <Box
@@ -224,19 +242,19 @@ return (
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
-            fontStyle: (record.archived) ? "italic" : "normal",
-            color: (record.archived) ? "grey" : "primary",
+            fontStyle: record.archived ? "italic" : "normal",
+            color: record.archived ? "grey" : "primary",
           }}
         >
           {record.name}
         </Box>
-        
+
         {/* //& Type Icon */}
         <Box
           component="span"
           sx={{
-            maxWidth: 50,
-            mr: 10,
+            maxWidth: 75,
+            mr: 4,
             fontWeight: Fonts.MEDIUM,
             flex: 1,
             overflow: "hidden",
@@ -250,14 +268,15 @@ return (
         <Box
           component="span"
           sx={{
+            maxWidth: 200,
             mr: 4,
             fontWeight: Fonts.MEDIUM,
             flex: 1,
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
-            fontStyle: (record.archived) ? "italic" : "normal",
-            color: (record.archived) ? "grey" : "primary",
+            fontStyle: record.archived ? "italic" : "normal",
+            color: record.archived ? "grey" : "primary",
           }}
         >
           {record.system}
@@ -266,14 +285,15 @@ return (
         <Box
           component="span"
           sx={{
+            maxWidth: 200,
             mr: 4,
             fontWeight: Fonts.MEDIUM,
             flex: 1,
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
-            fontStyle: (record.archived) ? "italic" : "normal",
-            color: (record.archived) ? "grey" : "primary",
+            fontStyle: record.archived ? "italic" : "normal",
+            color: record.archived ? "grey" : "primary",
           }}
         >
           {frequencyText(record.frequency)}
@@ -283,14 +303,15 @@ return (
         <Box
           component="span"
           sx={{
+            maxWidth: 150,
             mr: 4,
             fontWeight: Fonts.MEDIUM,
             flex: 1,
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
-            fontStyle: (record.archived) ? "italic" : "normal",
-            color: (record.archived) ? "grey" : "primary",
+            fontStyle: record.archived ? "italic" : "normal",
+            color: record.archived ? "grey" : "primary",
           }}
         >
           {dowText(record.dow)}
@@ -306,8 +327,8 @@ return (
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
-            fontStyle: (record.archived) ? "italic" : "normal",
-            color: (record.archived) ? "grey" : "primary",
+            fontStyle: record.archived ? "italic" : "normal",
+            color: record.archived ? "grey" : "primary",
           }}
         >
           {timeSlotText(record.timeSlot)}
@@ -323,9 +344,9 @@ return (
             onChangeActive={onChangeActive}
             onSelectRecordsForDelete={onSelectRecordsForDelete}
             onOpenEditRecord={onOpenEditRecord}
+            handleSchedule={handleSchedule}
           />
         </Box>
-        
       </Box>
     </CampaignListItemWrapper>
   );
@@ -345,4 +366,5 @@ CampaignListItem.propTypes = {
   onSelectRecordsForDelete: PropTypes.func,
   onViewRecordDetail: PropTypes.func,
   onOpenEditRecord: PropTypes.func,
+  handleSchedule: PropTypes.func,
 };
