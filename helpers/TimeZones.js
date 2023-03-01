@@ -23,7 +23,7 @@ export const currDateDiffByZone = (toTimeZoneOffset, fromTimeZoneOffset = usersT
   // returns currTime if the timezones are the same (no offset)
   if ( fromTimeZoneOffset === toTimeZoneOffset ) return currDate; 
   
-  const currTimeDiff = (fromTimeZoneOffset - toTimeZoneOffset); 
+  const currTimeDiff = 0 - (fromTimeZoneOffset - toTimeZoneOffset); 
   currDate.setHours(currDate.getHours() + currTimeDiff);
   return currDate// returns the offset time
 }

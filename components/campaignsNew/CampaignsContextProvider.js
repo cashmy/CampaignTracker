@@ -19,10 +19,9 @@ export const CampaignsContextProvider = ({ children }) => {
   const [pageView, setPageView] = useState("list");
   const [page, setPage] = useState(0);
   const [
-    { apiData: CampaignsList, loading },
-    { setQueryParams, setData: setCampaignsData, reCallAPI },
+    { apiData: RecordsList, loading },
+    { setQueryParams, setData: setRecordsData, reCallAPI },
   ] = useGetDataApi(API_URL, {}, {}, false);
-
   useEffect(() => {
     setPage(0);
   }, [all]);
@@ -47,7 +46,7 @@ export const CampaignsContextProvider = ({ children }) => {
     <CampaignsContext.Provider
       value={{
         all,
-        CampaignsList,
+        RecordsList,
         loading,
         page,
         pageView,
@@ -55,7 +54,7 @@ export const CampaignsContextProvider = ({ children }) => {
     >
       <CampaignsActionsContext.Provider
         value={{
-          setCampaignsData,
+          setRecordsData,
           onPageChange,
           reCallAPI,
           setPageView,
