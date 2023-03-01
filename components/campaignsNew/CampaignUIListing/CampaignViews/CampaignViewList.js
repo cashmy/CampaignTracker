@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 12:47:54
- * @modify date 2023-02-28 19:07:14
+ * @modify date 2023-02-28 21:43:55
  * @desc [description]
  */
 
@@ -35,8 +35,6 @@ const CampaignViewList = (props) => {
     handleSchedule,
   } = props;
   const { loading, pageView } = useCampaignsContext();
-
-  console.log("CampaignViewList: ", list);
 
   return (
     <Fragment>

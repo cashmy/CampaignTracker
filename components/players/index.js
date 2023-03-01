@@ -8,13 +8,7 @@ import PlayersContextProvider from './PlayersContextProvider';
 const Players = () => {
   // const { messages } = useIntl();
   var today = new Date();
-  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  // var adjTime = newTime.getHours() + ":" + newTime.getMinutes() + ":" + newTime.getSeconds();
-  console.log("Players.js: " + time);
   today.setHours(today.getHours() + 4)
-  console.log("Players.js: " + today);
-
-
 
   return (
     <PlayersContextProvider>

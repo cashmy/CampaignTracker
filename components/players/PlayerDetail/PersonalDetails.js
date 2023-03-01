@@ -9,16 +9,13 @@ import { Fonts } from '@/../../lib/constants/AppEnums';
 import PropTypes from 'prop-types';
 
 export const PersonalDetails = (props) => {
-  console.log("I am here")
   return (
     <div>Hi Cash</div>
   )
 }
 
 // const PersonalDetails = (props) => {
-//   console.log("PROPS", props  )
 //   // const { player } = props;
-//   console.log('**PersonalDetails -> player', player);
 //   return (
 //     <Box
 //       sx={{

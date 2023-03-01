@@ -83,8 +83,6 @@ const AddPlayerForm = (props) => {
 
   const handleClick = (event) => {
     event.target.onsubmit = true;
-    console.log(event.target)
-    console.log(event)
   }
 
   return (

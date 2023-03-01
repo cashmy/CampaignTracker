@@ -46,8 +46,6 @@ const CreatePlayer = (props) => {
         : '/assets/images/placeholder.jpg'
     );
   }, [selectPlayer]);
-
-  console.log({selectPlayer})
   
   return (
     <AppDialog

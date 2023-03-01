@@ -7,8 +7,7 @@ export function useForm(initialFValues, validateOnChange = false, validate) {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    // console.log("handleToggleChange - Event: ", event.target);
-    // console.log("handleInputChange: ", name, value);
+
     setValues({
       ...values,
       [name]: value,

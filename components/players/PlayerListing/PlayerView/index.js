@@ -26,7 +26,6 @@ const PlayerView = (props) => {
     onViewPlayerDetail,
   } = props;
 
-  // console.log ('list', list);
   const { loading, pageView } = usePlayersContext();
   const labelList = [
     { id: 311, name: 'Exp/Vet +DM', alias: 'crema', color: red[500] },
