@@ -7,7 +7,7 @@ export const campaignRecord = {
   description: "",  // Description of campaign
   dm: "",           // Dungeon Master Name
   world: "",        // World/Plane name
-  system: "",       // e.g. D&D, Cyberpunk, ShadowRun, etc.
+  gameSystem: "",       // e.g. D&D, Cyberpunk, ShadowRun, etc.
   type: "n",        // one-shot, adventure-only, campaign
   style: "",        // table-top, online, Roll20, Combo, etc.
   frequency: "w",   // weekly, bi-weekly, monthly, varied
@@ -28,7 +28,7 @@ export const campaignColumnsDataX = [
   { id: "description", label: "Description" },
   { id: "dm", label: "DM Name" },
   { id: "world", label: "World" },
-  { id: "system", label: "Game System" },
+  { id: "gameSystem", label: "Game System" },
   { id: "type", label: "Type" },
   { id: "style", label: "Style"},
   { id: "frequency", label: "Freq" },
@@ -59,7 +59,7 @@ campaignRecord.PropTypes = {
   description: PropTypes.string,
   dm: PropTypes.string,
   world: PropTypes.string,
-  system: PropTypes.string,
+  gameSystem: PropTypes.string,
   type: PropTypes.oneOf(["n", "o", "a", "c"]),      // one-shot, adventure-only, campaign
   style: PropTypes.string,                          // table-top, online, Roll20, Combo, etc.
   frequency: PropTypes.oneOf(["w", "b", "m", "v"]), // weekly, bi-weekly, monthly, varied

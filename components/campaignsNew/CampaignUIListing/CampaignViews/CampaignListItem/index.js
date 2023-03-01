@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-27 18:10:43
- * @modify date 2023-02-28 19:26:41
+ * @modify date 2023-02-28 20:28:01
  * @desc [description]
  */
 
@@ -214,7 +214,7 @@ const CampaignListItem = (props) => {
           <AppsArchiveIcon record={record} onChange={onChangeActive} />
         </Box>
 
-        {/* //& Avatar/Image? */}
+        {/* //& Image */}
         <Box
           component="span"
           sx={{
@@ -226,7 +226,7 @@ const CampaignListItem = (props) => {
         >
           <Image 
             src={record.imageUrl || '/assets/images/1444575.gif'}
-            // alt={record.name}
+            alt={record.name}
             width={30}
             height={30}
           />
@@ -279,8 +279,9 @@ const CampaignListItem = (props) => {
             color: record.archived ? "grey" : "primary",
           }}
         >
-          {record.system}
+          {record.gameSystem}
         </Box>
+
         {/* //& Frequency */}
         <Box
           component="span"
@@ -347,6 +348,7 @@ const CampaignListItem = (props) => {
             handleSchedule={handleSchedule}
           />
         </Box>
+
       </Box>
     </CampaignListItemWrapper>
   );

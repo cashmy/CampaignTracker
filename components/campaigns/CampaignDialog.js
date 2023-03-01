@@ -96,11 +96,11 @@ const CampaignDialog = (props) => {
           </Grid>
           <Grid item xs={4}>
             <Controls.TextField
-              name="system"
+              name="gameSystem"
               label="Game System"
-              value={values.system}
+              value={values.gameSystem}
               onChange={handleInputChange}
-              error={errors.system}
+              error={errors.gameSystem}
             />
           </Grid>
           <Grid item xs={4}>
