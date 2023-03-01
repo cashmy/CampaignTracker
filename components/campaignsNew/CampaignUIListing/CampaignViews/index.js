@@ -2,11 +2,12 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 11:29:57
- * @modify date 2023-02-28 19:06:49
+ * @modify date 2023-02-28 21:51:03
  * @desc [description]
  */
 
 //#region Imports
+import {useRouter} from 'next/navigation';
 import { useState, Fragment } from "react";
 import CampaignViewsHeader from "./CampaignViewsHeader";
 import AppConfirmDialog from "@/../../lib/components/AppConfirmDialog";
@@ -28,6 +29,7 @@ import {
 
 const CampaignViews = () => {
   //#region //* State & Local variables
+  const router = useRouter();
   const { all, page, RecordsList } = useCampaignsContext();
   const { onPageChange, setRecordsData } = useCampaignsActionsContext();
   const infoViewActionsContext = useInfoViewActionsContext();
@@ -65,7 +67,8 @@ const CampaignViews = () => {
   };
   const onOpenEditRecord = (record) => {
     setSelectedRecord(record);
-    handleAddRecordOpen();
+    // router.push(`/campaigns/campaignDetails`);
+    router.push(`/campaignDetails/${record.id}`);
   };
   const onViewRecordDetail = (record) => {
     setSelectedRecord(record);
@@ -105,8 +108,10 @@ const CampaignViews = () => {
     if (filterText === "") {
       return RecordsList;
     } else {
-      return RecordsList?.filter((Player) =>
-        Record.name.toUpperCase().includes(filterText.toUpperCase())
+      return RecordsList?.filter((record) => {
+        return record.name.toUpperCase().includes(filterText.toUpperCase()) 
+        || record.gameSystem.toUpperCase().includes(filterText.toUpperCase()) 
+      }
       );
     }
   };
