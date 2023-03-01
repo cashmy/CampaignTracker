@@ -131,12 +131,15 @@ const PlayerListing = () => {
     if (filterText === '') {
       return PlayersList
     } else {
-      return PlayersList?.filter((Player) =>
-        Player.playerName.toUpperCase().includes(filterText.toUpperCase())
+      return PlayersList?.filter((Player) => {
+
+        return Player.playerName.toUpperCase().includes(filterText.toUpperCase())
+        || Player.email.toUpperCase().includes(filterText.toUpperCase())
+        || Player.discordId.toUpperCase().includes(filterText.toUpperCase())
+      }
       );
     }
   };
-
   const onDeleteSelectedPlayers = () => {
     postDataApi('http//localhost:5000/api/players/delete/player', infoViewActionsContext, {
       type: all[0],
@@ -154,12 +157,10 @@ const PlayerListing = () => {
     setDeleteDialogOpen(false);
     setCheckedPlayers([]);
   };
-
   const onSelectPlayersForDelete = (PlayerIds) => {
     setToDeletePlayers(PlayerIds);
     setDeleteDialogOpen(true);
   };
-
   const onSelectPlayersForStatusChg = (PlayerIds) => {
     // TODO : change status
     alert("Changing status(es)")

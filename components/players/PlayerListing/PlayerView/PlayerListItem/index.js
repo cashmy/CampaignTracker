@@ -174,7 +174,7 @@ const PlayerListItem = ({
             whiteSpace: "nowrap",
           }}
         >
-          {Player.email ? Player.email : null}
+          {Player.discordId ? Player.discordId : Player.email ? Player.email : null}
         </Box>
       </Box>
 
