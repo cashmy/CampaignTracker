@@ -17,6 +17,7 @@ import { currDateDiffByZone } from "/helpers/TimeZones";
 
 import { styled } from "@mui/material/styles";
 
+//#region //* Styled Components
 const GridCard = styled(Card)(({ theme }) => {
   return {
     borderRadius: theme.cardRadius,
@@ -41,6 +42,24 @@ const GridCard = styled(Card)(({ theme }) => {
     },
   };
 });
+
+const ClockFace = styled(Clock)(({ theme }) => {
+  return {
+    "& .react-clock__mark__body": {
+      backgroundColor: theme.palette.text.primary,
+    },
+    "& .react-clock__hand__body": {
+      backgroundColor: theme.palette.text.primary,
+    },    
+    "& .react-clock__second-hand__body": {
+      backgroundColor: theme.palette.error.main,
+    },  
+    "& .react-clock__face": {
+      borderColor: theme.palette.text.primary,
+    },
+  }
+});
+//#endregion
 
 const PlayerGridItem = (props) => {
   const {
@@ -228,7 +247,7 @@ const PlayerGridItem = (props) => {
                 alignItems: "center",
               }}
               >
-              <Clock value={currDateDiffByZone(Player.timeZoneOffset)} size={75} />
+              <ClockFace value={currDateDiffByZone(Player.timeZoneOffset)} size={75} />
             </Box>
           </Grid>
         </Grid>
