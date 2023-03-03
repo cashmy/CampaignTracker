@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 11:29:57
- * @modify date 2023-02-28 21:51:03
+ * @modify date 2023-03-02 14:38:33
  * @desc [description]
  */
 
@@ -67,8 +67,8 @@ const CampaignViews = () => {
   };
   const onOpenEditRecord = (record) => {
     setSelectedRecord(record);
-    // router.push(`/campaigns/campaignDetails`);
-    router.push(`/campaignDetails/${record.id}`);
+    router.push(`/campaigns/campaignDetails`);
+    // router.push(`/campaignDetails/${record.id}`);
   };
   const onViewRecordDetail = (record) => {
     setSelectedRecord(record);

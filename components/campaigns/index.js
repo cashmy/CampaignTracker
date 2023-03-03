@@ -32,16 +32,19 @@ const CampaignDashboard = () => {
         <Grid item xs={12} sx={{paddingTop: '5px !important'}} >
           <CampaignHeader title="Campaign Tracker" handleClear={handleClear} />
         </Grid>
+
         <Grid item xs={9} container spacing={5}>
           <Grid item xs={7}>
             <CampaignList selectCampaign={selectCampaign} />
           </Grid>
+
           <Grid item xs={5}>
             <AdventureList
               campaign={campaign}
               selectAdventure={selectAdventure}
             />
           </Grid>
+
           <Grid item xs={12}>
             {!campaign && (
               <Card>
@@ -50,7 +53,9 @@ const CampaignDashboard = () => {
             )}
             {campaign && <SessionList adventure={adventure} />}
           </Grid>
+          
         </Grid>
+
         <Grid item xs={3}>
           {!campaign && (
             <Card>
