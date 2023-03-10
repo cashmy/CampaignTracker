@@ -18,7 +18,7 @@ class AdventureService {
   };
 
   addRecord = (data) => {
-    console.log("Posting data: ", data)
+    // console.log("Posting data: ", data)
     return axios.post(API_URL, data, { headers: authHeader() });
   };
 

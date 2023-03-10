@@ -5,7 +5,7 @@ import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../../createEmotionCache";
 import AppContextProvider from "../../lib/context/AppContextProvider";
 import AppThemeProvider from "@/../../lib/context/AppThemeProvider/index.js";
-import AppStyleProvider from '@/../../lib/context/AppStyleProvider/index.js';
+import AppStyleProvider from "@/../../lib/context/AppStyleProvider/index.js";
 // import AppLocaleProvider from '@/../../lib/context/AppLocaleProvider/index.js';
 import AppAuthProvider from "../core/AppAuthProvider";
 import AuthRoutes from "@/../../lib/components/AuthRoutes.js";
@@ -24,16 +24,16 @@ export default function App({
       <AppContextProvider>
         <AppThemeProvider>
           {/* <AppLocalProvider> */}
-            <AppStyleProvider>
-                  <InfoViewContextProvider>
-                    <AppAuthProvider>
-                      <AuthRoutes>
-                        <CssBaseline />
-                        <Component {...pageProps} />
-                      </AuthRoutes>
-                    </AppAuthProvider>
-                  </InfoViewContextProvider>
-            </AppStyleProvider>
+          <AppStyleProvider>
+            <InfoViewContextProvider>
+              <AppAuthProvider>
+                <AuthRoutes>
+                  <CssBaseline />
+                  <Component {...pageProps} />
+                </AuthRoutes>
+              </AppAuthProvider>
+            </InfoViewContextProvider>
+          </AppStyleProvider>
           {/* </AppLocalProvider> */}
         </AppThemeProvider>
       </AppContextProvider>
