@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-01 10:49:59
- * @modify date 2023-03-01 14:03:44
+ * @modify date 2023-03-05 20:22:11
  * @desc [description]
  */
 //#region // *Imports
@@ -22,7 +22,7 @@ import AppCard from "@/../../lib/components/AppCard";
 
 const CampaignImage = (props) => {
   const { record } = props;
-
+  
   return (
     <AppCard
       sxStyle={{ mb: 8 }}
@@ -48,5 +48,5 @@ const CampaignImage = (props) => {
 export default CampaignImage;
 
 CampaignImage.propTypes = {
-  campaign: PropTypes.object.isRequired,
+   record: PropTypes.object.isRequired,
 };

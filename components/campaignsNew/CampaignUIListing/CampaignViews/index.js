@@ -2,117 +2,199 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 11:29:57
- * @modify date 2023-03-02 14:38:33
+ * @modify date 2023-03-10 11:34:55
  * @desc [description]
  */
 
 //#region Imports
-import {useRouter} from 'next/navigation';
-import { useState, Fragment } from "react";
-import CampaignViewsHeader from "./CampaignViewsHeader";
-import AppConfirmDialog from "@/../../lib/components/AppConfirmDialog";
-// import CreatePlayer from '../CreatePlayer';
+import { useRouter } from "next/router";
+import { useState, useEffect, Fragment } from "react";
+// * Mui Components
 import { Hidden } from "@mui/material";
-import CampaignViewList from './CampaignViewList';
-// import PlayerDetail from '../PlayerDetail';
-import AppsPagination from "@/../../lib/components/AppsPagination";
-import AppHeader from "@/../../lib/components/AppContainer/AppHeader";
-import AppContent from "@/../../lib/components/AppContainer/AppContent";
-import AppFooter from "@/../../lib/components/AppContainer/AppFooter";
-import { useInfoViewActionsContext } from "@/../../lib/context/AppContextProvider/InfoViewContextProvider";
-// import { postDataApi, putDataApi } from '@crema/hooks/APIHooks';
+// * Local Components
+import CampaignViewsHeader from "./CampaignViewsHeader";
+import CampaignViewList from "./CampaignViewList";
+import CampaignDialog from "components/campaigns/CampaignDialog";
+import AppConfirmDialog from "lib/components/AppConfirmDialog";
+import AppContent from "lib/components/AppContainer/AppContent";
+import AppFooter from "lib/components/AppContainer/AppFooter";
+import AppHeader from "lib/components/AppContainer/AppHeader";
+import AppsPagination from "lib/components/AppsPagination";
+import PageDialog from "components/controls/PageDialog";
+import Controls from "components/controls/Controls";
+// * Services
+import { useInfoViewActionsContext } from "lib/context/AppContextProvider/InfoViewContextProvider";
 import {
   useCampaignsActionsContext,
   useCampaignsContext,
 } from "../../CampaignsContextProvider";
+import CampaignService from "services/campaign.service";
+import { CampaignRecord as emptyRecord } from "dataModels/campaign";
+import { useGetDataApi, deleteDataApi, postDataApi, patchDataApiSts } from 'lib/hooks/APIHooks';
 //#endregion
 
 const CampaignViews = () => {
   //#region //* State & Local variables
   const router = useRouter();
-  const { all, page, RecordsList } = useCampaignsContext();
+  const { RecordsList } = useCampaignsContext();
+  const [page, setPage] = useState(0);
   const { onPageChange, setRecordsData } = useCampaignsActionsContext();
   const infoViewActionsContext = useInfoViewActionsContext();
   const [filterText, onSetFilterText] = useState("");
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [checkedRecords, setCheckedRecords] = useState([]);
   const [toDeleteRecords, setToDeleteRecords] = useState([]);
-  const [isAddRecord, onSetIsAddRecord] = useState(false);
+  const [openAddEdit, SetOpenAddEdit] = useState(false);
   const [isShowDetail, onShowDetail] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
+  const [loadData, setLoadData] = useState(false);
+  const [detailTitle, setDetailTitle] = useState("Add/Edit Campaign");
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "info",
+  });
+  const { reCallAPI, API_URL } = useCampaignsActionsContext();
   //#endregion
+  
+  // const [
+  //   { apiData: recordList, loading },
+  //   { setQueryParams, setData: setCampaignData, reCallAPI },
+  // ] = useGetDataApi('/api/campaigns', {}, {}, false);
 
+  // useEffect(() => {
+  //   setPage(0);
+  // }, [all]);
+
+  // useEffect(() => {
+  //   setQueryParams({
+  //     page: page,
+  //   });
+  // }, [all, page]);
+  
   //#region //* Event Handlers & Callbacks
   const handleAddRecordOpen = () => {
-    onSetIsAddRecord(true);
-  };
-  const onChangeActive = (status, record) => {
-    const selectedIdList = [record.id];
-    alert('onChangeActive');
-    // putDataApi('/api/PlayerApp/update/starred', infoViewActionsContext, {
-    //   PlayerIds: selectedIdList,
-    //   status: status,
-    // })
-    //   .then((data) => {
-    //     onUpdateSelectedPlayer(data[0]);
-    //     infoViewActionsContext.showMessage(
-    //       data[0].isStarred
-    //         ? 'Player Marked as Starred Successfully'
-    //         : 'Player Marked as Unstarred Successfully'
-    //     );
-    //   })
-    //   .catch((error) => {
-    //     infoViewActionsContext.fetchError(error.message);
-    //   });
+    setSelectedRecord(emptyRecord);
+    setDetailTitle("Add Campaign");
+    SetOpenAddEdit(true);
   };
   const onOpenEditRecord = (record) => {
     setSelectedRecord(record);
+    setDetailTitle("Edit Campaign");
+    SetOpenAddEdit(true);
+  };
+  const addEditRecord = (record, resetForm) => {
+    let close = false;
+    if (record.id === 0) {
+      CampaignService.addRecord(record);
+      resetForm();
+      setNotify({
+        isOpen: true,
+        message: "Record added",
+        type: "error",
+      });
+      reCallAPI();
+    }
+    else {
+      CampaignService.updateRecord(record);
+      setNotify({
+        isOpen: true,
+        message: "Record modified",
+        type: "error",
+      });
+      close = true;
+      reCallAPI();
+    }
+    if (close) {
+      resetForm();
+      setSelectedRecord(emptyRecord);
+      SetOpenAddEdit(false); // Close Popup modal
+    }
+    setNotify({
+      isOpen: true,
+      message: "Submitted Successfully",
+      type: "success",
+    });
+  };
+  const onChangeActive = (status, record) => {
+    const selectedIdList = [record.id];
+    alert("onChangeActive");
+    patchDataApiSts(`/api/campaigns/`, infoViewActionsContext, {
+      CampaignIds: selectedIdList,
+      archived: status,
+    })
+      .then((data) => {
+        onUpdateSelectedCampaign(data[0]);
+        infoViewActionsContext.showMessage(
+          data[0].archived
+            ? 'Campaign Marked as Archived Successfully'
+            : 'Campaign Marked as Unarchived Successfully'
+        );
+      })
+      .catch((error) => {
+        infoViewActionsContext.fetchError(error.message);
+      });
+      // reCallAPI();
+  };
+  const onChangeCheckedRecords = (event, id) => {
+    if (event.target.checked) {
+      setCheckedRecords(checkedRecords.concat(id));
+    } else {
+      setCheckedRecords(
+        checkedRecords.filter((recordId) => recordId !== id),
+      );
+    }
+  };
+  const onOpenDetails = (record) => {
+    setSelectedRecord(record);
     router.push(`/campaigns/campaignDetails`);
-    // router.push(`/campaignDetails/${record.id}`);
   };
   const onViewRecordDetail = (record) => {
     setSelectedRecord(record);
     onShowDetail(true);
+    alert("Viewing record " + record.id);
   };
   const onDeleteSelectedRecords = () => {
-    // postDataApi('http//localhost:5000/api/players/delete/player', infoViewActionsContext, {
-    //   type: all[0],
-    //   name: all[1],
-    //   PlayerIds: toDeletePlayers,
-    //   page,
-    // })
-    //   .then((data) => {
-    //     setPlayerData(data);
-    //     infoViewActionsContext.showMessage('Player Deleted Successfully');
-    //   })
-    //   .catch((error) => {
-    //     infoViewActionsContext.fetchError(error.message);
-    //   });
+    deleteDataApi(API_URL, infoViewActionsContext, {
+      recordIds: toDeleteRecords,
+      page,
+    })
+      .then((data) => {
+        // setRecordData(data);
+        infoViewActionsContext.showMessage('Record Deleted Successfully');
+      })
+      .catch((error) => {
+        infoViewActionsContext.fetchError(error.message);
+      });
     setDeleteDialogOpen(false);
     setCheckedRecords([]);
+    reCallAPI();
   };
-  const onSelectRecordsForDelete = (RecordIds) => {
-    setToDeleteRecords(RecordIds);
+  const onSelectRecordsForDelete = (recordIds) => {
+    console.log("Record Ids to delete: ", recordIds);
+    setToDeleteRecords(recordIds);
     setDeleteDialogOpen(true);
+    // reCallAPI();
   };
-  const onSelectRecordsForStatusChg = (PlayerIds) => {
+  const onSelectRecordsForStatusChg = (recordIds) => {
     // TODO : change status
-    alert("Changing status(es)")
-    // setToDeletePlayers(PlayerIds);
+    alert("Changing status(es)");
+    // setToDeleteRecords(recordIds);
     // setDeleteDialogOpen(true);
   };
   const handleSchedule = (record) => {
     alert("Scheduling record " + record.id);
-  }
+  };
   const onGetFilteredItems = () => {
     if (filterText === "") {
       return RecordsList;
     } else {
       return RecordsList?.filter((record) => {
-        return record.name.toUpperCase().includes(filterText.toUpperCase()) 
-        || record.gameSystem.toUpperCase().includes(filterText.toUpperCase()) 
-      }
-      );
+        return (
+          record.name.toUpperCase().includes(filterText.toUpperCase()) ||
+          record.gameSystem.toUpperCase().includes(filterText.toUpperCase())
+        );
+      });
     }
   };
   const list = onGetFilteredItems();
@@ -128,20 +210,22 @@ const CampaignViews = () => {
           onSetFilterText={onSetFilterText}
           onSelectRecordsForDelete={onSelectRecordsForDelete}
           onSelectRecordsForStatusChg={onSelectRecordsForStatusChg}
+          handleAddRecordOpen={handleAddRecordOpen}
         />
       </AppHeader>
 
       <AppContent>
-        <CampaignViewList 
+        <CampaignViewList
           list={list}
           checkedRecords={checkedRecords}
-          onChangeCheckedRecords={setCheckedRecords}
+          onChangeCheckedRecords={onChangeCheckedRecords}
           handleAddRecordOpen={handleAddRecordOpen}
           onChangeActive={onChangeActive}
           onSelectRecordsForDelete={onSelectRecordsForDelete}
           onOpenEditRecord={onOpenEditRecord}
+          onOpenDetails={onOpenDetails}
           onViewRecordDetail={onViewRecordDetail}
-          handleSchedule={handleSchedule}       
+          handleSchedule={handleSchedule}
         />
       </AppContent>
 
@@ -158,7 +242,16 @@ const CampaignViews = () => {
       </Hidden>
 
       {/* //& Modals & Dialogs */}
-      {/* Create Record */}
+      {/* Create/Edit Record */}
+      <PageDialog
+        openPopup={openAddEdit}
+        setOpenPopup={SetOpenAddEdit}
+        title={detailTitle}
+        titleColor={process.env.NEXT_PUBLIC_NX_PRIMARY_COLOR}
+        size="sm"
+      >
+        <CampaignDialog recordForEdit={selectedRecord} addOrEdit={addEditRecord} />
+      </PageDialog>
 
       {/* View Detail */}
 
@@ -171,6 +264,8 @@ const CampaignViews = () => {
         title="Are you sure, you want to delete the selected Record ?"
         dialogTitle="Delete Item(s)"
       />
+      {/* Notification */}
+      <Controls.Notification notify={notify} setNotify={setNotify} />
     </Fragment>
   );
 };

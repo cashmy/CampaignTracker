@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 12:47:54
- * @modify date 2023-02-28 21:43:55
+ * @modify date 2023-03-09 11:31:41
  * @desc [description]
  */
 
@@ -16,7 +16,6 @@ import AppGrid from "@/../../lib/components/AppGrid";
 import ListEmptyResult from "@/../../lib/components/AppList/ListEmptyResult";
 // TODO: Create & Replace this
 import PlayerListSkeleton from "@/../../lib/components/AppSkeleton/PlayerListSkeleton";
-// import CampaignCardItem from './CampaignCardItem';
 import CampaignListItem from "./CampaignListItem";
 // import CampaignDetailListMobile from "./CampaignDetailListMobile";
 import { useCampaignsContext } from "../../CampaignsContextProvider";
@@ -31,6 +30,7 @@ const CampaignViewList = (props) => {
     onChangeCheckedRecords,
     onSelectRecordsForDelete,
     onOpenEditRecord,
+    onOpenDetails,
     onViewRecordDetail,
     handleSchedule,
   } = props;
@@ -69,6 +69,7 @@ const CampaignViewList = (props) => {
                   onChangeActive={onChangeActive}
                   onViewRecordDetail={onViewRecordDetail}
                   onOpenEditRecord={onOpenEditRecord}
+                  onOpenDetails={onOpenDetails}
                   handleSchedule={handleSchedule}
                 />
               )}
@@ -94,7 +95,7 @@ const CampaignViewList = (props) => {
                   placeholder={<PlayerListSkeleton />}
                 />
               }
-              renderRow={(Record) => (
+              renderRow={(record) => (
                 <div> Mobile record item </div>
                 // <CampaignDetailListMobile
                 //   key={Record.id}
@@ -168,6 +169,7 @@ CampaignViewList.propTypes = {
   onChangeActive: PropTypes.func.isRequired,
   onSelectRecordsForDelete: PropTypes.func.isRequired,
   onOpenEditRecord: PropTypes.func.isRequired,
+  onOpenDetails: PropTypes.func.isRequired,
   onViewRecordDetail: PropTypes.func.isRequired,
   handleSchedule: PropTypes.func.isRequired,
 };

@@ -8,8 +8,7 @@ const CampaignsContext = createContext();
 const CampaignsActionsContext = createContext();
 
 export const useCampaignsContext = () => useContext(CampaignsContext);
-export const useCampaignsActionsContext = () =>
-  useContext(CampaignsActionsContext);
+export const useCampaignsActionsContext = () => useContext(CampaignsActionsContext);
 
 export const CampaignsContextProvider = ({ children }) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
@@ -59,6 +58,7 @@ export const CampaignsContextProvider = ({ children }) => {
           reCallAPI,
           setPageView,
           onChangePageView,
+          API_URL
         }}
       >
         {children}

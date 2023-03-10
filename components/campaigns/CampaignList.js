@@ -2,35 +2,35 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-14 20:45:17
- * @modify date 2023-02-26 17:20:36
+ * @modify date 2023-03-09 11:45:50
  * @desc [description]
  */
+
 // #region Imports
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+// * Mui Components
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
-import TableCard from "@/../../components/controls/TableCard";
-// *Services
-import CampaignService from "@/../../services/campaign.service";
-import ActionButton from "components/controls/ActionButton";
+// * Local Components
 import ActionIconButton from "components/controls/ActionIconButton";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import { BiTargetLock } from "react-icons/bi";
-import { GiPistolGun, GiReloadGunBarrel } from "react-icons/gi";
-import { MdCampaign } from "react-icons/md";
-import { CampaignRecord as emptyRecord } from "dataModels/campaign";
-import { campaignColumns as columnCells } from "dataModels/campaign";
+import TableCard from "@/../../components/controls/TableCard";
 import CampaignActionItems from "./CampaignActionItems";
-import useTable from "@/../../lib/hooks/useTable";
 import PageDialog from "../controls/PageDialog";
 import CampaignDialog from "./CampaignDialog";
 import Controls from "../controls/Controls";
+import useTable from "@/../../lib/hooks/useTable";
+// * Icons
+import { BiTargetLock } from "react-icons/bi";
+import { GiPistolGun, GiReloadGunBarrel } from "react-icons/gi";
+import { MdCampaign } from "react-icons/md";
+// * Services
+import CampaignService from "@/../../services/campaign.service";
+import { CampaignRecord as emptyRecord } from "dataModels/campaign";
+import { campaignColumns as columnCells } from "dataModels/campaign";
 //#endregion
 
 const CampaignList = (props) => {
@@ -68,6 +68,7 @@ const CampaignList = (props) => {
     useTable(records, columnCells, filterFn, rowsPerPageOptions);
   //#endregion
 
+  //#region //* useEffect
   useEffect(() => {
     const getTableData = async (e) => {
       try {
@@ -85,6 +86,7 @@ const CampaignList = (props) => {
     };
     getTableData();
   }, [archiveStatus, loadData]);
+  //#endregion
 
   //#region //* Handler Functions
   const handleRowClick = (record) => {

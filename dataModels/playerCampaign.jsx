@@ -8,4 +8,7 @@ export const playerCampaignRecord = {
   campaignId: 0,
   discordNickName: "",
   pcName: "",
+  pcRace: "",
+  pcClass: "",
+  tokenUrl: "",
 };

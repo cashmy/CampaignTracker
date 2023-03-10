@@ -21,7 +21,7 @@ class PlayerService {
     return axios.get(API_URL + `archive/${status}`, { headers: authHeader() });
   };
 
-  getRecord = (id) => {
+  getRecordById = (id) => {
     return axios.get(API_URL + `${id}/`, { headers: authHeader() });
   };
 

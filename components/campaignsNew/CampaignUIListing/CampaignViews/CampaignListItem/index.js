@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-27 18:10:43
- * @modify date 2023-03-02 16:30:41
+ * @modify date 2023-03-10 14:57:09
  * @desc [description]
  */
 
@@ -77,6 +77,7 @@ const CampaignListItem = (props) => {
     onSelectRecordsForDelete,
     onViewRecordDetail,
     onOpenEditRecord,
+    onOpenDetails,
     handleSchedule,
   } = props;
 
@@ -181,9 +182,10 @@ const CampaignListItem = (props) => {
       dense
       button
       key={record.id}
-      className={clsx("item-hover", {
-        rootCheck: checkedRecords.includes(record.id),
-      })}
+      className={clsx(
+        "item-hover"
+        //  {rootCheck: checkedRecords.includes(record.id),}
+      )}
       onClick={() => onViewRecordDetail(record)}
     >
       <Box
@@ -224,8 +226,8 @@ const CampaignListItem = (props) => {
             overflow: "hidden",
           }}
         >
-          <Image 
-            src={record.imageUrl || '/assets/images/1444575.gif'}
+          <Image
+            src={record.imageUrl || "/assets/images/1444575.gif"}
             alt={record.name}
             width={30}
             height={30}
@@ -282,73 +284,93 @@ const CampaignListItem = (props) => {
           {record.gameSystem}
         </Box>
 
-        {/* //& Frequency */}
+        {/* //^ Action Items & "Shift left" */}
         <Box
-          component="span"
           sx={{
-            maxWidth: 200,
-            mr: 4,
-            fontWeight: Fonts.MEDIUM,
-            flex: 1,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-            fontStyle: record.archived ? "italic" : "normal",
-            color: record.archived ? "grey" : "primary",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            width: { xs: "25%", sm: "20%", md: "50%" },
           }}
         >
-          {frequencyText(record.frequency)}
-        </Box>
+          {/* //^ Frequence, DOW, TimeSlot */}
+          <Box
+            sx={{
+              transition: "all 0.4s ease",
+              display: "flex",
+              alignItems: "center",
+              width: { sm: "calc(100% - 70px)" },
+            }}
+            className="recordViewInfo"
+          >
+            {/* //& Frequency */}
+            <Box
+              component="span"
+              sx={{
+                maxWidth: 200,
+                mr: 4,
+                fontWeight: Fonts.MEDIUM,
+                flex: 1,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                fontStyle: record.archived ? "italic" : "normal",
+                color: record.archived ? "grey" : "primary",
+              }}
+            >
+              {frequencyText(record.frequency)}
+            </Box>
 
-        {/* //& DOW */}
-        <Box
-          component="span"
-          sx={{
-            maxWidth: 150,
-            mr: 4,
-            fontWeight: Fonts.MEDIUM,
-            flex: 1,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-            fontStyle: record.archived ? "italic" : "normal",
-            color: record.archived ? "grey" : "primary",
-          }}
-        >
-          {dowText(record.dow)}
-        </Box>
+            {/* //& DOW */}
+            <Box
+              component="span"
+              sx={{
+                maxWidth: 150,
+                mr: 4,
+                fontWeight: Fonts.MEDIUM,
+                flex: 1,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                fontStyle: record.archived ? "italic" : "normal",
+                color: record.archived ? "grey" : "primary",
+              }}
+            >
+              {dowText(record.dow)}
+            </Box>
 
-        {/* //& TimeSlot */}
-        <Box
-          component="span"
-          sx={{
-            mr: 4,
-            fontWeight: Fonts.MEDIUM,
-            flex: 1,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-            fontStyle: record.archived ? "italic" : "normal",
-            color: record.archived ? "grey" : "primary",
-          }}
-        >
-          {timeSlotText(record.timeSlot)}
+            {/* //& TimeSlot */}
+            <Box
+              component="span"
+              sx={{
+                mr: 4,
+                fontWeight: Fonts.MEDIUM,
+                flex: 1,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                fontStyle: record.archived ? "italic" : "normal",
+                color: record.archived ? "grey" : "primary",
+              }}
+            >
+              {timeSlotText(record.timeSlot)}
+            </Box>
+          </Box>
+          {/* //& Actions Items */}
+          <Box
+            component="span"
+            sx={{ display: "flex", alignItems: "center", marginLeft: "auto" }}
+          >
+            <ItemMenu
+              record={record}
+              onChangeActive={onChangeActive}
+              onSelectRecordsForDelete={onSelectRecordsForDelete}
+              onOpenEditRecord={onOpenEditRecord}
+              onOpenDetails={onOpenDetails}
+              handleSchedule={handleSchedule}
+            />
+          </Box>
         </Box>
-
-        {/* //& Actions Items */}
-        <Box
-          component="span"
-          sx={{ display: "flex", alignItems: "center", ml: "auto" }}
-        >
-          <ItemMenu
-            record={record}
-            onChangeActive={onChangeActive}
-            onSelectRecordsForDelete={onSelectRecordsForDelete}
-            onOpenEditRecord={onOpenEditRecord}
-            handleSchedule={handleSchedule}
-          />
-        </Box>
-
       </Box>
     </CampaignListItemWrapper>
   );
@@ -368,5 +390,6 @@ CampaignListItem.propTypes = {
   onSelectRecordsForDelete: PropTypes.func,
   onViewRecordDetail: PropTypes.func,
   onOpenEditRecord: PropTypes.func,
+  onOpenDetails: PropTypes.func,
   handleSchedule: PropTypes.func,
 };

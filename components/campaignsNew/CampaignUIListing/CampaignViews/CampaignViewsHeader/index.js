@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
-import { Hidden } from "@mui/material";
+import { Fab, Hidden } from "@mui/material";
 
 import AppSearchBar from "@/../../lib/components/AppSearchBar";
 import AppsPagination from "@/../../lib/components/AppsPagination";
 import ViewSelectButtons from "./ViewSelectButtons";
 import CheckBox from "./CheckBox";
+import AddIcon from "@mui/icons-material/Add";
 import CampaignCheckedActions from "./CampaignCheckedActions";
 import {
   useCampaignsActionsContext,
@@ -22,11 +23,10 @@ const CampaignViewsHeader = (props) => {
     // onUpdateRecords,
     onSelectRecordsForDelete,
     onSelectRecordsForStatusChg,
+    handleAddRecordOpen,
   } = props;
   const { page, pageView, RecordsList } = useCampaignsContext();
   const { onPageChange, onChangePageView } = useCampaignsActionsContext();
-
-  // const { messages } = useIntl();
 
   return (
     <>
@@ -54,7 +54,7 @@ const CampaignViewsHeader = (props) => {
 
         {checkedRecords.length > 0 ? (
           <CampaignCheckedActions
-            checkedRecordss={checkedRecords}
+            checkedRecords={checkedRecords}
             onSelectRecordsForDelete={onSelectRecordsForDelete}
             onSelectRecordsForStatusChg={onSelectRecordsForStatusChg}
           />
@@ -65,6 +65,7 @@ const CampaignViewsHeader = (props) => {
           onChangePageView={onChangePageView}
         />
       </Box>
+
       <Hidden smDown>
         {RecordsList?.length > 0 ? (
           <AppsPagination
@@ -77,6 +78,12 @@ const CampaignViewsHeader = (props) => {
           "length?"
         )}
       </Hidden>
+
+      <Box sx={{ ml: "auto" }}>
+        <Fab size="small" aria-label="add" color="secondary">
+          <AddIcon onClick={handleAddRecordOpen} />
+        </Fab>{" "}
+      </Box>
     </>
   );
 };
@@ -95,4 +102,5 @@ CampaignViewsHeader.propTypes = {
   onSetFilterText: PropTypes.func,
   onSelectRecordsForDelete: PropTypes.func,
   onSelectRecordsForStatusChg: PropTypes.func,
+  handleAddRecordOpen: PropTypes.func,
 };

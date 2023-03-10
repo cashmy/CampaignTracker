@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-02 12:05:52
- * @modify date 2023-03-03 11:19:55
+ * @modify date 2023-03-07 11:24:51
  * @desc [description]
  */
 
@@ -46,7 +46,7 @@ const BackDrop = styled(Paper)(({ theme }) => ({
 
 const RecordDisplay = (props) => {
   //#region //* State & local variables
-  const { record } = props;
+  const { record, handleReloadCampaign } = props;
   const router = useRouter();
   //#endregion
 
@@ -55,7 +55,10 @@ const RecordDisplay = (props) => {
 
   //#region //* Event Handlers
   const onSelectRecordsForDelete = () => {};
-  const onOpenEditRecord = () => {};
+  const onOpenEditRecord = () => {
+    alert("Edit Record");
+    handleReloadCampaign();
+  };
   const handleStatusChange = () => {};
   const dowText = (dow) => {
     switch (dow) {
@@ -130,7 +133,7 @@ const RecordDisplay = (props) => {
           {/* //^ Header */}
           <Grid container sx={{ pt: 3 }}>
             {/* //& Back Button */}
-            <Grid item xs={1} sx={{ mr: 5, pt: 2 }}>
+            <Grid item md={2} lg={1}  sx={{ mr: 5, pt: 2 }}>
               <Button
                 variant="outlined"
                 startIcon={<ArrowBackIcon />}
@@ -148,7 +151,7 @@ const RecordDisplay = (props) => {
             </Grid>
 
             {/* //& Name/Title */}
-            <Grid item xs={6} sx={{ pt: 3 }}>
+            <Grid item md={3} lg={5} xl={6} sx={{ pt: 3 }}>
               <Typography
                 variant="h3"
                 component="h1"
@@ -498,4 +501,5 @@ export default RecordDisplay;
 
 RecordDisplay.propTypes = {
   record: PropTypes.object.isRequired,
+  handleReloadCampaign: PropTypes.func.isRequired,
 };

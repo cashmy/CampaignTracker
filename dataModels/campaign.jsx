@@ -10,7 +10,7 @@ export const campaignRecord = {
   gameSystem: "",       // e.g. D&D, Cyberpunk, ShadowRun, etc.
   type: "n",        // one-shot, adventure-only, campaign
   style: "",        // table-top, online, Roll20, Combo, etc.
-  frequency: "w",   // weekly, bi-weekly, monthly, varied
+  frequency: "t",   // (w)eekly, (b)i-weekly, (m)onthly, (v)aried, (o)nce, (n)ever, (T)BD
   dow: 0,           // 0-7 = None,S,M,T,W,Th,F,Sa
   timeSlot: 0,      // 0-3 = None,M,A,E
   pcIdeal: 0,       // Ideal number of player characters

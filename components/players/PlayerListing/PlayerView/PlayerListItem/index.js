@@ -186,6 +186,7 @@ const PlayerListItem = ({
           width: { xs: "25%", sm: "20%", md: "50%" },
         }}
       >
+        {/* //^ Contact, TimeZone, Digital Clock */}
         <Box
           sx={{
             transition: "all 0.4s ease",
@@ -195,6 +196,7 @@ const PlayerListItem = ({
           }}
           className="PlayerViewInfo"
         >
+          {/* //& Contact Number */}
           <Box
             component="span"
             sx={{
@@ -208,6 +210,8 @@ const PlayerListItem = ({
           >
             {Player.contact}
           </Box>
+
+          {/* //& Time Zone */}
           <Box
             component="span"
             sx={{
@@ -223,6 +227,8 @@ const PlayerListItem = ({
             <b />
             {Player.timeZoneOffset ? Player.timeZoneOffset : null}
           </Box>
+
+          {/* //& Digital Clock */}
           <Box
             component="span"
             sx={{
@@ -241,6 +247,7 @@ const PlayerListItem = ({
           </Box>
         </Box>
 
+        {/* //& Arrow Label / Item Menu */}
         <Box
           component="span"
           sx={{
@@ -266,6 +273,7 @@ const PlayerListItem = ({
             onSelectPlayersForDelete={onSelectPlayersForDelete}
           />
         </Box>
+
       </Box>
     </PlayerListItemWrapper>
   );

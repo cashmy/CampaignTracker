@@ -1,19 +1,24 @@
 import React from 'react';
-import Checkbox from '@mui/material/Checkbox';
 import PropTypes from 'prop-types';
+
 import Box from '@mui/material/Box';
+import Checkbox from '@mui/material/Checkbox';
+
 import { useCampaignsContext } from '../../../CampaignsContextProvider';
 
 const CheckBox = ({ checkedRecords, setCheckedRecords }) => {
   const { RecordsList } = useCampaignsContext();
+
   const onHandleMasterCheckbox = (event) => {
+    console.log("Records List: ", RecordsList)
     if (event.target.checked) {
-      const RecordIds = RecordsList?.map((Record) => Record.id);
-      setCheckedRecords(RecordIds);
+      const recordIds = RecordsList?.map((record) => record.id);
+      setCheckedRecords(recordIds);
     } else {
       setCheckedRecords([]);
     }
   };
+
 
   return (
     <Box

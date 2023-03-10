@@ -2,16 +2,15 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-01 10:17:40
- * @modify date 2023-03-03 10:29:52
+ * @modify date 2023-03-10 12:02:19
  * @desc [description]
  */
+
 //#region Imports
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import AppGridContainer from "@/../../lib/components/AppGridContainer";
-import AppGrid from "@/../../lib/components/AppGrid";
-import { Box, Grid, Paper } from "@mui/material";
-import AppContainer from "@/../../lib/components/AppContainer";
-import AppScrollbar from "@/../../lib/components/AppScrollbar";
+import { Grid, Paper } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 // * Components
@@ -41,19 +40,26 @@ const Item = styled(Paper)(({ theme }) => ({
 //#endregion
 
 const DetailLayout = (props) => {
-  const { record } = props;
+  const { 
+    record, 
+    campaignPlayers,
+    handleReloadCampaign,
+    handleReloadPlayers,
+    handleReloadImage
+   } = props;
+
   return (
     <AppGridContainer>
       <Grid item xs={9} container spacing={5} >
         <Grid item xs={3}>
-          <CampaignImage record={record} />
+          <CampaignImage record={record} handleReloadImage={handleReloadImage}/>
         </Grid>
 
         <Grid item xs={9}>
-          <RecordDisplay record={record} />
+          <RecordDisplay record={record} handleReloadCampaign={handleReloadCampaign} />
         </Grid>
         <Grid item xs={12} >
-            <CampaignPlayers record={record} />
+            <CampaignPlayers campaign={record} campaignPlayers={campaignPlayers} handleReloadPlayers={handleReloadPlayers} />
         </Grid>
       </Grid>
 
@@ -69,5 +75,9 @@ const DetailLayout = (props) => {
 export default DetailLayout;
 
 DetailLayout.propTypes = {
-  record: PropTypes.object.isRequired,
+  record: PropTypes.object,
+  campaignPlayers: PropTypes.array,
+  handleReloadCampaign: PropTypes.func,
+  handleReloadPlayers: PropTypes.func,
+  handleReloadImage: PropTypes.func,
 };

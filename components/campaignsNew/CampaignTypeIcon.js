@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-02 12:05:52
- * @modify date 2023-03-02 17:37:55
+ * @modify date 2023-03-05 20:28:49
  * @desc [description]
  */
 
@@ -25,7 +25,7 @@ const CampaignTypeIcon = (props) => {
   //#region //* State & local variables
   const { type, size } = props;
   //#endregion
-  console.log("CampaignTypeIcon: ", type)
+  
   //#region //* Event Handlers
   const typeText = (type) => {
     switch (type) {
@@ -61,7 +61,15 @@ const CampaignTypeIcon = (props) => {
         ); // Cmgn
 
       default:
-        return "None";
+        return (
+          <ActionIconButton
+            filled={true}
+            color="grey"
+            tooltipText="Unknown Campaign Type"
+          >
+            <QuestionMarkIcon size={size}/>
+          </ActionIconButton>
+        );
     }
   };
   //#endregion
@@ -72,10 +80,11 @@ const CampaignTypeIcon = (props) => {
 export default CampaignTypeIcon;
 
 CampaignTypeIcon.defaultProps = {
+  type: "",
   size: "",
 }
 
 CampaignTypeIcon.propTypes = {
-  type: PropTypes.object,
+  type: PropTypes.string,
   size: PropTypes.string,
 };

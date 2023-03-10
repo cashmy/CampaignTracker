@@ -16,6 +16,10 @@ class PlayerCampaignService {
     return axios.get(API_URL + `player/${id}`, { headers: authHeader() });
   };
 
+  getAllRecordsByCampaign = (id) => {
+    return axios.get(API_URL + `campaign/${id}`, { headers: authHeader() });
+  };
+
   getRecord = (id) => {
     return axios.get(API_URL + `${id}/`, { headers: authHeader() });
   };

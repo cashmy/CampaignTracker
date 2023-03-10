@@ -1,18 +1,32 @@
+/** Author
+ * @author Cash Myers
+ * @github [https://github.com/cashmy]
+ * @create date 2023-03-09 11:54:27
+ * @modify date 2023-03-09 11:56:34
+ * @desc [description]
+ */
+
+//#region Imports
 import React from "react";
-// import IntlMessages from '@/../../lib/helpers/IntlMessages';
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PropTypes from "prop-types";
+// import IntlMessages from '@/../../lib/helpers/IntlMessages';
+// * Mui
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+// * Icons
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@mui/material/IconButton";
-import {HiBolt, HiOutlineBolt} from 'react-icons/hi2';
+import { HiBolt, HiOutlineBolt } from "react-icons/hi2";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import DetailsIcon from "@mui/icons-material/Details";
+// * Local Components
 import AppTooltip from "@/../../lib/components/AppTooltip";
-import Box from "@mui/material/Box";
 import Controls from "/components/controls/Controls";
+//#endregion
 
-import { styled } from "@mui/material/styles";
-
+//#region // * Styles
 const RecordActionHoverWrapper = styled("div")(() => {
   return {
     display: "flex",
@@ -28,6 +42,7 @@ const RecordActionHoverWrapper = styled("div")(() => {
     visibility: "hidden",
   };
 });
+// #endregion
 
 const ItemMenu = (props) => {
   const {
@@ -35,23 +50,28 @@ const ItemMenu = (props) => {
     record,
     onChangeActive,
     onOpenEditRecord,
+    onOpenDetails,
     handleSchedule,
   } = props;
 
+  //#region // * Handlers
   const onDeleteRecord = (e) => {
     onSelectRecordsForDelete([record.id]);
     e.stopPropagation();
   };
-
   const onChangeActiveStatus = (e) => {
     onChangeActive(!record.active, record);
     e.stopPropagation();
   };
-
   const onClickEditOption = (e) => {
     onOpenEditRecord(record);
     e.stopPropagation();
   };
+  const onClickDetailsOption = (e) => {
+    onOpenDetails(record);
+    e.stopPropagation();
+  };
+  //#endregion
 
   return (
     <Box
@@ -92,7 +112,11 @@ const ItemMenu = (props) => {
           size="small"
           onClick={onChangeActiveStatus}
         >
-          {!record.archived ? <HiOutlineBolt fontSize='large' /> : <HiBolt fontSize='large' />}
+          {!record.archived ? (
+            <HiOutlineBolt fontSize="large" />
+          ) : (
+            <HiBolt fontSize="large" />
+          )}
         </Controls.ActionButton>
 
         {/* //& Delete Item */}
@@ -106,16 +130,16 @@ const ItemMenu = (props) => {
           <DeleteOutlinedIcon fontSize="small" />
         </Controls.ActionButton>
 
-          {/* //& Calendar Item */}
-          <Controls.ActionButton
-            filled={true}
-            color="darkblue"
-            tooltipText={"Schedule an item"}
-            size="small"
-            onClick={() => handleSchedule(record)}
-          >
-            <CalendarMonthIcon fontSize="small" />
-          </Controls.ActionButton>
+        {/* //& Calendar Item */}
+        <Controls.ActionButton
+          filled={true}
+          color="darkblue"
+          tooltipText={"Schedule an item"}
+          size="small"
+          onClick={() => handleSchedule(record)}
+        >
+          <CalendarMonthIcon fontSize="small" />
+        </Controls.ActionButton>
 
         {/* //& Edit Item */}
         <Controls.ActionButton
@@ -127,6 +151,18 @@ const ItemMenu = (props) => {
         >
           <EditOutlinedIcon fontSize="small" />
         </Controls.ActionButton>
+
+        {/* //& Details Item */}
+        <Controls.ActionButton
+          filled={true}
+          color="orange"
+          tooltipText={"Work with details"}
+          size="small"
+          onClick={onClickDetailsOption}
+        >
+          <DetailsIcon fontSize="small" />
+        </Controls.ActionButton>
+        
       </RecordActionHoverWrapper>
     </Box>
   );
@@ -139,5 +175,6 @@ ItemMenu.propTypes = {
   record: PropTypes.object.isRequired,
   onChangeActive: PropTypes.func,
   onOpenEditRecord: PropTypes.func,
+  onOpenDetails: PropTypes.func,
   handleSchedule: PropTypes.func,
 };

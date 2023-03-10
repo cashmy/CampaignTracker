@@ -1,39 +1,101 @@
+/** Author
+ * @author Cash Myers
+ * @github [https://github.com/cashmy]
+ * @create date 2023-03-05 20:38:52
+ * @modify date 2023-03-05 20:49:59
+ * @desc [description]
+ */
 
-import { useEffect, useState } from "react";
+//#region //* Imports
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import AppContainer from "@/../../lib/components/AppContainer";
-import CampaignService from "@/../../services/campaign.service";
-import CampaignsContextProvider from "../CampaignsContextProvider";
 import DetailLayout from "./DetailLayout";
+import CampaignService from "services/campaign.service";
+import PlayerCampaignService from "services/playerCampaign.service";
+//#endregion
 
-const CampaignDetails = (initialProps) => {
+
+const CampaignDetails = (props) => {
+  //#region //* State & local variables
+  const { campaignId } = props;
   const [record, setRecord] = useState({});
+  const [campaignPlayers, setCampaignPlayers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [loadData, setLoadData] = useState(true);
+  const [reloadCampaign, setReloadCampaign] = useState(false);
+  const [reloadPlayers, setReloadPlayers] = useState(false);
+  const [reloadImage, setReloadImage] = useState(false);
+  //#endregion
 
-  useEffect (() => {
+  //#region //* Hooks
+  useEffect(() => {
     const getRecordData = async (e) => {
       try {
         setLoading(true);
-        const response = await CampaignService
-          .getRecord(1)
-          .then();
+        const response = await CampaignService.getRecord(campaignId).then();
         setRecord(response.data);
         setLoading(false);
-        setLoadData(false);
+        setReloadCampaign(false);
       } catch (e) {
         console.log("API call unsuccessful", e);
       }
     };
     getRecordData();
-  }, [initialProps]);
+  }, [campaignId, reloadCampaign]);
+
+  useEffect(() => {
+    const getTableData = async (e) => {
+      try {
+        setLoading(true);
+        const response = await PlayerCampaignService.getAllRecordsByCampaign(
+          campaignId
+        ).then();
+        setCampaignPlayers(response.data);
+        setLoading(false);
+        setReloadCampaign(false);
+        setReloadPlayers(false);
+      } catch (e) {
+        console.log("API call unsuccessful", e);
+      }
+    };
+    getTableData();
+  }, [reloadCampaign, reloadPlayers]);
+  //#endregion
+
+  //#region //* Event Handlers
+  const handleReloadCampaign = () => {
+    setReloadCampaign(true);
+  }
+  const handleReloadPlayers = () => {
+    setReloadPlayers(true);
+  }
+  const handleReloadImage = () => {
+    setReloadImage(true);
+  }
+  //#endregion
 
   return (
-    <CampaignsContextProvider>
-      <AppContainer title="Campaign Details" cardStyle={{ background: 'none', boxShadow: 'none', border: '0 none' }} fullView>
-        <DetailLayout record={record} />
-      </AppContainer>
-    </CampaignsContextProvider>
+    <AppContainer
+      title="Campaign Details"
+      cardStyle={{ background: "none", boxShadow: "none", border: "0 none" }}
+      fullView
+    >
+      <DetailLayout 
+        record={record} 
+        campaignPlayers={campaignPlayers} 
+        handleReloadCampaign={handleReloadCampaign}
+        handleReloadPlayers={handleReloadPlayers}
+      />
+    </AppContainer>
   );
 };
 
 export default CampaignDetails;
+
+CampaignDetails.defaultProps = {
+  campaignId: 1,
+};
+
+CampaignDetails.propTypes = {
+  campaignId: PropTypes.number,
+};
