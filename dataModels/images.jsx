@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 
 export const imageRecord = {
   id: 0,
-  fileName: "",             // File name of image ex: image.jp🇬
-  fileUrl: "",              // Url of image
-  altText: "",              // Description of image for screen readers
-  fileSize: 0,              // size of image in bytes
-  mimeType: "",             // Opt: (jpg, png, gif, etc.)
-  lastModified: Date(now),  // Date of last modification
-  imageType: "i",           // i = image, a = avatar, t = token, s = sidebar
-  userId: 1,                // User id of image owner
+  fileName: "",     // File name of image ex: image.jp🇬
+  fileUrl: "",      // Url of image
+  altText: "",      // Description of image for screen readers
+  fileSize: 0,      // size of image in bytes
+  mimeType: "",     // Opt: (jpg, png, gif, etc.)
+  lastModified: "", // Date of last modification
+  imageType: "i",   // i = image, a = avatar, t = token, s = sidebar
+  userId: 1,        // User id of image owner
 };
 
 export const imageColumnsDataX = [
