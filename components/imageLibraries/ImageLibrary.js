@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-11 11:01:55
- * @modify date 2023-03-11 18:54:07
+ * @modify date 2023-03-11 19:40:52
  * @desc [description]
  */
 
@@ -44,6 +44,7 @@ import ImageDialog from "./ImageDialog";
 import Notification from "../../components/controls/Notification";
 import PageDialog from "components/controls/PageDialog";
 import TitleBar from "/components/controls/TitleBar";
+import ViewImageDialog from "./ViewImageDialog";
 // * Services
 import {
   useImagesContext,
@@ -57,6 +58,7 @@ const ImageLibrary = (props) => {
   const [images, setImages] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openPopup, setOpenPopup] = useState(false);
+  const [openView, setOpenView] = useState(false);
   const [recordForEdit, setRecordForEdit] = useState(null);
   const [currentItem, setCurrentItem] = useState();
   const maxNumber = 69;
@@ -191,7 +193,9 @@ const ImageLibrary = (props) => {
     setCurrentItem(null);
   };
   const handleSelection = (item) => {
-    selectImage(item);
+    // selectImage(item);
+    setRecordForEdit(item);
+    setOpenView(true);
     // exit modal close.
   };
   const handleDialogClose = () => {
@@ -598,6 +602,15 @@ const ImageLibrary = (props) => {
         size={"sm"}
       >
         <ImageDialog recordForEdit={recordForEdit} addOrEdit={addOrEdit} />
+      </PageDialog>
+      <PageDialog
+        openPopup={openView}
+        setOpenPopup={setOpenView}
+        title={selectDialogTitle(imageType)}
+        titleColor={process.env.NEXT_PUBLIC_NX_PRIMARY_COLOR}
+        size={"md"}
+      >
+        <ViewImageDialog record={recordForEdit} />
       </PageDialog>
       <Controls.ConfirmDialog
         confirmDialog={confirmDialog}
