@@ -68,7 +68,7 @@ const routesConfig = [
             messageId: "sidebar.app.imageLibaries.images",
             icon: <IoImage />,
             type: "item",
-            url: "/images",
+            url: "/images?imageType=i",
           },
           {
             id: "avatars",
@@ -76,7 +76,7 @@ const routesConfig = [
             messageId: "sidebar.app.imageLibaries.avatars",
             icon: <RxAvatar />,
             type: "item",
-            url: "/error-pages/coming-soon",
+            url: "/images?imageType=a",
           },
           {
             id: "tokens",
@@ -84,7 +84,7 @@ const routesConfig = [
             messageId: "sidebar.app.imageLibaries.tokens",
             icon: <GiToken />,
             type: "item",
-            url: "/error-pages/coming-soon",
+            url: "/images?imageType=t",
           },
           {
             id: "sidebars",
@@ -92,7 +92,7 @@ const routesConfig = [
             messageId: "sidebar.app.imageLibaries.sidebars",
             icon: <RiSideBarFill />,
             type: "item",
-            url: "/error-pages/coming-soon",
+            url: "/images?imageType=s"
           },
         ],
       },

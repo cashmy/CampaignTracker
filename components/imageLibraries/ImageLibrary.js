@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-11 11:01:55
- * @modify date 2023-03-11 19:40:52
+ * @modify date 2023-03-12 12:38:55
  * @desc [description]
  */
 
@@ -18,6 +18,7 @@ import {
   CardActionArea,
   CardMedia,
   CardContent,
+  Grid,
   ListItemIcon,
   Menu,
   MenuItem,
@@ -146,7 +147,6 @@ const ImageLibrary = (props) => {
       message: "Submitted Successfully",
       type: "success",
     });
-    
   };
   const onChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
@@ -233,13 +233,13 @@ const ImageLibrary = (props) => {
   const selectDialogTitle = (imageType) => {
     switch (imageType) {
       case "i":
-        return "Image Details";
+        return "Image";
       case "a":
-        return "Avatar Details";
+        return "Avatar";
       case "t":
-        return "Token Details";
+        return "Token";
       case "s":
-        return "SideBar Details";
+        return "SideBar";
       default:
         return "Image Details";
     }
@@ -293,6 +293,10 @@ const ImageLibrary = (props) => {
           borderRadius: "10px",
         };
     }
+  };
+  const selectImageStyle = (imageType) => {
+    if (imageType == "s") return "flex";
+    else return null;
   };
   // #endregion
 
@@ -349,7 +353,7 @@ const ImageLibrary = (props) => {
                   // overflowY: "auto",
                   borderRadius: "10px",
                 }}
-                >
+              >
                 <AppScrollbar>
                   <Box sx={{ m: 3 }} display="flex">
                     {/* //& Page: Card Table Body */}
@@ -366,6 +370,7 @@ const ImageLibrary = (props) => {
                             height: "175px",
                             borderRadius: "10px",
                             boxShadow: "3px 3px 3px 3px rgba(0,0,0,0.2)",
+                            display: selectImageStyle(item.imageType),
                           }}
                         >
                           {/* //& Card Image */}
@@ -381,15 +386,13 @@ const ImageLibrary = (props) => {
                             onClick={() => handleSelection(item)}
                           />
                           <CardContent
-                            sx={
-                              {
-                                // mt: "auto",
-                                // flexGrow: 0,
-                                // flexDirection: "column",
-                                // alignItems: "end",
-                                // justifyContent: "space-between",
-                              }
-                            }
+                            sx={{
+                              mt: "auto",
+                              // flexGrow: 0,
+                              // flexDirection: "row",
+                              // alignItems: "end",
+                              // justifyContent: "space-between",
+                            }}
                           >
                             <Box
                               sx={{
@@ -399,32 +402,35 @@ const ImageLibrary = (props) => {
                                 alignItems: "center",
                               }}
                             >
-                              <Typography variant="body2" sx={{}}>
-                                {item.altText.length > 13 && item.id != 1
-                                  ? item.altText.substring(0, 11) + "..."
-                                  : item.altText}
-                              </Typography>
-
-                              {/* //& MoreVertical */}
-                              {item.id != 1 && (
-                                <Controls.ActionButton
-                                  size="small"
-                                  tooltipText="More options"
-                                  aria-controls={
-                                    open ? "basic-menu" : undefined
-                                  }
-                                  aria-haspopup="true"
-                                  aria-expanded={open ? "true" : undefined}
-                                  aria-label={`more options for ${item.name}`}
-                                  onClick={(e) => {
-                                    handleMenuClick(e, item);
-                                  }}
-                                >
-                                  <MoreVertIcon
-                                    sx={{ color: "grey", fontSize: 20 }}
-                                  />
-                                </Controls.ActionButton>
-                              )}
+                              <Grid item xs={10}>
+                                <Typography variant="body2" sx={{}}>
+                                  {item.altText.length > 15 && item.id != 1
+                                    ? item.altText.substring(0, 14) + "..."
+                                    : item.altText}
+                                </Typography>
+                              </Grid>
+                              <Grid item xs={2}>
+                                {/* //& MoreVertical */}
+                                {item.id != 1 && (
+                                  <Controls.ActionButton
+                                    size="small"
+                                    tooltipText="More options"
+                                    aria-controls={
+                                      open ? "basic-menu" : undefined
+                                    }
+                                    aria-haspopup="true"
+                                    aria-expanded={open ? "true" : undefined}
+                                    aria-label={`more options for ${item.name}`}
+                                    onClick={(e) => {
+                                      handleMenuClick(e, item);
+                                    }}
+                                  >
+                                    <MoreVertIcon
+                                      sx={{ color: "grey", fontSize: 20 }}
+                                    />
+                                  </Controls.ActionButton>
+                                )}
+                              </Grid>
                             </Box>
                           </CardContent>
                         </Card>
@@ -597,7 +603,7 @@ const ImageLibrary = (props) => {
       <PageDialog
         openPopup={openPopup}
         setOpenPopup={handleDialogClose}
-        title={selectDialogTitle(imageType)}
+        title={selectDialogTitle(recordForEdit?.imageType) + " Details"}
         titleColor={process.env.NEXT_PUBLIC_NX_PRIMARY_COLOR}
         size={"sm"}
       >
@@ -606,7 +612,7 @@ const ImageLibrary = (props) => {
       <PageDialog
         openPopup={openView}
         setOpenPopup={setOpenView}
-        title={selectDialogTitle(imageType)}
+        title={selectDialogTitle(recordForEdit?.imageType) + " View"}
         titleColor={process.env.NEXT_PUBLIC_NX_PRIMARY_COLOR}
         size={"md"}
       >

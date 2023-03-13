@@ -12,26 +12,28 @@ export const useImagesActionsContext = () => useContext(ImagesActionsContext);
 
 export const ImagesContextProvider = ({ children }) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
-  const API_URL = baseUrl + "images/admin";
+  const API_URL = baseUrl + "images/type/";
   const router = useRouter();
-  const { all } = router.query;
+  const { imageType = "i" } = router.query;
   const [pageView, setPageView] = useState("list");
   const [page, setPage] = useState(0);
-  const [
+  console.log ("imageType: ", imageType)
+  var [
     { apiData: recordsList = [], loading },
     { setQueryParams, setData: setRecordsData, reCallAPI },
   ] = useGetDataApi(API_URL, {}, {}, false);
   useEffect(() => {
     setPage(0);
-  }, [all]);
+  }, [imageType]);
 
   useEffect(() => {
     setQueryParams({
+      imageType: imageType,
       // type: all[0],
       // name: all[1],
       page: page,
     });
-  }, [all, page]);
+  }, [imageType, page]);
 
   const onPageChange = (event, value) => {
     setPage(value);
@@ -44,7 +46,7 @@ export const ImagesContextProvider = ({ children }) => {
   return (
     <ImagesContext.Provider
       value={{
-        all,
+        imageType,
         recordsList,
         loading,
         page,
