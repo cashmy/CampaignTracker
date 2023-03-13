@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-02 12:05:52
- * @modify date 2023-03-10 20:08:03
+ * @modify date 2023-03-13 16:22:55
  * @desc [description]
  */
 
@@ -46,7 +46,7 @@ const BackDrop = styled(Paper)(({ theme }) => ({
 
 const RecordDisplay = (props) => {
   //#region //* State & local variables
-  const { record, handleReloadCampaign } = props;
+  const { record, handleReloadCampaign, showActions } = props;
   const router = useRouter();
   //#endregion
 
@@ -133,6 +133,7 @@ const RecordDisplay = (props) => {
           {/* //^ Header */}
           <Grid container sx={{ pt: 3 }}>
             {/* //& Back Button */}
+            {showActions && (
             <Grid item md={2} lg={1}  sx={{ mr: 5, pt: 2 }}>
               <Button
                 variant="outlined"
@@ -144,6 +145,7 @@ const RecordDisplay = (props) => {
                 Back
               </Button>
             </Grid>
+            )}
 
             {/* //& Type: Campaign, Adventure, One-Shot */}
             <Grid item xs={1}>
@@ -163,6 +165,7 @@ const RecordDisplay = (props) => {
             </Grid>
 
             {/* //& Action Items Menu */}
+            {showActions && (
             <Grid item xs={3} sx={{ ml: 10, display: "flex" }}>
               <ActionItems
                 record={record}
@@ -171,6 +174,7 @@ const RecordDisplay = (props) => {
                 handleStatusChange={handleStatusChange}
               />
             </Grid>
+            )}
           </Grid>
 
           {/* //^ Body Block 1 */}
@@ -502,4 +506,9 @@ export default RecordDisplay;
 RecordDisplay.propTypes = {
   record: PropTypes.object.isRequired,
   handleReloadCampaign: PropTypes.func.isRequired,
+  showActions: PropTypes.bool,
+};
+
+RecordDisplay.defaultProps = {
+  showActions: true,
 };

@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 11:29:57
- * @modify date 2023-03-10 11:34:55
+ * @modify date 2023-03-13 16:31:47
  * @desc [description]
  */
 
@@ -22,6 +22,7 @@ import AppHeader from "lib/components/AppContainer/AppHeader";
 import AppsPagination from "lib/components/AppsPagination";
 import PageDialog from "components/controls/PageDialog";
 import Controls from "components/controls/Controls";
+import RecordDisplay from '../../CampaignDetails/RecordDisplay';
 // * Services
 import { useInfoViewActionsContext } from "lib/context/AppContextProvider/InfoViewContextProvider";
 import {
@@ -45,7 +46,7 @@ const CampaignViews = () => {
   const [checkedRecords, setCheckedRecords] = useState([]);
   const [toDeleteRecords, setToDeleteRecords] = useState([]);
   const [openAddEdit, SetOpenAddEdit] = useState(false);
-  const [isShowDetail, onShowDetail] = useState(false);
+  const [showDetail, setShowDetail] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [loadData, setLoadData] = useState(false);
   const [detailTitle, setDetailTitle] = useState("Add/Edit Campaign");
@@ -151,7 +152,7 @@ const CampaignViews = () => {
   };
   const onViewRecordDetail = (record) => {
     setSelectedRecord(record);
-    onShowDetail(true);
+    setShowDetail(true);
     alert("Viewing record " + record.id);
   };
   const onDeleteSelectedRecords = () => {
@@ -254,6 +255,15 @@ const CampaignViews = () => {
       </PageDialog>
 
       {/* View Detail */}
+      <PageDialog
+        openPopup={showDetail}
+        setOpenPopup={setShowDetail}
+        title={"Basic Campaign Information"}
+        titleColor={process.env.NEXT_PUBLIC_NX_PRIMARY_COLOR}
+        size="md"
+      >
+        <RecordDisplay record={selectedRecord} showActions={false}/>
+      </PageDialog>
 
       {/* Delete Record */}
       <AppConfirmDialog
