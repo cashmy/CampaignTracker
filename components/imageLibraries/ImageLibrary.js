@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-11 11:01:55
- * @modify date 2023-03-12 12:38:55
+ * @modify date 2023-03-13 19:34:28
  * @desc [description]
  */
 
@@ -665,8 +665,6 @@ export default ImageLibrary;
 
 ImageLibrary.propTypes = {
   imageType: PropTypes.string,
-  //   defaultData: PropTypes.object,
-  //   loading: PropTypes.bool,
 };
 
 ImageLibrary.defaultProps = {

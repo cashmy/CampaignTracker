@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-02 12:05:52
- * @modify date 2023-03-13 19:39:45
+ * @modify date 2023-03-13 21:04:29
  * @desc [description]
  */
 
@@ -49,23 +49,20 @@ const BackDrop = styled(Paper)(({ theme }) => ({
 
 const RecordDisplay = (props) => {
   //#region //* State & local variables
-  const { record, handleReloadCampaign, showActions } = props;
+  const { record, handleReloadCampaign, showActions, handleEdit, handleDelete } = props;
   const [avatarUrl, setAvatarUrl] = useState("/assets/images/placeholder.jpg");
   const router = useRouter();
   //#endregion
 
   //#region //* Hooks
   useEffect (() => {
-    console.log("RecordDisplay useEffect: ", record)
     const getDmPlayerData = async (e) => {
       try {
         const response = await PlayerService
           .getRecordByName(record.dm)
           .then();
-          console.log(response.data)
           setAvatarUrl(response.data[0].avatarImage)
       } catch (e) {
-        console.log("API call unsuccessful", e);
         setAvatarUrl("/assets/images/placeholder.jpg")
       }
     };
@@ -75,9 +72,11 @@ const RecordDisplay = (props) => {
   //#endregion
 
   //#region //* Event Handlers
-  const onSelectRecordsForDelete = () => {};
+  const onSelectRecordForDelete = () => {
+    handleDelete(record.id);
+  };
   const onOpenEditRecord = () => {
-    alert("Edit Record");
+    handleEdit();
     handleReloadCampaign();
   };
   const handleStatusChange = () => {};
@@ -190,7 +189,7 @@ const RecordDisplay = (props) => {
             <Grid item xs={3} sx={{ ml: 10, display: "flex" }}>
               <ActionItems
                 record={record}
-                handleDelete={onSelectRecordsForDelete}
+                handleDelete={onSelectRecordForDelete}
                 handleEdit={onOpenEditRecord}
                 handleStatusChange={handleStatusChange}
               />
@@ -528,6 +527,8 @@ RecordDisplay.propTypes = {
   record: PropTypes.object.isRequired,
   handleReloadCampaign: PropTypes.func.isRequired,
   showActions: PropTypes.bool,
+  handleEdit: PropTypes.func,
+  handleDelete: PropTypes.func,
 };
 
 RecordDisplay.defaultProps = {

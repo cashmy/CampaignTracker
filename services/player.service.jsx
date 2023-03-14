@@ -26,7 +26,6 @@ class PlayerService {
   };
 
   getRecordByName = (dmName) => {
-    console.log("getRecordByName: " + dmName)
     return axios.get(API_URL + `name/${dmName}/`, { headers: authHeader() });
   };
 

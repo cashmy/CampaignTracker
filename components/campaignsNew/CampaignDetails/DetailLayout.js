@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-01 10:17:40
- * @modify date 2023-03-10 12:02:19
+ * @modify date 2023-03-13 20:10:44
  * @desc [description]
  */
 
@@ -15,8 +15,8 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 // * Components
 import CampaignImage from "./CampaignImage";
-import RecordDisplay from './RecordDisplay';
-import CampaignPlayers from '../CampaignPlayers';
+import RecordDisplay from "./RecordDisplay";
+import CampaignPlayers from "../CampaignPlayers";
 // import CampaignNotes from './CampaignNotes';  ???????????
 // import CampaignAdvSessTree from './CampaignAdvSessTree';
 // import SessionDetail from '/components/sessions/SessionDetail';
@@ -40,26 +40,45 @@ const Item = styled(Paper)(({ theme }) => ({
 //#endregion
 
 const DetailLayout = (props) => {
-  const { 
-    record, 
+  const {
+    record,
     campaignPlayers,
     handleReloadCampaign,
     handleReloadPlayers,
-    handleReloadImage
-   } = props;
+    handleReloadImage,
+    handleEdit,
+    handleDelete,
+  } = props;
+
+    //#region //* Events
+    // const handleEdit = (e) => {}
+    // const handleDelete = (e) => {}
+    //#endregion
 
   return (
     <AppGridContainer>
-      <Grid item xs={9} container spacing={5} >
+      <Grid item xs={9} container spacing={5}>
         <Grid item xs={3}>
-          <CampaignImage record={record} handleReloadImage={handleReloadImage}/>
+          <CampaignImage
+            record={record}
+            handleReloadImage={handleReloadImage}
+          />
         </Grid>
 
         <Grid item xs={9}>
-          <RecordDisplay record={record} handleReloadCampaign={handleReloadCampaign} />
+          <RecordDisplay
+            record={record}
+            handleReloadCampaign={handleReloadCampaign}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+          />
         </Grid>
-        <Grid item xs={12} >
-            <CampaignPlayers campaign={record} campaignPlayers={campaignPlayers} handleReloadPlayers={handleReloadPlayers} />
+        <Grid item xs={12}>
+          <CampaignPlayers
+            campaign={record}
+            campaignPlayers={campaignPlayers}
+            handleReloadPlayers={handleReloadPlayers}
+          />
         </Grid>
       </Grid>
 
@@ -80,4 +99,6 @@ DetailLayout.propTypes = {
   handleReloadCampaign: PropTypes.func,
   handleReloadPlayers: PropTypes.func,
   handleReloadImage: PropTypes.func,
+  handleEdit: PropTypes.func,
+  handleDelete: PropTypes.func,
 };
