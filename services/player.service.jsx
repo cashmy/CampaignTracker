@@ -25,6 +25,12 @@ class PlayerService {
     return axios.get(API_URL + `${id}/`, { headers: authHeader() });
   };
 
+  getRecordByName = (dmName) => {
+    console.log("getRecordByName: " + dmName)
+    return axios.get(API_URL + `name/${dmName}/`, { headers: authHeader() });
+  };
+
+
   addRecord = (data) => {
     return axios.post(API_URL, data, { headers: authHeader() });
   };

@@ -2,13 +2,14 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-02 12:05:52
- * @modify date 2023-03-13 16:22:55
+ * @modify date 2023-03-13 19:39:45
  * @desc [description]
  */
 
 //#region //* Imports
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 // * Mui Components
 import { Avatar, Box, Grid, Button, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -29,6 +30,8 @@ import CampaignTypeIcon from "../../CampaignTypeIcon";
 import AppScrollbar from "lib/components/AppScrollbar";
 import ActionItems from "components/controls/ActionItems";
 // * Services
+import PlayerService from "services/player.service";
+
 //#endregion
 
 //#region //* Styles
@@ -47,10 +50,28 @@ const BackDrop = styled(Paper)(({ theme }) => ({
 const RecordDisplay = (props) => {
   //#region //* State & local variables
   const { record, handleReloadCampaign, showActions } = props;
+  const [avatarUrl, setAvatarUrl] = useState("/assets/images/placeholder.jpg");
   const router = useRouter();
   //#endregion
 
   //#region //* Hooks
+  useEffect (() => {
+    console.log("RecordDisplay useEffect: ", record)
+    const getDmPlayerData = async (e) => {
+      try {
+        const response = await PlayerService
+          .getRecordByName(record.dm)
+          .then();
+          console.log(response.data)
+          setAvatarUrl(response.data[0].avatarImage)
+      } catch (e) {
+        console.log("API call unsuccessful", e);
+        setAvatarUrl("/assets/images/placeholder.jpg")
+      }
+    };
+    getDmPlayerData();
+  }, [record]);
+
   //#endregion
 
   //#region //* Event Handlers
@@ -183,7 +204,7 @@ const RecordDisplay = (props) => {
             <Grid item xs={3} sx={{ display: "flex", alignItems: "center" }}>
               <Avatar
                 alt={record.dm}
-                src={"/assets/images/avatar/A12.jpg"}
+                src={avatarUrl}
                 sx={{ width: 48, height: 48, mr: 3 }}
               />
               <Typography> DM <br/> {record.dm} </Typography>
