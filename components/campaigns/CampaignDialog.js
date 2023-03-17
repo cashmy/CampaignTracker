@@ -142,7 +142,7 @@ const CampaignDialog = (props) => {
                 { id: "v", title: "Varies" },
                 { id: "o", title: "Once" },
                 { id: "n", title: "Never" },
-                { id: "t", title: "TBD" }
+                { id: "t", title: "TBD" },
               ]}
             />
           </Grid>
@@ -211,7 +211,7 @@ const CampaignDialog = (props) => {
               error={errors.cost}
             />
           </Grid>
-          <Grid item xs={2} >
+          <Grid item xs={2}>
             <Controls.Checkbox
               name="archived"
               label="Archived"
@@ -219,7 +219,25 @@ const CampaignDialog = (props) => {
               value={values.archived}
               onChange={handleInputChange}
               error={errors.archived}
-              style={{ paddingleft: '0px !important', marginLeft: '0'}}
+              style={{ paddingleft: "0px !important", marginLeft: "0" }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Controls.TextField
+              name="discordServer"
+              label="Discord Server"
+              value={values.discordServer}
+              onChange={handleInputChange}
+              error={errors.discordServer}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Controls.TextField
+              name="discordChannel"
+              label="Discord General Chat Channel"
+              value={values.discordChannel}
+              onChange={handleInputChange}
+              error={errors.discordChannel}
             />
           </Grid>
           <Grid
