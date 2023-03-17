@@ -1,20 +1,34 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Box from "@mui/material/Box";
-import { Fab, Hidden } from "@mui/material";
+/** Author
+ * @author Cash Myers
+ * @github [https://github.com/cashmy]
+ * @create date 2023-03-02 12:05:52
+ * @modify date 2023-03-17 12:28:37
+ * @desc [description]
+ */
 
+//#region //* Imports
+import PropTypes from "prop-types";
+// * Mui Components
+import { Box, Fab, Hidden } from "@mui/material";
+// * Icons
+import AddIcon from "@mui/icons-material/Add";
+import CachedIcon from "@mui/icons-material/Cached";
+// * Local Components
 import AppSearchBar from "@/../../lib/components/AppSearchBar";
 import AppsPagination from "@/../../lib/components/AppsPagination";
-import ViewSelectButtons from "./ViewSelectButtons";
+import ActionIconButton from "components/controls/ActionIconButton";
 import CheckBox from "./CheckBox";
-import AddIcon from "@mui/icons-material/Add";
+import ViewSelectButtons from "./ViewSelectButtons";
+// * Services
 import CampaignCheckedActions from "./CampaignCheckedActions";
 import {
   useCampaignsActionsContext,
   useCampaignsContext,
 } from "../../../CampaignsContextProvider";
+//#endregion
 
 const CampaignViewsHeader = (props) => {
+  //#region //* State & Local Variables
   const {
     filterText,
     onSetFilterText,
@@ -24,9 +38,11 @@ const CampaignViewsHeader = (props) => {
     onSelectRecordsForDelete,
     onSelectRecordsForStatusChg,
     handleAddRecordOpen,
+    handleReload,
   } = props;
   const { page, pageView, RecordsList } = useCampaignsContext();
   const { onPageChange, onChangePageView } = useCampaignsActionsContext();
+  //#endregion
 
   return (
     <>
@@ -64,6 +80,11 @@ const CampaignViewsHeader = (props) => {
           pageView={pageView}
           onChangePageView={onChangePageView}
         />
+      </Box>
+      <Box sx={{ ml: 3 }}>
+        <ActionIconButton onClick={handleReload} tooltip="Reload table">
+          <CachedIcon />
+        </ActionIconButton>
       </Box>
 
       <Hidden smDown>
@@ -103,4 +124,5 @@ CampaignViewsHeader.propTypes = {
   onSelectRecordsForDelete: PropTypes.func,
   onSelectRecordsForStatusChg: PropTypes.func,
   handleAddRecordOpen: PropTypes.func,
+  handleReload: PropTypes.func,
 };

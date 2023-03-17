@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-02 12:05:52
- * @modify date 2023-03-05 20:28:49
+ * @modify date 2023-03-17 11:46:01
  * @desc [description]
  */
 
@@ -15,11 +15,8 @@ import { MdCampaign } from "react-icons/md";
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 // * Local Components
 import ActionIconButton from "components/controls/ActionIconButton";
-// * Services
 //#endregion
 
-//#region //* Styles
-//#endregion
 
 const CampaignTypeIcon = (props) => {
   //#region //* State & local variables

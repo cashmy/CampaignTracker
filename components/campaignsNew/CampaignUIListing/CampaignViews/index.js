@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 11:29:57
- * @modify date 2023-03-13 20:53:00
+ * @modify date 2023-03-17 12:34:29
  * @desc [description]
  */
 
@@ -74,6 +74,14 @@ const CampaignViews = () => {
   // }, [all, page]);
   
   //#region //* Event Handlers & Callbacks
+  const handleReload = () => {
+    setNotify({
+      isOpen: true,
+      message: "Data reload requested",
+      type: "info",
+    });
+    reCallAPI()
+  }
   const handleAddRecordOpen = () => {
     setSelectedRecord(emptyRecord);
     setDetailTitle("Add Campaign");
@@ -211,6 +219,7 @@ const CampaignViews = () => {
           onSelectRecordsForDelete={onSelectRecordsForDelete}
           onSelectRecordsForStatusChg={onSelectRecordsForStatusChg}
           handleAddRecordOpen={handleAddRecordOpen}
+          handleReload={handleReload}
         />
       </AppHeader>
 

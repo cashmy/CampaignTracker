@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-02 12:05:52
- * @modify date 2023-03-13 21:04:29
+ * @modify date 2023-03-17 12:00:04
  * @desc [description]
  */
 
@@ -178,7 +178,9 @@ const RecordDisplay = (props) => {
                 variant="h3"
                 component="h1"
                 gutterBottom
-                sx={{ textAlign: "center" }}
+                sx={{ textAlign: "center", color: record.archived ? "grey" : "primary" }}
+                
+                
               >
                 {record.name}
               </Typography>

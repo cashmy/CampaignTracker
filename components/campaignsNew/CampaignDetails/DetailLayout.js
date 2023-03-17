@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-01 10:17:40
- * @modify date 2023-03-13 20:10:44
+ * @modify date 2023-03-17 11:07:32
  * @desc [description]
  */
 
@@ -18,23 +18,22 @@ import CampaignImage from "./CampaignImage";
 import RecordDisplay from "./RecordDisplay";
 import CampaignPlayers from "../CampaignPlayers";
 // import CampaignNotes from './CampaignNotes';  ???????????
-// import CampaignAdvSessTree from './CampaignAdvSessTree';
+import CampaignAdvSessTree from './CampaignAdvSessTree';
 // import SessionDetail from '/components/sessions/SessionDetail';
 // * Services
 //#endregion
 
 //#region //* Styles
-const CampaignDetailWrapper = styled(Grid)(({ theme }) => ({
-  border: `5px solid ${theme.palette.grey[300]}`,
-  background: theme.palette.background.paper,
-}));
+// const CampaignDetailWrapper = styled(Grid)(({ theme }) => ({
+//   border: `5px solid ${theme.palette.grey[300]}`,
+//   background: theme.palette.background.paper,
+// }));
 
 const Item = styled(Paper)(({ theme }) => ({
-  height: 40,
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: "center",
+  // textAlign: "center",
   color: theme.palette.text.secondary,
 }));
 //#endregion
@@ -49,11 +48,6 @@ const DetailLayout = (props) => {
     handleEdit,
     handleDelete,
   } = props;
-
-    //#region //* Events
-    // const handleEdit = (e) => {}
-    // const handleDelete = (e) => {}
-    //#endregion
 
   return (
     <AppGridContainer>
@@ -82,9 +76,9 @@ const DetailLayout = (props) => {
         </Grid>
       </Grid>
 
-      <Grid item xs={3}>
+      <Grid item xs={3} sx={{height: "auto"}}>
         <Item>
-          <Typography>Tree view</Typography>
+          <CampaignAdvSessTree />
         </Item>
       </Grid>
     </AppGridContainer>

@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 12:47:54
- * @modify date 2023-03-09 11:31:41
+ * @modify date 2023-03-17 11:37:20
  * @desc [description]
  */
 
@@ -16,6 +16,7 @@ import AppGrid from "@/../../lib/components/AppGrid";
 import ListEmptyResult from "@/../../lib/components/AppList/ListEmptyResult";
 // TODO: Create & Replace this
 import PlayerListSkeleton from "@/../../lib/components/AppSkeleton/PlayerListSkeleton";
+import CampaignGridItem from "./CampaignGridItem";
 import CampaignListItem from "./CampaignListItem";
 // import CampaignDetailListMobile from "./CampaignDetailListMobile";
 import { useCampaignsContext } from "../../CampaignsContextProvider";
@@ -124,24 +125,23 @@ const CampaignViewList = (props) => {
               xs: 1,
               sm: 2,
               md: 3,
-              lg: 2,
-              xl: 3,
+              lg: 4,
+              xl: 5,
             }}
             data={list}
-            renderRow={(Record) => (
-              <div> Card Item {Record.id} </div>
-              // <CampaignCardItem
-              //   key={Player.id}
-              //   Player={Player}
-              //   labelList={labelList}
-              //   onChangeCheckedPlayers={onChangeCheckedPlayers}
-              //   checkedPlayers={checkedPlayers}
-              //   onChangeStarred={onChangeStarred}
-              //   onChangeActive={onChangeActive}
-              //   onSelectPlayersForDelete={onSelectPlayersForDelete}
-              //   onViewPlayerDetail={onViewPlayerDetail}
-              //   onOpenEditPlayer={onOpenEditPlayer}
-              // />
+            renderRow={(record) => (
+              <CampaignGridItem
+                key={record.id}
+                record={record}
+                onChangeCheckedRecords={onChangeCheckedRecords}
+                checkedRecords={checkedRecords}
+                onChangeActive={onChangeActive}
+                onSelectRecordsForDelete={onSelectRecordsForDelete}
+                onViewRecordDetail={onViewRecordDetail}
+                onOpenEditRecord={onOpenEditRecord}
+                onOpenDetails={onOpenDetails}
+                handleSchedule={handleSchedule}
+              />
             )}
           />
         </Box>

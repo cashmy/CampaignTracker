@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-27 18:10:43
- * @modify date 2023-03-13 20:17:41
+ * @modify date 2023-03-17 09:19:09
  * @desc [description]
  */
 
@@ -19,7 +19,7 @@ import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/material";
 import ActionIconButton from "components/controls/ActionIconButton";
 import { BiTargetLock } from "react-icons/bi";
-import { GiPistolGun, GiReloadGunBarrel } from "react-icons/gi";
+import { GiPistolGun } from "react-icons/gi";
 import { MdCampaign } from "react-icons/md";
 // Components
 import AppsArchiveIcon from "@/../../lib/components/AppsArchiveIcon";

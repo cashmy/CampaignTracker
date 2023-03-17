@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-01 10:49:59
- * @modify date 2023-03-05 20:22:11
+ * @modify date 2023-03-17 11:58:52
  * @desc [description]
  */
 //#region // *Imports
@@ -22,6 +22,7 @@ import AppCard from "@/../../lib/components/AppCard";
 
 const CampaignImage = (props) => {
   const { record } = props;
+  console.log("CampaignImage -> record", record)
   
   return (
     <AppCard
@@ -38,7 +39,7 @@ const CampaignImage = (props) => {
           height: 180,
           width: "100%",
         }}
-        image={record.image || "/assets/images/campaign1600-800.png"}
+        image={record.imageUrl || "/assets/images/1444575.gif"}
         alt={record.name}
       />
     </AppCard>
