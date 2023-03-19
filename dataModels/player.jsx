@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 
 export const playerRecord = {
   id: 0,
-  userid: "",         // Logged In User (Used for authentication)
+  userid: "",         // Logged In User (Used for auth)
   playerName: "",     // Player Name
-  pcName: "",         // Player Character Name
   discordId: "",      // Discord Id
-  notes: "",          // GM Notes about player or character
+  notes: "",          // GM Notes about player
   email: "",          // Player email
   contact: "",        // Player contact info
   timeZone: "",       // Player time zone
@@ -16,13 +15,14 @@ export const playerRecord = {
   isStarred: false,   // Player is starred
   avatarImage: "",    // Player avatar image
   label: "",          // Player Experience label (Newbie, Experienced, Veteran, Exp/Vet +DM)
+  fbUserName: "",     // Player Facebook User Name
+  twitterId: "",      // Player Twitter Id
   active: true,
 };
 
 export const playerColumnsDataX = [
   { id: "id", label: "Id", numeric: true },
   { id: "playerName", label: "Player Name" },
-  { id: "pcName", label: "PC Name" },
   { id: "discordId", label: "Discord Id" },
   { id: "notes", label: "Notes" },
   { id: "email", label: "Email" },
@@ -34,13 +34,14 @@ export const playerColumnsDataX = [
   { id: "active", label: "Active", disableSorting: true },
   { id: "avatarImage", label: "Avatar", disableSorting: true },
   { id: "label", label: "Label"},
+  { id: "fbUserName", label: "Facebook"},
+  { id: "twitterId", label: "Twitter"},
   { id: "actions", label: "Actions", disableSorting: true },
 ];
 
 export const playerColumns = [
   { id: "id", label: "Id", numeric: true },
   { id: "playerName", label: "Player Name" },
-  { id: "pcName", label: "PC Name" },
   { id: "discordId", label: "Discord Id" },
   { id: "timeZone", label: "Time Zone"},
   { id: "timeSoneOffset", label: "Players Time" },
@@ -53,7 +54,6 @@ playerRecord.PropTypes = {
   id: PropTypes.number,
   userid: PropTypes.string,
   playerName: PropTypes.string,
-  pcName: PropTypes.string,
   discordId: PropTypes.string,
   notes: PropTypes.string,
   email: PropTypes.string,
@@ -64,5 +64,7 @@ playerRecord.PropTypes = {
   isStarred: PropTypes.bool,
   avatarImage: PropTypes.string,
   label: PropTypes.string,
+  fbUserName: PropTypes.string,
+  twitterId: PropTypes.string,
   active: PropTypes.bool,
 };

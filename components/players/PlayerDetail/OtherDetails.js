@@ -1,14 +1,15 @@
-import React from 'react';
-import Box from '@mui/material/Box';
+import React from "react";
+import Box from "@mui/material/Box";
+import { useTheme } from '@mui/material/styles';
 // import IntlMessages from '@crema/helpers/IntlMessages';
-import BusinessIcon from '@mui/icons-material/Business';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import PropTypes from 'prop-types';
-import { Fonts } from '@/../../lib/constants/AppEnums';
-import { FiFacebook, FiTwitter } from 'react-icons/fi';
+import PropTypes from "prop-types";
+import { Fonts } from "@/../../lib/constants/AppEnums";
+import { FiFacebook, FiTwitter } from "react-icons/fi";
+import { FaDiscord } from "react-icons/fa";
 
 const OtherDetails = (props) => {
   const { player } = props;
+  const theme = useTheme();
 
   return (
     <Box
@@ -31,23 +32,21 @@ const OtherDetails = (props) => {
         <Box
           sx={{
             mb: { xs: 2, md: 3 },
-            display: 'flex',
-            alignItems: 'center',
+            display: "flex",
+            alignItems: "center",
           }}
         >
-          <BusinessIcon
-            sx={{
-              fontSize: 24,
-              color: (theme) => theme.palette.text.secondary,
-            }}
+          <FaDiscord
+            size={24}
+            color={theme.palette.text.secondary}
           />
           <Box
             sx={{
               ml: 3.5,
             }}
           >
-            {player.company ? (
-              player.company
+            {player.discordId ? (
+              player.discordId
             ) : (
               // <IntlMessages id="common.na" />
               <text>NA</text>
@@ -58,50 +57,21 @@ const OtherDetails = (props) => {
         <Box
           sx={{
             mb: { xs: 2, md: 3 },
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <HomeOutlinedIcon
-            sx={{
-              fontSize: 24,
-              color: (theme) => theme.palette.text.secondary,
-            }}
-          />
-          <Box
-            sx={{
-              ml: 3.5,
-            }}
-          >
-            {player.address ? (
-              player.address
-            ) : (
-              // <IntlMessages id="common.na" />
-              <text>NA</text>
-            )}
-          </Box>
-        </Box>
-
-        <Box
-          sx={{
-            mb: { xs: 2, md: 3 },
-            display: 'flex',
-            alignItems: 'center',
+            display: "flex",
+            alignItems: "center",
           }}
         >
           <FiFacebook
-            sx={{
-              fontSize: 24,
-              color: (theme) => theme.palette.text.secondary,
-            }}
+            size={24}
+            color={theme.palette.text.secondary}
           />
           <Box
             sx={{
               ml: 3.5,
             }}
           >
-            {player.facebookId ? (
-              player.facebookId
+            {player.fbUsername ? (
+              player.fbUsername
             ) : (
               // <IntlMessages id="common.na" />
               <text>NA</text>
@@ -111,16 +81,14 @@ const OtherDetails = (props) => {
 
         <Box
           sx={{
-            display: 'flex',
-            alignItems: 'center',
+            display: "flex",
+            alignItems: "center",
           }}
         >
           <FiTwitter
-            sx={{
-              fontSize: 24,
-              color: (theme) => theme.palette.text.secondary,
-            }}
-          />
+            size={24}
+            color={theme.palette.text.secondary}
+            />
           <Box
             sx={{
               ml: 3.5,

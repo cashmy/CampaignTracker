@@ -1,94 +1,109 @@
-import React from 'react';
-import { alpha, Box, Button, Select } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
-import { Field, Form } from 'formik';
-import { useDropzone } from 'react-dropzone';
+/** Author
+ * @author Cash Myers
+ * @github [https://github.com/cashmy]
+ * @create date 2023-03-18 15:13:53
+ * @modify date 2023-03-18 15:16:29
+ * @desc [description]
+ */
+
+//#region Imports
+import PropTypes from "prop-types";
+import { useDropzone } from "react-dropzone";
 // import { useIntl } from 'react-intl';
-import PropTypes from 'prop-types';
-// import IntlMessages from '@crema/helpers/IntlMessages';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import { Fonts } from '@@/../../lib/constants/AppEnums';
-import EditIcon from '@mui/icons-material/Edit';
-import AppGridContainer from '@/../../lib/components/AppGridContainer';
-import Grid from '@mui/material/Grid';
-import AppTextField from '@/../../lib/components/AppFormComponents/AppTextField';
-import AppDateFiled from '@/../../lib/components/AppFormComponents/AppDateFiled';
+import { Field, Form } from "formik";
+// * Mui
+import { alpha, Avatar, Box, Button, Select } from "@mui/material";
+import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import { styled } from "@mui/material/styles";
+import { blue, green, red, orange } from "@mui/material/colors";
+// * Icons
+import EditIcon from "@mui/icons-material/Edit";
+// * Local Components
+import { Fonts } from "lib/constants/AppEnums";
+// import AppDateFiled from '@/../../lib/components/AppFormComponents/AppDateFiled';
+import AppGridContainer from "lib/components/AppGridContainer";
+import AppTextField from "@/../../lib/components/AppFormComponents/AppTextField";
+// import IntlMessages from 'lib/helpers/IntlMessages';
+// import SelectCountry from "components/controls/SelectCountry";
+// #endregion
 
-import { styled } from '@mui/material/styles';
-import { blue, green, red, orange } from '@mui/material/colors';
-
-const HeaderWrapper = styled('div')(({ theme }) => {
+// #region //* Styled Components
+const HeaderWrapper = styled("div")(({ theme }) => {
   return {
     padding: 20,
     marginLeft: -24,
     marginRight: -24,
     marginTop: -20,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     borderBottom: `1px solid ${theme.palette.divider}`,
-    '& .dropzone': {
+    "& .dropzone": {
       outline: 0,
-      '&:hover .edit-icon, &:focus .edit-icon': {
-        display: 'flex',
+      "&:hover .edit-icon, &:focus .edit-icon": {
+        display: "flex",
       },
     },
   };
 });
-
-const AvatarViewWrapper = styled('div')(({ theme }) => {
+const AvatarViewWrapper = styled("div")(({ theme }) => {
   return {
-    position: 'relative',
-    cursor: 'pointer',
-    '& .edit-icon': {
-      position: 'absolute',
+    position: "relative",
+    cursor: "pointer",
+    "& .edit-icon": {
+      position: "absolute",
       bottom: 0,
       right: 0,
       zIndex: 1,
       border: `solid 2px ${theme.palette.background.paper}`,
       backgroundColor: alpha(theme.palette.primary.main, 0.7),
       color: theme.palette.primary.contrastText,
-      borderRadius: '50%',
+      borderRadius: "50%",
       width: 26,
       height: 26,
-      display: 'none',
-      alignItems: 'center',
-      justifyContent: 'center',
-      transition: 'all 0.4s ease',
-      '& .MuiSvgIcon-root': {
+      display: "none",
+      alignItems: "center",
+      justifyContent: "center",
+      transition: "all 0.4s ease",
+      "& .MuiSvgIcon-root": {
         fontSize: 16,
       },
     },
   };
 });
+// #endregion
 
 const AddPlayerForm = (props) => {
+  // #region //* State and Local Variables
   const { values, userImage, setUserImage, setFieldValue } = props;
   // const { labelList } = usesPlayerContext();
   const labelList = [
-    { id: 311, name: 'Exp/Vet +DM', alias: 'crema', color: red[500] },
-    { id: 312, name: 'Veteran', alias: 'personal', color: blue[500] },
-    { id: 313, name: 'Experienced', alias: 'work', color: orange[500] },
-    { id: 314, name: 'Newbie', alias: 'work', color: green[500] },
-  ] 
+    { id: 311, name: "Exp/Vet +DM", alias: "crema", color: red[500] },
+    { id: 312, name: "Veteran", alias: "personal", color: blue[500] },
+    { id: 313, name: "Experienced", alias: "work", color: orange[500] },
+    { id: 314, name: "Newbie", alias: "work", color: green[500] },
+  ];
+  // #endregion
 
+  // #region //* Event Handlers
   const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
+    accept: "image/*",
     onDrop: (acceptedFiles) => {
       setUserImage(URL.createObjectURL(acceptedFiles[0]));
     },
   });
-
   const handleClick = (event) => {
     event.target.onsubmit = true;
-  }
+  };
+  // #endregion
 
   return (
     <Form noValidate autoComplete="off">
       <HeaderWrapper>
-        <div {...getRootProps({ className: 'dropzone' })}>
+        <div {...getRootProps({ className: "dropzone" })}>
           <input {...getInputProps()} />
           <label htmlFor="icon-button-file">
             <AvatarViewWrapper>
@@ -97,7 +112,7 @@ const AddPlayerForm = (props) => {
                   width: 60,
                   height: 60,
                 }}
-                src={userImage ? userImage : ''}
+                src={userImage ? userImage : ""}
               />
               <Box className="edit-icon">
                 <EditIcon />
@@ -143,7 +158,7 @@ const AddPlayerForm = (props) => {
           <div>
             <AppTextField
               sx={{
-                width: '100%',
+                width: "100%",
                 mb: { xs: 4, xl: 6 },
               }}
               variant="outlined"
@@ -154,7 +169,7 @@ const AddPlayerForm = (props) => {
 
             <AppTextField
               sx={{
-                width: '100%',
+                width: "100%",
                 mb: { xs: 4, xl: 6 },
               }}
               variant="outlined"
@@ -165,7 +180,7 @@ const AddPlayerForm = (props) => {
 
             <AppTextField
               sx={{
-                width: '100%',
+                width: "100%",
                 mb: { xs: 4, xl: 6 },
               }}
               variant="outlined"
@@ -174,7 +189,7 @@ const AddPlayerForm = (props) => {
               name="contact"
             />
             <AppGridContainer spacing={5}>
-              <Grid item xs={12} md={6}>
+              {/* <Grid item xs={12} md={6}>
                 <AppDateFiled
                   autoOk
                   disableFuture
@@ -191,12 +206,12 @@ const AddPlayerForm = (props) => {
                   value={values.birthday}
                   onChange={(value) => setFieldValue('birthday', value)}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12} md={6}>
                 <FormControl
                   variant="outlined"
                   sx={{
-                    width: '100%',
+                    width: "100%",
                   }}
                 >
                   <InputLabel id="label-select-outlined-label">
@@ -210,7 +225,7 @@ const AddPlayerForm = (props) => {
                     labelId="label-select-outlined-label"
                     as={Select}
                     sx={{
-                      width: '100%',
+                      width: "100%",
                       mb: { xs: 4, xl: 6 },
                     }}
                   >
@@ -220,7 +235,7 @@ const AddPlayerForm = (props) => {
                           value={label.id}
                           key={label.id}
                           sx={{
-                            cursor: 'pointer',
+                            cursor: "pointer",
                           }}
                         >
                           {label.name}
@@ -230,17 +245,24 @@ const AddPlayerForm = (props) => {
                   </Field>
                 </FormControl>
               </Grid>
+              <Grid item xs={12} md={6}>
+                <AppTextField
+                  sx={{
+                    width: "100%",
+                  }}
+                  variant="outlined"
+                  label="Country"
+                  name="countryCode"
+                />
+                {/* <SelectCountry 
+                  name="countryCode"
+                  label="Country Code"
+                  value={values.countryCode}
+                  // error={}
+                  // onChange={}
+                  /> */}
+              </Grid>
             </AppGridContainer>
-
-            <AppTextField
-              sx={{
-                width: '100%',
-              }}
-              variant="outlined"
-              // label={<IntlMessages id="common.website" />}
-              label="Website"
-              name="website"
-            />
           </div>
         </Box>
 
@@ -268,16 +290,16 @@ const AddPlayerForm = (props) => {
           <div>
             <AppTextField
               sx={{
-                width: '100%',
+                width: "100%",
                 mb: { xs: 4, xl: 6 },
               }}
               variant="outlined"
               // label={<IntlMessages id="common.company" />}
-              label="Company"
-              name="company"
+              label="Discord Id"
+              name="discordId"
             />
 
-            <AppTextField
+            {/* <AppTextField
               sx={{
                 width: '100%',
               }}
@@ -285,7 +307,7 @@ const AddPlayerForm = (props) => {
               // label={<IntlMessages id="common.address" />}
               label="Address"
               name="address"
-            />
+            /> */}
           </div>
         </Box>
 
@@ -313,7 +335,7 @@ const AddPlayerForm = (props) => {
           <div>
             <AppTextField
               sx={{
-                width: '100%',
+                width: "100%",
                 mb: { xs: 4, xl: 6 },
               }}
               variant="outlined"
@@ -324,7 +346,7 @@ const AddPlayerForm = (props) => {
 
             <AppTextField
               sx={{
-                width: '100%',
+                width: "100%",
               }}
               variant="outlined"
               // label={<IntlMessages id="common.twitterId" />}
@@ -351,7 +373,7 @@ const AddPlayerForm = (props) => {
             name="notes"
             multiline
             sx={{
-              width: '100%',
+              width: "100%",
             }}
             rows="4"
             variant="outlined"
@@ -365,12 +387,12 @@ const AddPlayerForm = (props) => {
         sx={{
           pb: 4,
           mx: -1,
-          textAlign: 'right',
+          textAlign: "right",
         }}
       >
         <Button
           sx={{
-            position: 'relative',
+            position: "relative",
             minWidth: 100,
           }}
           color="primary"
