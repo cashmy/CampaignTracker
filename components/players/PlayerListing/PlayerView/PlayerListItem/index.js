@@ -148,7 +148,7 @@ const PlayerListItem = ({
             </Avatar>
           )}
         </Box>
-        
+
         <Box
           component="span"
           sx={{
@@ -174,7 +174,11 @@ const PlayerListItem = ({
             whiteSpace: "nowrap",
           }}
         >
-          {Player.discordId ? Player.discordId : Player.email ? Player.email : null}
+          {Player.discordId
+            ? Player.discordId
+            : Player.email
+            ? Player.email
+            : null}
         </Box>
       </Box>
 
@@ -208,7 +212,9 @@ const PlayerListItem = ({
               whiteSpace: "nowrap",
             }}
           >
-            {Player.contact}
+            {Player.contact
+              ? Player.country.phone + "+" + Player.contact
+              : null}
           </Box>
 
           {/* //& Time Zone */}
@@ -273,7 +279,6 @@ const PlayerListItem = ({
             onSelectPlayersForDelete={onSelectPlayersForDelete}
           />
         </Box>
-
       </Box>
     </PlayerListItemWrapper>
   );

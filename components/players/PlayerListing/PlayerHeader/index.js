@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 import CheckBox from './CheckBox';
 import PlayerCheckedActions from './PlayerCheckedActions';
 import AppsPagination from '@/../../lib/components/AppsPagination';
+import CachedIcon from "@mui/icons-material/Cached";
+import ActionIconButton from "components/controls/ActionIconButton";
 import ViewSelectButtons from './ViewSelectButtons';
 import {
   usePlayersActionsContext,
@@ -22,6 +24,7 @@ const PlayerHeader = (props) => {
     onUpdatePlayers,
     onSelectPlayersForDelete,
     onSelectPlayersForStatusChg,
+    handleReload,
   } = props;
   const { page, pageView, PlayersList } = usePlayersContext();
   const { onPageChange, onChangePageView } = usePlayersActionsContext();
@@ -66,6 +69,11 @@ const PlayerHeader = (props) => {
           onChangePageView={onChangePageView}
         />
       </Box>
+      <Box sx={{ ml: 3 }}>
+        <ActionIconButton onClick={handleReload} tooltip="Reload table">
+          <CachedIcon />
+        </ActionIconButton>
+      </Box>
       <Hidden smDown>
         {PlayersList?.length > 0 ? (
           <AppsPagination
@@ -96,4 +104,5 @@ PlayerHeader.propTypes = {
   onUpdatePlayers: PropTypes.func,
   onSelectPlayersForDelete: PropTypes.func,
   onSelectPlayersForStatusChg: PropTypes.func,
+  handleReload: PropTypes.func,
 };

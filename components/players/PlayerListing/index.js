@@ -16,10 +16,11 @@ import {
   usePlayersActionsContext,
   usePlayersContext,
 } from '../PlayersContextProvider';
+import Controls from 'components/controls/Controls';
 
 const PlayerListing = () => {
   const { all, page, PlayersList } = usePlayersContext();
-  const { onPageChange, setPlayerData } = usePlayersActionsContext();
+  const { onPageChange, setPlayerData, reCallAPI } = usePlayersActionsContext();
   const infoViewActionsContext = useInfoViewActionsContext();
   const [filterText, onSetFilterText] = useState('');
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -28,25 +29,27 @@ const PlayerListing = () => {
   const [isAddPlayer, onSetIsAddPlayer] = useState(false);
   const [isShowDetail, onShowDetail] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "info",
+  });
 
+  //#region //* Event Handlers
   const handleAddPlayerOpen = () => {
     onSetIsAddPlayer(true);
   };
-
   const handleAddPlayerClose = () => {
     onSetIsAddPlayer(false);
   };
-
   const onViewPlayerDetail = (Player) => {
     setSelectedPlayer(Player);
     onShowDetail(true);
   };
-
   const onOpenEditPlayer = (Player) => {
     setSelectedPlayer(Player);
     handleAddPlayerOpen();
   };
-
   const onChangeCheckedPlayers = (event, id) => {
     if (event.target.checked) {
       setCheckedPlayers(checkedPlayers.concat(id));
@@ -56,7 +59,6 @@ const PlayerListing = () => {
       );
     }
   };
-
   const onChangeStarred = (status, Player) => {
     const selectedIdList = [Player.id];
     alert('onChangeStarred');
@@ -76,7 +78,6 @@ const PlayerListing = () => {
     //     infoViewActionsContext.fetchError(error.message);
     //   });
   };
-
   const onChangeActive = (status, Player) => {
     const selectedIdList = [Player.id];
     alert('onChangeActive');
@@ -96,7 +97,6 @@ const PlayerListing = () => {
     //     infoViewActionsContext.fetchError(error.message);
     //   });
   };
-
   const onUpdateSelectedPlayer = (Player) => {
     setPlayerData({
       data: PlayersList?.map((item) => {
@@ -108,7 +108,6 @@ const PlayerListing = () => {
       count: PlayersList?.length,
     });
   };
-
   const onUpdatePlayers = (Players) => {
     setPlayerData({
       data: PlayersList?.map((item) => {
@@ -121,12 +120,10 @@ const PlayerListing = () => {
       count: PlayersList?.length,
     });
   };
-
   const onUpdatePlayer = (Player) => {
     setSelectedPlayer(Player);
     handleAddPlayerClose();
   };
-
   const onGetFilteredItems = () => {
     if (filterText === '') {
       return PlayersList
@@ -167,7 +164,15 @@ const PlayerListing = () => {
     // setToDeletePlayers(PlayerIds);
     // setDeleteDialogOpen(true);
   };
-
+  const handleReload = () => {
+    setNotify({
+      isOpen: true,
+      message: "Data reload requested",
+      type: "info",
+    });
+    reCallAPI()
+  }
+  //#endregion
   const list = onGetFilteredItems();
 
   return (
@@ -181,6 +186,7 @@ const PlayerListing = () => {
           onSelectPlayersForDelete={onSelectPlayersForDelete}
           onSelectPlayersForStatusChg={onSelectPlayersForStatusChg}
           onSetFilterText={onSetFilterText}
+          handleReload={handleReload}
         />
       </AppsHeader>
       <AppsContent>
@@ -234,6 +240,8 @@ const PlayerListing = () => {
         title="Are you sure, you want to delete the selected Player ?"
         dialogTitle="Delete Item(s)"
       />
+            {/* Notification */}
+            <Controls.Notification notify={notify} setNotify={setNotify} />
     </>
   );
 };
