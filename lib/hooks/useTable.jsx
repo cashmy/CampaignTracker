@@ -1,5 +1,15 @@
-import React, { useState } from "react";
+/** Author
+ * @author Cash Myers
+ * @github [https://github.com/cashmy]
+ * @create date 2023-03-19 11:31:42
+ * @modify date 2023-03-19 11:31:42
+ * @desc [description]
+ */
+
+//#region Imports
+import { useState } from "react";
 import PropTypes from "prop-types";
+// * Mui
 import {
   Box,
   Table,
@@ -17,12 +27,17 @@ import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+//#endregion
 
 function TablePaginationActions(props) {
+  //#region //* State & Local Variables
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
+  //#endregion
+
+  //#region //* Event Handlers
   const handleFirstPageButtonClick = (event) => {
     onPageChange(event, 0);
   };
@@ -35,6 +50,7 @@ function TablePaginationActions(props) {
   const handleLastPageButtonClick = (event) => {
     onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
+  //#endregion
 
   return (
     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
@@ -81,6 +97,7 @@ function TablePaginationActions(props) {
     </Box>
   );
 }
+
 TablePaginationActions.propTypes = {
   count: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,

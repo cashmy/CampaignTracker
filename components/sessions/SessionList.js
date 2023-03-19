@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-14 20:45:17
- * @modify date 2023-02-23 14:38:50
+ * @modify date 2023-03-18 16:43:17
  * @desc [description]
  */
 // #region Imports
@@ -223,7 +223,7 @@ const SessionList = (props) => {
         );
     }
   };
-  const sideQuestColor = (record) => {
+  const sideQuestIcon = (record) => {
     if (record.sideQuest) {
       return ( 
       "🏰 " + record.name )
@@ -274,7 +274,7 @@ const SessionList = (props) => {
                       key={index}
                       onDoubleClick={() => handleStsUpd(record)}
                     >
-                      <TableCell sx={{ width: 175 }}>{sideQuestColor(record)}</TableCell>
+                      <TableCell sx={{ width: 175 }}>{sideQuestIcon(record)}</TableCell>
                       <TableCell sx={{ width: 325 }}>
                         {record.description}
                       </TableCell>

@@ -20,7 +20,6 @@ const PlayerDetail = (props) => {
     onSelectPlayersForDelete,
     onOpenEditPlayer,
   } = props;
-
   const [player, setPlayer] = useState(selectedPlayer);
 
   useEffect(() => {
@@ -64,7 +63,6 @@ const PlayerDetail = (props) => {
                 mr: -6,
                 pl: 5,
                 pr: 5,
-                pb: 4,
               }}
             >
               <Box
@@ -99,11 +97,7 @@ const PlayerDetail = (props) => {
               </Box>
             </Box>
 
-            <Box
-              sx={{
-                pt: 5,
-              }}
-            >
+            <Box>
               <AppGridContainer>
                 <Grid item xs={12} md={6}>
                   <PersonalDetails player={player} />
@@ -120,7 +114,7 @@ const PlayerDetail = (props) => {
         )}
         <DialogActions>
           <Button
-            variant="outlined"
+            variant="contained"
             color="primary"
             type="submit"
             sx={{ width: 100 }}

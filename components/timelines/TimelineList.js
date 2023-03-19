@@ -95,6 +95,14 @@ const TimelineList = (props) => {
       </>
     );
   };
+  const sideQuestIcon = (record) => {
+    if (record.sideQuest) {
+      return ( 
+      "🏰 " + record.name )
+    } else {
+      return record.name;
+    }
+  };
   //#endregion
 
   return (
@@ -119,7 +127,7 @@ const TimelineList = (props) => {
                 {timelines.map((timeline, index) => (
                   <TimelineItem key={index}>
                     <TimelineOppositeContent
-                      sx={{ marginTop: "12px" }}
+                      sx={{ mt: 12, marginLeft: "-3px" }}
                       align="right"
                       variant="body2"
                       color="text.secondary"
@@ -137,7 +145,8 @@ const TimelineList = (props) => {
                     </TimelineSeparator>
 
                     <TimelineContent sx={{ minWidth: "140px" }} variant="body2">
-                      {timeline.name}
+                      {/* {timeline.name} */}
+                      {sideQuestIcon(timeline)}
                     </TimelineContent>
                   </TimelineItem>
                 ))}

@@ -2,12 +2,14 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-14 20:45:17
- * @modify date 2023-02-23 14:36:57
+ * @modify date 2023-03-18 16:34:45
  * @desc [description]
  */
+
 // #region Imports
 import { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
+// * Mui
 import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
@@ -18,25 +20,22 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import TableCard from "@/../../components/controls/TableCard";
 import { Collapse, Typography } from "@mui/material";
-// *Services
-import AdventureService from "@/../../services/adventure.service";
-// * Buttons & Data Definitions
-// import ActionButton from "components/controls/ActionButton";
-// import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-// import DeleteIcon from "@mui/icons-material/Delete";
+// * Icons
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-
-import { adventureRecord as emptyRecord } from "dataModels/adventure";
-import { adventureColumns as columnCells } from "dataModels/adventure";
-import useTable from "@/../../lib/hooks/useTable";
-import PageDialog from "../controls/PageDialog";
-import TextContrast from "lib/helpers/getTextContrast";
+// * Local Components
+import ActionItems from "../controls/ActionItems";
+import AppScrollbar from "lib/components/AppScrollbar";
 import AdventureDialog from "./AdventureDialog";
 import Controls from "../controls/Controls";
-import ActionItems from "../controls/ActionItems";
+import PageDialog from "../controls/PageDialog";
+import TextContrast from "lib/helpers/getTextContrast";
+import useTable from "@/../../lib/hooks/useTable";
+// *Services
+import AdventureService from "@/../../services/adventure.service";
+import { adventureRecord as emptyRecord } from "dataModels/adventure";
+import { adventureColumns as columnCells } from "dataModels/adventure";
 //#endregion
-
 
 const AdventureList = (props) => {
   //#region //* State Variables
@@ -70,6 +69,7 @@ const AdventureList = (props) => {
     useTable(records, columnCells, filterFn, rowsPerPageOptions, collapsible);
   //#endregion
 
+  //#region //* useEffect
   useEffect(() => {
     if (campaign === undefined) return;
     const getTableData = async (e) => {
@@ -87,6 +87,7 @@ const AdventureList = (props) => {
     };
     getTableData();
   }, [campaign, loadData]);
+  //#endregion
 
   //#region //* Handler Functions
   const handleAdd = () => {
@@ -213,7 +214,7 @@ const AdventureList = (props) => {
           sx={{ "& > *": { borderBottom: "unset" } }}
           onDoubleClick={() => handleDoubleClick(row)}
         >
-          <TableCell sx={{ width: 50 }}>
+          <TableCell sx={{ p: '6px' }}>
             <IconButton
               sx={{ minWidth: 0, margin: 0.5, mr: 2, p: 1 }}
               aria-label="expand row"
@@ -235,34 +236,13 @@ const AdventureList = (props) => {
             {/* {row.sessionCount}/{row.sessionEstimate} */}
           </TableCell>
           {/* // *Actions */}
-          <TableCell sx={{ minWidth: 140}}>
-              <ActionItems
-                record={row}
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-                displayStatusChange={true}
-              />
-            {/* //& Edit */}
-            {/* <ActionButton
-              filled={true}
-              color="darkcyan"
-              tooltipText={editToolTip}
-              size="small"
-              onClick={() => handleEdit(row)}
-            >
-              <EditOutlinedIcon fontSize="small" />
-            </ActionButton> */}
-
-            {/* //& Delete */}
-            {/* <ActionButton
-              filled={true}
-              color="red"
-              tooltipText={deleteToolTip}
-              size="small"
-              onClick={() => handleDelete(row.id)}
-            >
-              <DeleteIcon fontSize="small" />
-            </ActionButton> */}
+          <TableCell sx={{ minWidth: 140 }}>
+            <ActionItems
+              record={row}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+              displayStatusChange={true}
+            />
           </TableCell>
         </TableRow>
 
@@ -314,33 +294,39 @@ const AdventureList = (props) => {
         onClickHandler={handleAdd}
         tooltip={addToolTip}
       >
-        {campaign && (
-          <TableContainer sx={{ maxHeight: 200 }} component={Paper}>
-            <TblContainer stickyHeader={true} size="small">
-              <TblHead />
-              <TableBody>
-                {loading ? (
-                  <TableRow key="999">
-                    <TableCell>
-                      <Typography> Loading ... </Typography>
-                    </TableCell>
-                  </TableRow>
-                ) : (
-                  recordsAfterPagingAndSorting().map((record, index) => (
-                    <Row
-                      key={index}
-                      row={record}
-                      selectAdventure={selectAdventure}
-                    />
-                  ))
-                )}
-              </TableBody>
-            </TblContainer>
-          </TableContainer>
-        )}
-        {campaign && <TblPagination />}
-      </TableCard>
+          {campaign && (
+            <TableContainer sx={{ maxHeight: 200 }} component={Paper}>
+              <AppScrollbar>
+                <TblContainer
+                  stickyHeader={true}
+                  size="small"
+                  sx={{ overflowX: "hidden" }}
+                >
+                  <TblHead />
+                  <TableBody>
+                    {loading ? (
+                      <TableRow key="999">
+                        <TableCell>
+                          <Typography> Loading ... </Typography>
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      recordsAfterPagingAndSorting().map((record, index) => (
+                        <Row
+                          key={index}
+                          row={record}
+                          selectAdventure={selectAdventure}
+                        />
+                      ))
+                    )}
+                  </TableBody>
+                </TblContainer>
+              </AppScrollbar>
+            </TableContainer>
+          )}
 
+          {campaign && <TblPagination />}
+      </TableCard>
       {/* //* Dialogs, Modals, & Popups */}
       {/* // & Standard RH Form */}
       <PageDialog

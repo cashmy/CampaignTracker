@@ -5,6 +5,7 @@
  * @modify date 2023-02-23 17:55:53
  * @desc [description]
  */
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   FormControl,
@@ -13,13 +14,14 @@ import {
   MenuItem,
   Select as MuiSelect,
 } from "@mui/material";
-import CountryService from "@/../../services/country.service";
+import CountryService from "services/country.service";
 
 const SelectCountry = (props) => {
   const { name, label, value, error = null, onChange } = props;
   const { records, setRecords } = useState([]);
 
   useEffect(() => {
+    console.log("useEffect called");
     const getTableData = async (e) => {
       try {
         const response = await CountryService.getAllRecords().then();
@@ -30,6 +32,8 @@ const SelectCountry = (props) => {
     };
     getTableData();
   }, []);
+
+  console.log("records", records);
 
   return (
     <FormControl variant="outlined" fullWidth {...(error && { error: true })}>
