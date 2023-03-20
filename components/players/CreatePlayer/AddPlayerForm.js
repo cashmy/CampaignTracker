@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-18 15:13:53
- * @modify date 2023-03-18 15:16:29
+ * @modify date 2023-03-19 13:04:55
  * @desc [description]
  */
 
@@ -97,6 +97,7 @@ const AddPlayerForm = (props) => {
   });
   const handleClick = (event) => {
     event.target.onsubmit = true;
+    console.log("event.target", event);
   };
   // #endregion
 
@@ -398,7 +399,7 @@ const AddPlayerForm = (props) => {
           color="primary"
           variant="contained"
           type="submit"
-          onClick={handleClick}
+          // onClick={handleClick}
         >
           {/* <IntlMessages id="common.save" /> */}
           Save

@@ -59,19 +59,19 @@ const CreatePlayer = (props) => {
           name: selectPlayer ? selectPlayer.playerName : '',
           email: selectPlayer ? selectPlayer.email : '',
           contact: selectPlayer ? selectPlayer.contact : '',
-          birthday:
-            selectPlayer && selectPlayer.birthday
-              ? selectPlayer.birthday
-              : null,
-          website:
-            selectPlayer && selectPlayer.website ? selectPlayer.website : '',
-          company:
-            selectPlayer && selectPlayer.company ? selectPlayer.company : '',
-          address:
-            selectPlayer && selectPlayer.address ? selectPlayer.address : '',
-          facebookId:
-            selectPlayer && selectPlayer.facebookId
-              ? selectPlayer.facebookId
+          // birthday:
+          //   selectPlayer && selectPlayer.birthday
+          //     ? selectPlayer.birthday
+          //     : null,
+          countryCode:
+            selectPlayer && selectPlayer.countryCode ? selectPlayer.countryCode : '',
+          discordId:
+            selectPlayer && selectPlayer.discordId ? selectPlayer.discordId : '',
+          // address:
+          //   selectPlayer && selectPlayer.address ? selectPlayer.address : '',
+          fbUserName:
+            selectPlayer && selectPlayer.fbUserName
+              ? selectPlayer.fbUserName
               : '',
           twitterId:
             selectPlayer && selectPlayer.twitterId
@@ -81,6 +81,10 @@ const CreatePlayer = (props) => {
             selectPlayer && selectPlayer.notes ? selectPlayer.notes : '',
           label:
             selectPlayer && selectPlayer.label ? selectPlayer.label : '',
+          isStared:
+            selectPlayer && selectPlayer.isStared ? selectPlayer.isStared : false,
+          active:
+            selectPlayer && selectPlayer.active ? selectPlayer.active : true,
         }}
         validationSchema={validationSchema}
         onSubmit={(data, { setSubmitting, resetForm }) => {
@@ -91,7 +95,7 @@ const CreatePlayer = (props) => {
               id: selectPlayer.id,
               isStarred: selectPlayer.isStarred,
               active: selectPlayer.active,
-              image: userImage,
+              avatarImage: userImage,
               ...data,
             };
             alert('Updating Player');
@@ -113,7 +117,7 @@ const CreatePlayer = (props) => {
               id: 0,
               isStarred: false,
               active: true,
-              image: userImage,
+              avatarImage: userImage,
               ...data,
             };
             alert('Creating new Player');

@@ -73,6 +73,7 @@ export const PlayersContextProvider = ({ children }) => {
           reCallAPI,
           setPageView,
           onChangePageView,
+          API_URL
         }}
       >
         {children}

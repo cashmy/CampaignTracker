@@ -1,28 +1,43 @@
-import React, { useState } from 'react';
-import PlayerHeader from './PlayerHeader';
-import AppConfirmDialog from '@/../../lib/components/AppConfirmDialog';
+/** Author
+ * @author Cash Myers
+ * @github [https://github.com/cashmy]
+ * @create date 2023-03-19 11:56:15
+ * @modify date 2023-03-19 19:01:34
+ * @desc [description]
+ */
+
+//#region Imports
+import { useState } from "react";
+// * Mui
+import { Hidden } from "@mui/material";
+// * Local Components
+import AppConfirmDialog from "@/../../lib/components/AppConfirmDialog";
+import AppsContent from "@/../../lib/components/AppContainer/AppContent";
+import AppsFooter from "@/../../lib/components/AppContainer/AppFooter";
+import AppsHeader from "@/../../lib/components/AppContainer/AppHeader";
+import AppsPagination from "@/../../lib/components/AppsPagination";
+import Controls from "components/controls/Controls";
+import CreatePlayer from "../CreatePlayer";
+import PlayerDetail from "../PlayerDetail";
+import PlayerHeader from "./PlayerHeader";
+import PlayerView from "./PlayerView";
 // import IntlMessages from '@crema/helpers/IntlMessages';
-import CreatePlayer from '../CreatePlayer';
-import { Hidden } from '@mui/material';
-import PlayerView from './PlayerView';
-import PlayerDetail from '../PlayerDetail';
-import AppsPagination from '@/../../lib/components/AppsPagination';
-import AppsHeader from '@/../../lib/components/AppContainer/AppHeader';
-import AppsContent from '@/../../lib/components/AppContainer/AppContent';
-import AppsFooter from '@/../../lib/components/AppContainer/AppFooter';
-import { useInfoViewActionsContext } from '@/../../lib/context/AppContextProvider/InfoViewContextProvider';
-// import { postDataApi, putDataApi } from '@crema/hooks/APIHooks';
+// * Services
+import { useInfoViewActionsContext } from "@/../../lib/context/AppContextProvider/InfoViewContextProvider";
+import { postDataApi, patchDataApi } from "lib/hooks/APIHooks";
 import {
   usePlayersActionsContext,
   usePlayersContext,
-} from '../PlayersContextProvider';
-import Controls from 'components/controls/Controls';
+} from "../PlayersContextProvider";
+//#endregion
 
 const PlayerListing = () => {
+  //#region //* State & Local Variables
   const { all, page, PlayersList } = usePlayersContext();
-  const { onPageChange, setPlayerData, reCallAPI } = usePlayersActionsContext();
+  const { onPageChange, setPlayerData, reCallAPI, API_URL } =
+    usePlayersActionsContext();
   const infoViewActionsContext = useInfoViewActionsContext();
-  const [filterText, onSetFilterText] = useState('');
+  const [filterText, onSetFilterText] = useState("");
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [checkedPlayers, setCheckedPlayers] = useState([]);
   const [toDeletePlayers, setToDeletePlayers] = useState([]);
@@ -34,6 +49,7 @@ const PlayerListing = () => {
     message: "",
     type: "info",
   });
+  //#endregion
 
   //#region //* Event Handlers
   const handleAddPlayerOpen = () => {
@@ -54,48 +70,40 @@ const PlayerListing = () => {
     if (event.target.checked) {
       setCheckedPlayers(checkedPlayers.concat(id));
     } else {
-      setCheckedPlayers(
-        checkedPlayers.filter((PlayerId) => PlayerId !== id)
-      );
+      setCheckedPlayers(checkedPlayers.filter((PlayerId) => PlayerId !== id));
     }
   };
-  const onChangeStarred = (status, Player) => {
-    const selectedIdList = [Player.id];
-    alert('onChangeStarred');
-    // putDataApi('/api/PlayerApp/update/starred', infoViewActionsContext, {
-    //   PlayerIds: selectedIdList,
-    //   status: status,
-    // })
-    //   .then((data) => {
-    //     onUpdateSelectedPlayer(data[0]);
-    //     infoViewActionsContext.showMessage(
-    //       data[0].isStarred
-    //         ? 'Player Marked as Starred Successfully'
-    //         : 'Player Marked as Unstarred Successfully'
-    //     );
-    //   })
-    //   .catch((error) => {
-    //     infoViewActionsContext.fetchError(error.message);
-    //   });
+  const onChangeActive = (status, record) => {
+    const selectedIdList = [record.id];
+    onChangeStatuses(status, "active", selectedIdList);
   };
-  const onChangeActive = (status, Player) => {
-    const selectedIdList = [Player.id];
-    alert('onChangeActive');
-    // putDataApi('/api/PlayerApp/update/starred', infoViewActionsContext, {
-    //   PlayerIds: selectedIdList,
-    //   status: status,
-    // })
-    //   .then((data) => {
-    //     onUpdateSelectedPlayer(data[0]);
-    //     infoViewActionsContext.showMessage(
-    //       data[0].isStarred
-    //         ? 'Player Marked as Starred Successfully'
-    //         : 'Player Marked as Unstarred Successfully'
-    //     );
-    //   })
-    //   .catch((error) => {
-    //     infoViewActionsContext.fetchError(error.message);
-    //   });
+  const onChangeStarred = (status, record) => {
+    const selectedIdList = [record.id];
+    onChangeStatuses(status, "isStarred", selectedIdList);
+  };
+  const onChangeStatuses = (status, field, selectedIdList) => {
+    patchDataApi(API_URL, infoViewActionsContext, {
+      ids: selectedIdList,
+      value: status,
+      path: field,
+      op: "replace",
+    })
+      .then((data) => {
+        // onUpdateSelectedPlayer(data);
+        infoViewActionsContext.showMessage(
+          field === "isStarred"
+            ? data.isStarred
+              ? "Player Marked as Starred Successfully"
+              : "Player Marked as Unstarred Successfully"
+            : data.active
+            ? "Player Marked as Active Successfully"
+            : "Player Marked as Inactive Successfully"
+        );
+      })
+      .catch((error) => {
+        infoViewActionsContext.fetchError(error.message);
+      });
+    reCallAPI();
   };
   const onUpdateSelectedPlayer = (Player) => {
     setPlayerData({
@@ -125,30 +133,36 @@ const PlayerListing = () => {
     handleAddPlayerClose();
   };
   const onGetFilteredItems = () => {
-    if (filterText === '') {
-      return PlayersList
+    if (filterText === "") {
+      return PlayersList;
     } else {
       return PlayersList?.filter((Player) => {
-
-        return Player.playerName.toUpperCase().includes(filterText.toUpperCase())
-        || Player.email.toUpperCase().includes(filterText.toUpperCase())
-        || Player.discordId.toUpperCase().includes(filterText.toUpperCase())
-      }
-      );
+        return (
+          Player.playerName.toUpperCase().includes(filterText.toUpperCase()) ||
+          Player.email.toUpperCase().includes(filterText.toUpperCase()) ||
+          Player.discordId.toUpperCase().includes(filterText.toUpperCase())
+        );
+      });
     }
   };
+  const list = onGetFilteredItems();
   const onDeleteSelectedPlayers = () => {
-    postDataApi('http//localhost:5000/api/players/delete/player', infoViewActionsContext, {
-      type: all[0],
-      name: all[1],
-      PlayerIds: toDeletePlayers,
-      page,
-    })
+    postDataApi(
+      "http//localhost:5000/api/players/delete/player",
+      infoViewActionsContext,
+      {
+        type: all[0],
+        name: all[1],
+        PlayerIds: toDeletePlayers,
+        page,
+      }
+    )
       .then((data) => {
         setPlayerData(data);
-        infoViewActionsContext.showMessage('Player Deleted Successfully');
+        infoViewActionsContext.showMessage("Player Deleted Successfully");
       })
       .catch((error) => {
+        console.log("Fetch Error 1");
         infoViewActionsContext.fetchError(error.message);
       });
     setDeleteDialogOpen(false);
@@ -159,10 +173,9 @@ const PlayerListing = () => {
     setDeleteDialogOpen(true);
   };
   const onSelectPlayersForStatusChg = (PlayerIds) => {
-    // TODO : change status
-    alert("Changing status(es)")
-    // setToDeletePlayers(PlayerIds);
-    // setDeleteDialogOpen(true);
+    setCheckedPlayers(PlayerIds);
+    onChangeStatuses(false, "active", checkedPlayers);
+    setCheckedPlayers([]);
   };
   const handleReload = () => {
     setNotify({
@@ -170,10 +183,9 @@ const PlayerListing = () => {
       message: "Data reload requested",
       type: "info",
     });
-    reCallAPI()
-  }
+    reCallAPI();
+  };
   //#endregion
-  const list = onGetFilteredItems();
 
   return (
     <>
@@ -240,8 +252,8 @@ const PlayerListing = () => {
         title="Are you sure, you want to delete the selected Player ?"
         dialogTitle="Delete Item(s)"
       />
-            {/* Notification */}
-            <Controls.Notification notify={notify} setNotify={setNotify} />
+      {/* Notification */}
+      <Controls.Notification notify={notify} setNotify={setNotify} />
     </>
   );
 };
