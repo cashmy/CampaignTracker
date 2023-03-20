@@ -45,7 +45,7 @@ const routesConfig = [
         messageId: "sidebar.app.players",
         type: "item",
         icon: <MdOutlineContactPhone />,
-        url: "/players",
+        url: "/players/folder/all",
       },
       {
         id: "characters",

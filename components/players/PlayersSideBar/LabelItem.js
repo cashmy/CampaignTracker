@@ -51,7 +51,7 @@ const LabelItem = ({ label }) => {
   return (
     <PlayerSidebarListItemWrapper
       button
-      to={`/apps/contact/label/${label.alias}`}
+      to={`/players/label/${label.alias}`}
       component={AppNavLink}
       activeClassName="active"
     >

@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-19 11:56:15
- * @modify date 2023-03-19 19:01:34
+ * @modify date 2023-03-19 19:27:05
  * @desc [description]
  */
 
@@ -140,7 +140,8 @@ const PlayerListing = () => {
         return (
           Player.playerName.toUpperCase().includes(filterText.toUpperCase()) ||
           Player.email.toUpperCase().includes(filterText.toUpperCase()) ||
-          Player.discordId.toUpperCase().includes(filterText.toUpperCase())
+          Player.discordId.toUpperCase().includes(filterText.toUpperCase()) ||
+          Player.timeZone.toUpperCase().includes(filterText.toUpperCase()) 
         );
       });
     }

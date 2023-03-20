@@ -1,17 +1,21 @@
-import React from 'react';
-import Box from '@mui/material/Box';
+import React from "react";
+import Box from "@mui/material/Box";
 // import IntlMessages from '@crema/helpers/IntlMessages';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { HiOutlineBolt } from 'react-icons/hi2';
-import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
-import PropTypes from 'prop-types';
-import IconButton from '@mui/material/IconButton';
-import { Hidden } from '@mui/material';
-import AppTooltip from '@/../../lib/components/AppTooltip';
-// import { putDataApi } from '@crema/hooks/APIHooks';
-import { useInfoViewActionsContext } from '@/../../lib/context/AppContextProvider/InfoViewContextProvider';
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { HiOutlineBolt } from "react-icons/hi2";
+import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
+import PropTypes from "prop-types";
+import IconButton from "@mui/material/IconButton";
+import { Hidden } from "@mui/material";
+import AppTooltip from "@/../../lib/components/AppTooltip";
+import { patchDataApi } from "lib/hooks/APIHooks";
+import { useInfoViewActionsContext } from "lib/context/AppContextProvider/InfoViewContextProvider";
+import {
+  usePlayersActionsContext,
+  usePlayersContext,
+} from "../../PlayersContextProvider";
 
 const PlayerCheckedActions = (props) => {
   const {
@@ -21,7 +25,7 @@ const PlayerCheckedActions = (props) => {
     onSelectPlayersForStatusChg,
     onUpdatePlayers,
   } = props;
-
+  const { reCallAPI, API_URL } = usePlayersActionsContext();
   const infoViewActionsContext = useInfoViewActionsContext();
 
   const [isLabelOpen, onOpenLabel] = React.useState(null);
@@ -36,33 +40,34 @@ const PlayerCheckedActions = (props) => {
 
   const onSelectLabel = (event) => {
     const labelType = event.target.value;
-    // TODO: Update the label for the selected Players
-    alert('onSelectLabel: ' + labelType);
-    // putDataApi('/api/contactApp/update/label', infoViewActionsContext, {
-    //   contactIds: checkedPlayers,
-    //   type: +labelType,
-    // })
-    //   .then((data) => {
-    //     onUpdatePlayers(data);
-    //     setCheckedPlayers([]);
-    //     onLabelClose();
-    //     infoViewActionsContext.showMessage('Contact Updated Successfully');
-    //   })
-    //   .catch((error) => {
-    //     infoViewActionsContext.fetchError(error.message);
-    //   });
+    patchDataApi(API_URL, infoViewActionsContext, {
+      ids: checkedPlayers,
+      value: labelType,
+      path: "labelId",
+      op: "replace",
+    })
+      .then((data) => {
+        // onUpdatePlayer(data);
+        setCheckedPlayers([]);
+        onLabelClose();
+        infoViewActionsContext.showMessage("Player Updated Successfully");
+      })
+      .catch((error) => {
+        infoViewActionsContext.fetchError(error.message);
+      });
+    reCallAPI();
   };
 
   return (
     <Box
       component="span"
       sx={{
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
         mr: { xs: 2, xl: 3 },
       }}
     >
-      <AppTooltip 
+      <AppTooltip
         // title={<IntlMessages id="common.delete" />}
         title="Delete Item(s)"
       >
@@ -74,15 +79,15 @@ const PlayerCheckedActions = (props) => {
         >
           <DeleteOutlinedIcon
             sx={{
-              cursor: 'pointer',
-              display: 'block',
+              cursor: "pointer",
+              display: "block",
             }}
             onClick={() => onSelectPlayersForDelete(checkedPlayers)}
           />
         </IconButton>
       </AppTooltip>
 
-      <AppTooltip 
+      <AppTooltip
         // title={<IntlMessages id="common.delete" />}
         title="Change Status for Item(s)"
       >
@@ -93,8 +98,8 @@ const PlayerCheckedActions = (props) => {
         >
           <HiOutlineBolt
             sx={{
-              cursor: 'pointer',
-              display: 'block',
+              cursor: "pointer",
+              display: "block",
             }}
             onClick={() => onSelectPlayersForStatusChg(checkedPlayers)}
           />
@@ -102,7 +107,7 @@ const PlayerCheckedActions = (props) => {
       </AppTooltip>
 
       <Hidden smDown>
-        <AppTooltip 
+        <AppTooltip
           // title={<IntlMessages id="common.label" />}
           title="Label"
         >
@@ -114,8 +119,8 @@ const PlayerCheckedActions = (props) => {
           >
             <LabelOutlinedIcon
               sx={{
-                cursor: 'pointer',
-                display: 'block',
+                cursor: "pointer",
+                display: "block",
               }}
               value={1}
               onClick={onLabelOpen}

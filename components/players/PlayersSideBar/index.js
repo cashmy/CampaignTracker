@@ -23,15 +23,15 @@ const SideBarContent = () => {
   // const { folderList, labelList } = usePlayersContext();
   const folderList = [
     { id: 121, name: 'All', alias: 'all' },
-    { id: 124, name: 'Starred', alias: 'starred' },
+    { id: 124, name: 'Starred', alias: 'isStarred' },
     { id: 122, name: 'Active', alias: 'active' },
-    { id: 125, name: 'Inactive', alias: 'archive' },
+    { id: 125, name: 'Inactive', alias: 'inactive' },
   ];
   const labelList = [
-    { id: 311, name: 'Exp/Vet +DM', alias: 'crema', color: red[500] },
-    { id: 312, name: 'Veteran', alias: 'personal', color: blue[500] },
-    { id: 313, name: 'Experienced', alias: 'work', color: orange[500] },
-    { id: 314, name: 'Newbie', alias: 'work', color: green[500] },
+    { id: 311, name: 'Exp/Vet +DM', alias: '311', color: red[500] },
+    { id: 312, name: 'Veteran', alias: '312', color: blue[500] },
+    { id: 313, name: 'Experienced', alias: '313', color: orange[500] },
+    { id: 314, name: 'Newbie', alias: '314', color: green[500] },
   ] 
   const [isAddPlayer, onSetIsAddPlayer] = useState(false);
   const [records, setRecords] = useState([]);
@@ -127,7 +127,7 @@ const SideBarContent = () => {
                 <AppsSideBarFolderItem
                   key={item.id}
                   item={item}
-                  path={`/apps/Players/folder/${item.alias}`}
+                  path={`/players/folder/${item.alias}`}
                 />
               )}
             />
@@ -209,7 +209,7 @@ const SideBarContent = () => {
                 <CampaignSideBarItem
                   key={item.id}
                   item={item}
-                  path={`/apps/Players/Campaigns/${item.id}`}
+                  path={`/players/campaign/${item.id}`}
                 />
               )}
             />

@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-06 15:07:21
- * @modify date 2023-03-11 11:05:03
+ * @modify date 2023-03-20 00:18:58
  * @desc [description]
  */
 
@@ -61,7 +61,7 @@ const CampaignPlayerDialog = (props) => {
   useEffect(() => {
     const getTableData = async (e) => {
       try {
-        const response = await PlayerService.getAllRecords().then();
+        const response = await PlayerService.getAllRecordsByUser().then();
         setRecords(response.data);
       } catch (e) {
         console.log("API call unsuccessful", e);

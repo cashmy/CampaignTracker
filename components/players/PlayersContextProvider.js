@@ -40,8 +40,8 @@ export const PlayersContextProvider = ({ children }) => {
 
   useEffect(() => {
     setQueryParams({
-      // type: all[0],
-      // name: all[1],
+      type: all[0],
+      name: all[1],
       page: page,
     });
   }, [all, page]);
