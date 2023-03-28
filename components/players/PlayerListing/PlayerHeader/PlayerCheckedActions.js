@@ -148,7 +148,7 @@ const PlayerCheckedActions = (props) => {
           {/* <IntlMessages id="common.work" /> */}
           Experienced
         </MenuItem>
-        <MenuItem value={313} onClick={onSelectLabel}>
+        <MenuItem value={314} onClick={onSelectLabel}>
           {/* <IntlMessages id="common.work" /> */}
           Newbie
         </MenuItem>

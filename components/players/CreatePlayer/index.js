@@ -10,18 +10,14 @@ import { postDataApi, putDataApi } from '@@/../../lib/hooks/APIHooks';
 import { usePlayersActionsContext } from '../PlayersContextProvider';
 
 const validationSchema = yup.object({
-  // name: yup.string().required(<IntlMessages id="validation.nameRequired" />),
   name: yup.string().required("Please enter name!"),
   email: yup
     .string()
-    // .email(<IntlMessages id="validation.emailFormat" />)
-    // .required(<IntlMessages id="validation.emailRequired" />),
-    .email("The Email you entered is not a valid format!")
-    .required("Please enter Email Address!"),
-  Player: yup
+    .email("The Email you entered is not a valid format!"),
+    //.required("Please enter Email Address!"),
+   countryCode: yup
     .string()
-    // .required(<IntlMessages id="validation.phoneNumberRequired" />),
-    .required("Please enter phone number!"),
+    .required("Please enter a country code!"),
 });
 
 const CreatePlayer = (props) => {

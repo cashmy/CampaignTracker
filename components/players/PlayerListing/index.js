@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-19 11:56:15
- * @modify date 2023-03-19 19:27:05
+ * @modify date 2023-03-28 15:27:44
  * @desc [description]
  */
 
@@ -18,9 +18,11 @@ import AppsHeader from "@/../../lib/components/AppContainer/AppHeader";
 import AppsPagination from "@/../../lib/components/AppsPagination";
 import Controls from "components/controls/Controls";
 import CreatePlayer from "../CreatePlayer";
+import PlayerDialog from "../CreatePlayer/PlayerDialog";
 import PlayerDetail from "../PlayerDetail";
 import PlayerHeader from "./PlayerHeader";
 import PlayerView from "./PlayerView";
+import PageDialog from "../../controls/PageDialog";
 // import IntlMessages from '@crema/helpers/IntlMessages';
 // * Services
 import { useInfoViewActionsContext } from "@/../../lib/context/AppContextProvider/InfoViewContextProvider";
@@ -141,7 +143,7 @@ const PlayerListing = () => {
           Player.playerName.toUpperCase().includes(filterText.toUpperCase()) ||
           Player.email.toUpperCase().includes(filterText.toUpperCase()) ||
           Player.discordId.toUpperCase().includes(filterText.toUpperCase()) ||
-          Player.timeZone.toUpperCase().includes(filterText.toUpperCase()) 
+          Player.timeZone.toUpperCase().includes(filterText.toUpperCase())
         );
       });
     }
@@ -234,6 +236,16 @@ const PlayerListing = () => {
         selectPlayer={selectedPlayer}
         onUpdatePlayer={onUpdatePlayer}
       />
+
+      <PageDialog
+        openPopup={isAddPlayer}
+        setOpenPopup={handleAddPlayerClose}
+        title={"Edit a Player"}
+        titleColor={process.env.NEXT_PUBLIC_NX_PRIMARY_COLOR}
+        size="md"
+      >
+        <PlayerDialog recordForEdit={selectedPlayer} addOrEdit={onUpdatePlayer} />
+      </PageDialog>
 
       <PlayerDetail
         selectedPlayer={selectedPlayer}
