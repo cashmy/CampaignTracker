@@ -29,6 +29,8 @@ const SocialMedia = (props) => {
       </Box>
 
       <Box
+      // ? Remember: The sx prop below works only on "media query" adjustments.
+      // ? It does not work on "theme/form" adjustments.
         sx={{
           px: { xs: 5, lg: 8, xl: 10 },
         }}

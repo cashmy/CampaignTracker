@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+// Todo: possibly add birthdate, address.
 
 export const playerRecord = {
   id: 0,
@@ -14,7 +15,7 @@ export const playerRecord = {
   countryCode: "",    // Player country code
   isStarred: false,   // Player is starred
   avatarImage: "",    // Player avatar image
-  label: "",          // Player Experience label (Newbie, Experienced, Veteran, Exp/Vet +DM)
+  label: "",          // Player Experience label (Newbie, Exp, Vet, Exp/Vet+DM)
   fbUserName: "",     // Player Facebook User Name
   twitterId: "",      // Player Twitter Id
   active: true,

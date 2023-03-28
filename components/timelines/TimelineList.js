@@ -127,7 +127,7 @@ const TimelineList = (props) => {
                 {timelines.map((timeline, index) => (
                   <TimelineItem key={index}>
                     <TimelineOppositeContent
-                      sx={{ mt: 12, marginLeft: "-3px" }}
+                      sx={{ mt: 2, ml: "-3px" }}
                       align="right"
                       variant="body2"
                       color="text.secondary"
