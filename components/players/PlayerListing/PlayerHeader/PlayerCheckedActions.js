@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Hidden } from "@mui/material";
+import { blue, green, red, orange } from '@mui/material/colors';
 // * Icons
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
@@ -140,19 +141,19 @@ const PlayerCheckedActions = (props) => {
         open={Boolean(isLabelOpen)}
         onClose={onLabelClose}
       >
-        <MenuItem value={311} onClick={onSelectLabel}>
+        <MenuItem value={311} onClick={onSelectLabel} sx={{color: red[500]}}>
           {/* <IntlMessages id="common.crema" /> */}
           Exp/Vet +DM
         </MenuItem>
-        <MenuItem value={312} onClick={onSelectLabel}>
+        <MenuItem value={312} onClick={onSelectLabel} sx={{color: blue[500]}}>
           {/* <IntlMessages id="common.personal" /> */}
           Veteran
         </MenuItem>
-        <MenuItem value={313} onClick={onSelectLabel}>
+        <MenuItem value={313} onClick={onSelectLabel} sx={{color: orange[500]}}>
           {/* <IntlMessages id="common.work" /> */}
           Experienced
         </MenuItem>
-        <MenuItem value={314} onClick={onSelectLabel}>
+        <MenuItem value={314} onClick={onSelectLabel} sx={{color: green[500]}}>
           {/* <IntlMessages id="common.work" /> */}
           Newbie
         </MenuItem>
