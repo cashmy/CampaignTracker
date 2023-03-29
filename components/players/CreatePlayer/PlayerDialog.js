@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-20 11:47:39
- * @modify date 2023-03-28 19:50:24
+ * @modify date 2023-03-28 20:10:03
  * @desc [description]
  */
 
@@ -27,7 +27,7 @@ import { FiFacebook, FiTwitter } from "react-icons/fi";
 import { useForm, Form } from "@/../../lib/hooks/useForm";
 import Controls from "components/controls/Controls";
 import SelectCountry from "admin/countries/SelectCountry";
-import SelectTimeZone from "admin/timeZones/SelectTimeZone";
+// import SelectTimeZone from "admin/timeZones/SelectTimeZone"; // TODO For future implementation
 import { Fonts } from "lib/constants/AppEnums";
 // * Services
 import { playerRecord as initialFValues } from "dataModels/player";
@@ -185,7 +185,6 @@ const PlayerDialog = (props) => {
     setValue(index);
   };
   const handleCountryChange = (event) => {
-    console.log("Country Code: ", event.target.value);
     setValues({
       ...values,
       countryCode: event.target.value,
@@ -307,7 +306,8 @@ const PlayerDialog = (props) => {
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <SelectTimeZone
+                    <Controls.TextField
+                    // <SelectTimeZone // Todo: For future implementation
                       name="timeZone"
                       label="Time Zone"
                       value={values.timeZone}

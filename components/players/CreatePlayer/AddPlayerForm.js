@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-18 15:13:53
- * @modify date 2023-03-19 13:04:55
+ * @modify date 2023-03-28 20:14:16
  * @desc [description]
  */
 
@@ -27,7 +27,7 @@ import { Fonts } from "lib/constants/AppEnums";
 import AppGridContainer from "lib/components/AppGridContainer";
 import AppTextField from "@/../../lib/components/AppFormComponents/AppTextField";
 // import IntlMessages from 'lib/helpers/IntlMessages';
-// import SelectCountry from "components/controls/SelectCountry";
+import SelectCountry from "admin/countries/SelectCountry";
 // #endregion
 
 // #region //* Styled Components
@@ -99,6 +99,10 @@ const AddPlayerForm = (props) => {
     event.target.onsubmit = true;
     console.log("event.target", event);
   };
+  const onChange = (event) => {
+    setFieldValue(event.target.name, event.target.value);
+  }
+
   // #endregion
 
   return (
@@ -247,21 +251,20 @@ const AddPlayerForm = (props) => {
                 </FormControl>
               </Grid>
               <Grid item xs={12} md={6}>
-                <AppTextField
+                {/* <AppTextField
                   sx={{
                     width: "100%",
                   }}
                   variant="outlined"
                   label="Country"
                   name="countryCode"
-                />
-                {/* <SelectCountry 
+                /> */}
+                <SelectCountry 
                   name="countryCode"
                   label="Country Code"
                   value={values.countryCode}
-                  // error={}
-                  // onChange={}
-                  /> */}
+                  onChange={onChange}
+                  />
               </Grid>
             </AppGridContainer>
           </div>
