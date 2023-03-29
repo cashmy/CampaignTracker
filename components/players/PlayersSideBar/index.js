@@ -1,41 +1,64 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import React, { useEffect, useState } from 'react';
-// import IntlMessages from '@crema/helpers/IntlMessages';
-import AppScrollbar from '@/../../lib/components/AppScrollbar';
-import CreatePlayer from '../CreatePlayer';
-import AppsSideBarFolderItem from '@/../../lib/components/AppsSideBarFolderItem';
-import { Fonts } from '@/../../lib/constants/AppEnums';
-import AppList from '@/../../lib/components/AppList';
-import ListEmptyResult from '@/../../lib/components/AppList/ListEmptyResult';
-import SidebarPlaceholder from '@/../../lib/components/AppSkeleton/SidebarListSkeleton';
-import CampaignSideBarItem from 'components/campaigns/CampaignSideBarItem';
-import AddIcon from '@mui/icons-material/Add';
-import { Zoom } from '@mui/material';
-import LabelItem from './LabelItem';
-// import { usePlayersContext } from '../PlayersContextProvider';
-import { blue, green, red, orange } from '@mui/material/colors';
-import CampaignService from 'services/campaign.service';
+/** Author
+ * @author Cash Myers
+ * @github [https://github.com/cashmy]
+ * @create date 2023-03-29 17:51:58
+ * @modify date 2023-03-29 18:41:29
+ * @desc [description]
+ */
+
+//#region Imports
+import React, { useEffect, useState } from "react";
+// * Mui
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import List from "@mui/material/List";
+import { Zoom } from "@mui/material";
+import { blue, green, red, orange } from "@mui/material/colors";
+// * Icons
+import AddIcon from "@mui/icons-material/Add";
+// * Local Components
+import AppList from "lib/components/AppList";
+import AppScrollbar from "lib/components/AppScrollbar";
+import AppsSideBarFolderItem from "lib/components/AppsSideBarFolderItem";
+import CampaignSideBarItem from "components/campaigns/CampaignSideBarItem";
+import ListEmptyResult from "lib/components/AppList/ListEmptyResult";
+import LabelItem from "./LabelItem";
+import PageDialog from "../../controls/PageDialog";
+import PlayerDialog from "../CreatePlayer/PlayerDialog";
+import SidebarPlaceholder from "lib/components/AppSkeleton/SidebarListSkeleton";
+import { Fonts } from "lib/constants/AppEnums";
+// * Services
+import { useInfoViewActionsContext } from "lib/context/AppContextProvider/InfoViewContextProvider";
+import { postDataApi } from "lib/hooks/APIHooks";
+import CampaignService from "services/campaign.service";
+import {
+  usePlayersActionsContext,
+} from "../PlayersContextProvider";
+//#endregion
 
 const SideBarContent = () => {
+  //#region //* State & Local Variables
   // TODO: get folderList and labelList from context or Datasoure
-  // const { folderList, labelList } = usePlayersContext();
   const folderList = [
-    { id: 121, name: 'All', alias: 'all' },
-    { id: 124, name: 'Starred', alias: 'isStarred' },
-    { id: 122, name: 'Active', alias: 'active' },
-    { id: 125, name: 'Inactive', alias: 'inactive' },
+    { id: 121, name: "All", alias: "all" },
+    { id: 124, name: "Starred", alias: "isStarred" },
+    { id: 122, name: "Active", alias: "active" },
+    { id: 125, name: "Inactive", alias: "inactive" },
   ];
   const labelList = [
-    { id: 311, name: 'Exp/Vet +DM', alias: '311', color: red[500] },
-    { id: 312, name: 'Veteran', alias: '312', color: blue[500] },
-    { id: 313, name: 'Experienced', alias: '313', color: orange[500] },
-    { id: 314, name: 'Newbie', alias: '314', color: green[500] },
-  ] 
+    { id: 311, name: "Exp/Vet +DM", alias: "311", color: red[500] },
+    { id: 312, name: "Veteran", alias: "312", color: blue[500] },
+    { id: 313, name: "Experienced", alias: "313", color: orange[500] },
+    { id: 314, name: "Newbie", alias: "314", color: green[500] },
+  ];
   const [isAddPlayer, onSetIsAddPlayer] = useState(false);
   const [records, setRecords] = useState([]);
+  const { reCallAPI, API_URL } =
+  usePlayersActionsContext();
+  const infoViewActionsContext = useInfoViewActionsContext();
+  //#endregion
 
+  //#region //* Hooks
   useEffect(() => {
     const getTableData = async (e) => {
       try {
@@ -53,15 +76,28 @@ const SideBarContent = () => {
     };
     getTableData();
   }, []);
+  //#endregion
 
-
+  //#region //* Event Handlers
   const handleAddPlayerOpen = () => {
     onSetIsAddPlayer(true);
   };
-
   const handleAddPlayerClose = () => {
     onSetIsAddPlayer(false);
   };
+  const onAddPlayer = (Player) =>{
+      postDataApi(API_URL, infoViewActionsContext, Player, Player.id)
+        .then((data) => {
+          // onUpdateSelectedPlayer(data);
+          infoViewActionsContext.showMessage("Player Added Successfully");
+        })
+        .catch((error) => {
+          infoViewActionsContext.fetchError(error.message);
+        });
+      reCallAPI();
+      handleAddPlayerClose();
+  }
+  //#endregion
 
   return (
     <>
@@ -72,22 +108,21 @@ const SideBarContent = () => {
           pb: 2.5,
         }}
       >
-        <Zoom in style={{ transitionDelay: '300ms' }}>
+        <Zoom in style={{ transitionDelay: "300ms" }}>
           <Button
             variant="contained"
             color="primary"
             sx={{
-              padding: '8px 28px',
+              padding: "8px 28px",
               borderRadius: 8,
-              '& .MuiSvgIcon-root': {
+              "& .MuiSvgIcon-root": {
                 fontSize: 26,
               },
             }}
             startIcon={<AddIcon />}
             onClick={handleAddPlayerOpen}
           >
-            {/* <IntlMessages id="PlayersApp.createPlayers" /> */}
-            Create Player 
+            Create Player
           </Button>
         </Zoom>
       </Box>
@@ -163,9 +198,7 @@ const SideBarContent = () => {
                   }
                 />
               }
-              renderRow={(label) => (
-                <LabelItem key={label.id} label={label} />
-              )}
+              renderRow={(label) => <LabelItem key={label.id} label={label} />}
             />
           </List>
 
@@ -215,10 +248,18 @@ const SideBarContent = () => {
             />
           </List>
 
-          <CreatePlayer
-            isAddPlayer={isAddPlayer}
-            handleAddPlayerClose={handleAddPlayerClose}
-          />
+          <PageDialog
+            openPopup={isAddPlayer}
+            setOpenPopup={handleAddPlayerClose}
+            title={"Edit a Player"}
+            titleColor={process.env.NEXT_PUBLIC_NX_PRIMARY_COLOR}
+            size="md"
+          >
+            <PlayerDialog
+              recordForEdit={null}
+              addOrEdit={onAddPlayer}
+            />
+          </PageDialog>
         </Box>
       </AppScrollbar>
     </>

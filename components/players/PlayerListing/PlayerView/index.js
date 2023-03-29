@@ -51,7 +51,6 @@ const PlayerView = (props) => {
               ListEmptyComponent={
                 <ListEmptyResult
                   loading={loading}
-                  // actionTitle={<IntlMessages id="PlayerApp.createPlayer" />}
                   actionTitle="Create Player"
                   onClick={handleAddPlayerOpen}
                   placeholder={<PlayerListSkeleton />}
@@ -88,7 +87,6 @@ const PlayerView = (props) => {
               ListEmptyComponent={
                 <ListEmptyResult
                   loading={loading}
-                  // actionTitle={<IntlMessages id="PlayerApp.createPlayer" />}
                   actionTitle="Create Player"
                   onClick={handleAddPlayerOpen}
                   placeholder={<PlayerListSkeleton />}

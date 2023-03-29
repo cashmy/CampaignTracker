@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-19 11:56:15
- * @modify date 2023-03-29 15:16:03
+ * @modify date 2023-03-29 18:41:35
  * @desc [description]
  */
 
@@ -17,16 +17,14 @@ import AppsFooter from "@/../../lib/components/AppContainer/AppFooter";
 import AppsHeader from "@/../../lib/components/AppContainer/AppHeader";
 import AppsPagination from "@/../../lib/components/AppsPagination";
 import Controls from "components/controls/Controls";
-import CreatePlayer from "../CreatePlayer";
 import PlayerDialog from "../CreatePlayer/PlayerDialog";
 import PlayerDetail from "../PlayerDetail";
 import PlayerHeader from "./PlayerHeader";
 import PlayerView from "./PlayerView";
 import PageDialog from "../../controls/PageDialog";
-// import IntlMessages from '@crema/helpers/IntlMessages';
 // * Services
-import { useInfoViewActionsContext } from "@/../../lib/context/AppContextProvider/InfoViewContextProvider";
-import { postDataApi, patchDataApi, putDataApi } from "lib/hooks/APIHooks";
+import { useInfoViewActionsContext } from "lib/context/AppContextProvider/InfoViewContextProvider";
+import { deleteDataApi, patchDataApi, putDataApi } from "lib/hooks/APIHooks";
 import {
   usePlayersActionsContext,
   usePlayersContext,
@@ -159,26 +157,21 @@ const PlayerListing = () => {
   };
   const list = onGetFilteredItems();
   const onDeleteSelectedPlayers = () => {
-    postDataApi(
-      "http//localhost:5000/api/players/delete/player",
+    console.log("onDeleteSelectedPlayers: ", toDeletePlayers)
+    deleteDataApi(API_URL,
       infoViewActionsContext,
-      {
-        type: all[0],
-        name: all[1],
-        PlayerIds: toDeletePlayers,
-        page,
-      }
+      {recordIds: toDeletePlayers }
     )
       .then((data) => {
-        setPlayersData(data);
+        // setPlayersData(data);
         infoViewActionsContext.showMessage("Player Deleted Successfully");
       })
       .catch((error) => {
-        console.log("Fetch Error 1");
         infoViewActionsContext.fetchError(error.message);
       });
     setDeleteDialogOpen(false);
     setCheckedPlayers([]);
+    reCallAPI();
   };
   const onSelectPlayersForDelete = (PlayerIds) => {
     setToDeletePlayers(PlayerIds);
@@ -239,13 +232,6 @@ const PlayerListing = () => {
         ) : null}
       </Hidden>
 
-      <CreatePlayer
-        isAddPlayer={isAddPlayer}
-        handleAddPlayerClose={handleAddPlayerClose}
-        selectPlayer={selectedPlayer}
-        onUpdatePlayer={onUpdatePlayer}
-      />
-
       <PageDialog
         openPopup={isAddPlayer}
         setOpenPopup={handleAddPlayerClose}
@@ -269,8 +255,6 @@ const PlayerListing = () => {
         open={isDeleteDialogOpen}
         onDeny={setDeleteDialogOpen}
         onConfirm={onDeleteSelectedPlayers}
-        // title={<IntlMessages id="PlayerApp.deletePlayer" />}
-        // dialogTitle={<IntlMessages id="common.deleteItem" />}
         title="Are you sure, you want to delete the selected Player ?"
         dialogTitle="Delete Item(s)"
       />
