@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-20 11:47:39
- * @modify date 2023-03-28 16:57:52
+ * @modify date 2023-03-28 19:50:24
  * @desc [description]
  */
 
@@ -19,7 +19,6 @@ import { blue, green, red, orange } from "@mui/material/colors";
 // * Icons
 import EditIcon from "@mui/icons-material/Edit";
 import InfoIcon from "@mui/icons-material/Info";
-import CampaignIcon from "@mui/icons-material/Campaign";
 import SocialDistanceIcon from "@mui/icons-material/SocialDistance";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import { FaDiscord } from "react-icons/fa";
@@ -27,11 +26,11 @@ import { FiFacebook, FiTwitter } from "react-icons/fi";
 // * Local components
 import { useForm, Form } from "@/../../lib/hooks/useForm";
 import Controls from "components/controls/Controls";
-import SelectCountry from "components/controls/SelectCountry";
+import SelectCountry from "admin/countries/SelectCountry";
+import SelectTimeZone from "admin/timeZones/SelectTimeZone";
 import { Fonts } from "lib/constants/AppEnums";
 // * Services
 import { playerRecord as initialFValues } from "dataModels/player";
-import AppScrollbar from "lib/components/AppScrollbar";
 //#endregion
 
 //#region //* Styled Components
@@ -154,11 +153,10 @@ const PlayerDialog = (props) => {
 
   //#region //* Hooks
   useEffect(() => {
-    if (recordForEdit != null)
-      "now setting values"
-      setValues({
-        ...recordForEdit,
-      });
+    if (recordForEdit != null) "now setting values";
+    setValues({
+      ...recordForEdit,
+    });
   }, [recordForEdit]);
   //#endregion
 
@@ -185,6 +183,13 @@ const PlayerDialog = (props) => {
   };
   const handleChangeIndex = (index) => {
     setValue(index);
+  };
+  const handleCountryChange = (event) => {
+    console.log("Country Code: ", event.target.value);
+    setValues({
+      ...values,
+      countryCode: event.target.value,
+    });
   };
   // #endregion
 
@@ -293,16 +298,16 @@ const PlayerDialog = (props) => {
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <Controls.TextField
+                    <SelectCountry
                       name="countryCode"
                       label="Country"
                       value={values.countryCode}
-                      onChange={handleInputChange}
+                      onChange={handleCountryChange}
                       error={errors.countryCode}
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <Controls.TextField
+                    <SelectTimeZone
                       name="timeZone"
                       label="Time Zone"
                       value={values.timeZone}
@@ -335,21 +340,19 @@ const PlayerDialog = (props) => {
               {/* //^ Social Connections */}
               <TabPanel value={tabValue} index={1} dir={theme.direction}>
                 <Grid container spacing={6} sx={{ display: "flex" }}>
-                  <Grid item xs={2} sx={{display: "grid"}} >
-                    <Box sx={{ justifySelf: "center", mt: 2,  }} >
-                    <FaDiscord
-                      size={32}
-                      style={{
-                        color: "#5865F2",
-                        backgroundColor: "white",
-                        borderRadius: "20%",
-                      }}
-                    /> 
+                  <Grid item xs={2} sx={{ display: "grid" }}>
+                    <Box sx={{ justifySelf: "center", mt: 2 }}>
+                      <FaDiscord
+                        size={32}
+                        style={{
+                          color: "#5865F2",
+                          backgroundColor: "white",
+                          borderRadius: "20%",
+                        }}
+                      />
                     </Box>
                   </Grid>
-                  <Grid item
-                    xs={10}
-                  >
+                  <Grid item xs={10}>
                     <Controls.TextField
                       name="discordId"
                       label="Discord Id"
@@ -358,16 +361,16 @@ const PlayerDialog = (props) => {
                       error={errors.discordId}
                     />
                   </Grid>
-                  <Grid item xs={2} sx={{display: "grid"}}>
-                  <Box sx={{ justifySelf: "center", mt: 2,  }} >
-                    <FiFacebook
-                      size={32}
-                      style={{
-                        color: "white",
-                        backgroundColor: "#4267b2",
-                        borderRadius: "20%",
-                      }}
-                    />
+                  <Grid item xs={2} sx={{ display: "grid" }}>
+                    <Box sx={{ justifySelf: "center", mt: 2 }}>
+                      <FiFacebook
+                        size={32}
+                        style={{
+                          color: "white",
+                          backgroundColor: "#4267b2",
+                          borderRadius: "20%",
+                        }}
+                      />
                     </Box>
                   </Grid>
                   <Grid item xs={10}>
@@ -379,16 +382,16 @@ const PlayerDialog = (props) => {
                       error={errors.fbUsername}
                     />
                   </Grid>
-                  <Grid item xs={2} sx={{display: "grid"}}>
-                  <Box sx={{ justifySelf: "center", mt: 2, }} >
-                    <FiTwitter
-                      size={32}
-                      style={{
-                        color: "#1DA1F2",
-                        backgroundColor: "white",
-                        borderRadius: "20%",
-                      }}
-                    />
+                  <Grid item xs={2} sx={{ display: "grid" }}>
+                    <Box sx={{ justifySelf: "center", mt: 2 }}>
+                      <FiTwitter
+                        size={32}
+                        style={{
+                          color: "#1DA1F2",
+                          backgroundColor: "white",
+                          borderRadius: "20%",
+                        }}
+                      />
                     </Box>
                   </Grid>
                   <Grid item xs={10}>
@@ -410,7 +413,7 @@ const PlayerDialog = (props) => {
 
               {/* //^ Notes */}
               <TabPanel value={tabValue} index={2} dir={theme.direction}>
-                <Grid item xs={12} sx={{mt: -1.5}}>
+                <Grid item xs={12} sx={{ mt: -1.5 }}>
                   <Controls.TextField
                     name="notes"
                     label="Player Notes"
