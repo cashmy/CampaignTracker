@@ -5,35 +5,28 @@
  * @modify date 2023-02-23 17:55:53
  * @desc [description]
  */
-import { useState, useEffect } from "react";
+
+//#region Imports
+import React from 'react';
 import PropTypes from "prop-types";
+// * Mui
 import {
+  Box,
   FormControl,
   FormHelperText,
   InputLabel,
   MenuItem,
   Select as MuiSelect,
 } from "@mui/material";
-import CountryService from "services/country.service";
+// * Services
+import { useCountriesContext } from "../CountriesContextProvider";
+//#endregion
 
 const SelectCountry = (props) => {
   const { name, label, value, error = null, onChange } = props;
-  const { records, setRecords } = useState([]);
+  const { RecordsList } = useCountriesContext();
 
-  useEffect(() => {
-    console.log("useEffect called");
-    const getTableData = async (e) => {
-      try {
-        const response = await CountryService.getAllRecords().then();
-        setRecords(response.data);
-      } catch (e) {
-        console.log("API call unsuccessful", e);
-      }
-    };
-    getTableData();
-  }, []);
-
-  console.log("records", records);
+  console.log("SelectCountry: props", props)
 
   return (
     <FormControl variant="outlined" fullWidth {...(error && { error: true })}>
@@ -46,7 +39,7 @@ const SelectCountry = (props) => {
         onChange={onChange}
         fullWidth
       >
-        {records.map((record) => (
+        {RecordsList.length != undefined && RecordsList.map((record) => (
           <MenuItem key={record.countryCode} value={record.countryCode}>
             <Box
               component="li"
@@ -60,7 +53,7 @@ const SelectCountry = (props) => {
                 srcSet={`https://flagcdn.com/w40/${record.countryCode.toLowerCase()}.png 2x`}
                 alt=""
               />
-              {record.countryName} ({record.countryCode}) +{record.phone}
+              {record.countryName} ({record.countryCode}) + {record.phone}
             </Box>
           </MenuItem>
         ))}
