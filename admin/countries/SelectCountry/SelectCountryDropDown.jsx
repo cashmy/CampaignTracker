@@ -25,9 +25,7 @@ import { useCountriesContext } from "../CountriesContextProvider";
 const SelectCountry = (props) => {
   const { name, label, value, error = null, onChange } = props;
   const { RecordsList } = useCountriesContext();
-
-  console.log("SelectCountry: props", props)
-
+  
   return (
     <FormControl variant="outlined" fullWidth {...(error && { error: true })}>
       <InputLabel>{label || "Select Country"}</InputLabel>

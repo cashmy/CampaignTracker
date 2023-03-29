@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-19 11:56:15
- * @modify date 2023-03-28 15:27:44
+ * @modify date 2023-03-29 15:16:03
  * @desc [description]
  */
 
@@ -26,7 +26,7 @@ import PageDialog from "../../controls/PageDialog";
 // import IntlMessages from '@crema/helpers/IntlMessages';
 // * Services
 import { useInfoViewActionsContext } from "@/../../lib/context/AppContextProvider/InfoViewContextProvider";
-import { postDataApi, patchDataApi } from "lib/hooks/APIHooks";
+import { postDataApi, patchDataApi, putDataApi } from "lib/hooks/APIHooks";
 import {
   usePlayersActionsContext,
   usePlayersContext,
@@ -36,7 +36,7 @@ import {
 const PlayerListing = () => {
   //#region //* State & Local Variables
   const { all, page, PlayersList } = usePlayersContext();
-  const { onPageChange, setPlayerData, reCallAPI, API_URL } =
+  const { onPageChange, setPlayersData, reCallAPI, API_URL } =
     usePlayersActionsContext();
   const infoViewActionsContext = useInfoViewActionsContext();
   const [filterText, onSetFilterText] = useState("");
@@ -108,7 +108,7 @@ const PlayerListing = () => {
     reCallAPI();
   };
   const onUpdateSelectedPlayer = (Player) => {
-    setPlayerData({
+    setPlayersData({
       data: PlayersList?.map((item) => {
         if (item.id === Player.id) {
           return Player;
@@ -119,7 +119,7 @@ const PlayerListing = () => {
     });
   };
   const onUpdatePlayers = (Players) => {
-    setPlayerData({
+    setPlayersData({
       data: PlayersList?.map((item) => {
         const Player = Players.find((Player) => Player.id === item.id);
         if (Player) {
@@ -132,6 +132,15 @@ const PlayerListing = () => {
   };
   const onUpdatePlayer = (Player) => {
     setSelectedPlayer(Player);
+    putDataApi(API_URL, infoViewActionsContext, Player, Player.id)
+      .then((data) => {
+        onUpdateSelectedPlayer(data);
+        infoViewActionsContext.showMessage("Player Updated Successfully");
+      })
+      .catch((error) => {
+        infoViewActionsContext.fetchError(error.message);
+      });
+    reCallAPI();
     handleAddPlayerClose();
   };
   const onGetFilteredItems = () => {
@@ -161,7 +170,7 @@ const PlayerListing = () => {
       }
     )
       .then((data) => {
-        setPlayerData(data);
+        setPlayersData(data);
         infoViewActionsContext.showMessage("Player Deleted Successfully");
       })
       .catch((error) => {

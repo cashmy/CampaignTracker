@@ -1,21 +1,24 @@
 import React from "react";
-import ListItem from "@mui/material/ListItem";
-import Checkbox from "@mui/material/Checkbox";
-import Avatar from "@mui/material/Avatar";
-import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
-import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import AppsStarredIcon from "@/../../lib/components/AppsStarredIcon";
-import AppsActiveIcon from "@/../../lib/components/AppsActiveIcon";
-import { Fonts } from "@/../../lib/constants/AppEnums";
-import ItemMenu from "../ItemMenu";
-import { blue } from "@mui/material/colors";
 import Clock from "react-live-clock";
-import { currDateDiffByZone } from "/helpers/TimeZones";
-
-import { styled } from "@mui/material/styles";
+// * Mui
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Checkbox from "@mui/material/Checkbox";
+import ListItem from "@mui/material/ListItem";
 import { alpha } from "@mui/material";
+import { blue } from "@mui/material/colors";
+import { styled } from "@mui/material/styles";
+// * Icons
+import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
+// * Local Components
+import AppsStarredIcon from "lib/components/AppsStarredIcon";
+import AppsActiveIcon from "lib/components/AppsActiveIcon";
+import { currDateDiffByZone } from "/helpers/TimeZones";
+import { Fonts } from "lib/constants/AppEnums";
+import ItemMenu from "../ItemMenu";
+
 
 const PlayerListItemWrapper = styled(ListItem)(({ theme }) => {
   return {

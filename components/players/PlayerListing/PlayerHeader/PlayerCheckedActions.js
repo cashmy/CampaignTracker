@@ -1,17 +1,21 @@
 import React from "react";
+import PropTypes from "prop-types";
+// * Mui
 import Box from "@mui/material/Box";
-// import IntlMessages from '@crema/helpers/IntlMessages';
+import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import { HiOutlineBolt } from "react-icons/hi2";
-import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
-import PropTypes from "prop-types";
-import IconButton from "@mui/material/IconButton";
 import { Hidden } from "@mui/material";
+// * Icons
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
+import { HiOutlineBolt } from "react-icons/hi2";
+// * Local Components
 import AppTooltip from "@/../../lib/components/AppTooltip";
-import { patchDataApi } from "lib/hooks/APIHooks";
 import { useInfoViewActionsContext } from "lib/context/AppContextProvider/InfoViewContextProvider";
+// * Services
+import { patchDataApi } from "lib/hooks/APIHooks";
+// import IntlMessages from '@crema/helpers/IntlMessages';
 import {
   usePlayersActionsContext,
   usePlayersContext,

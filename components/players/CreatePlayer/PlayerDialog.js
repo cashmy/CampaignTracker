@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-20 11:47:39
- * @modify date 2023-03-28 20:10:03
+ * @modify date 2023-03-29 17:32:51
  * @desc [description]
  */
 
@@ -24,6 +24,8 @@ import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import { FaDiscord } from "react-icons/fa";
 import { FiFacebook, FiTwitter } from "react-icons/fi";
 // * Local components
+import AppsActiveIcon from "lib/components/AppsActiveIcon";
+import AppsStarredIcon from "lib/components/AppsStarredIcon";
 import { useForm, Form } from "@/../../lib/hooks/useForm";
 import Controls from "components/controls/Controls";
 import SelectCountry from "admin/countries/SelectCountry";
@@ -153,7 +155,7 @@ const PlayerDialog = (props) => {
 
   //#region //* Hooks
   useEffect(() => {
-    if (recordForEdit != null) "now setting values";
+    if (recordForEdit != null)
     setValues({
       ...recordForEdit,
     });
@@ -206,6 +208,27 @@ const PlayerDialog = (props) => {
             }}
           >
             <HeaderWrapper>
+              {/* //& Statuses */}
+              <Grid container sx={{display: "flex"}}>
+                <Grid item xs={2}>
+                <AppsStarredIcon
+                  item={values}
+                  onChange={handleInputChange}
+                  formOnly={true}
+                  sx={{justifySelf: "flex-start", alignSelf: "flex-start"}}
+                />
+                </Grid>
+                <Grid item xs={8}/>
+                <Grid item xs={2}>
+                <AppsActiveIcon
+                  item={values}
+                  onChange={handleInputChange}
+                  formOnly={true}
+                  sx={{justifySelf: "flex-end", alignSelf: "flex-end"}}
+                />
+                </Grid>
+              </Grid>
+              {/* //& Avatar & Name*/}
               <div {...getRootProps({ className: "dropzone" })}>
                 <input {...getInputProps()} />
                 <label htmlFor="icon-button-file"></label>
@@ -216,7 +239,7 @@ const PlayerDialog = (props) => {
                       height: "auto",
                       ml: "auto",
                       mr: "auto",
-                      mt: 10,
+                      // mt: 10,
                       mb: 10,
                     }}
                     src={values.avatarImage ? values.avatarImage : ""}
@@ -307,7 +330,7 @@ const PlayerDialog = (props) => {
                   </Grid>
                   <Grid item xs={6}>
                     <Controls.TextField
-                    // <SelectTimeZone // Todo: For future implementation
+                      // <SelectTimeZone // Todo: For future implementation
                       name="timeZone"
                       label="Time Zone"
                       value={values.timeZone}

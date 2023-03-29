@@ -1,15 +1,19 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import AppSearchBar from '@/../../lib/components/AppSearchBar';
-import { Hidden } from '@mui/material';
 import PropTypes from 'prop-types';
-// import { useIntl } from 'react-intl';
-import CheckBox from './CheckBox';
-import PlayerCheckedActions from './PlayerCheckedActions';
-import AppsPagination from '@/../../lib/components/AppsPagination';
-import CachedIcon from "@mui/icons-material/Cached";
+// * Mui
+import Box from '@mui/material/Box';
+import { Hidden } from '@mui/material';
+// * Icons
 import ActionIconButton from "components/controls/ActionIconButton";
+import CachedIcon from "@mui/icons-material/Cached";
+// * Local Components
+import AppsPagination from '@/../../lib/components/AppsPagination';
+import AppSearchBar from '@/../../lib/components/AppSearchBar';
+import CheckBox from './CheckBox';
 import ViewSelectButtons from './ViewSelectButtons';
+import PlayerCheckedActions from './PlayerCheckedActions';
+// import { useIntl } from 'react-intl';
+// * Services
 import {
   usePlayersActionsContext,
   usePlayersContext,
