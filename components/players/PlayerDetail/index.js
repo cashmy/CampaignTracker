@@ -80,7 +80,7 @@ const PlayerDetail = (props) => {
                       height: 80,
                       mb: 2.5,
                     }}
-                    src={"/assets/images/avatar/A12.jpg"}
+                    src={player.avatarImage}
                   />
                 ) : (
                   <Avatar
