@@ -232,7 +232,7 @@ const PlayerListItem = ({
               whiteSpace: "nowrap",
             }}
           >
-            {Player.timeZone ? Player.timeZone : null}: <b />
+            {Player.timeZone ? Player.timeZone + ":" : null} <b />
             <b />
             {Player.timeZoneOffset ? Player.timeZoneOffset : null}
           </Box>

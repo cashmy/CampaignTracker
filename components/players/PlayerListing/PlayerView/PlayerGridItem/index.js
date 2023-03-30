@@ -212,7 +212,7 @@ const PlayerGridItem = (props) => {
                 {Player.timeZone
                   ? Player.timeZone
                   : // <IntlMessages id="common.na" />
-                  NA}
+                  "Unknown (GMT)"}
               </Box>
             </Box>
             {/* //& Phone */}

@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-20 11:47:39
- * @modify date 2023-03-29 18:13:37
+ * @modify date 2023-03-30 13:31:28
  * @desc [description]
  */
 
@@ -156,9 +156,9 @@ const PlayerDialog = (props) => {
   //#region //* Hooks
   useEffect(() => {
     if (recordForEdit != null)
-    setValues({
-      ...recordForEdit,
-    });
+      setValues({
+        ...recordForEdit,
+      });
   }, [recordForEdit]);
   //#endregion
 
@@ -209,23 +209,23 @@ const PlayerDialog = (props) => {
           >
             <HeaderWrapper>
               {/* //& Statuses */}
-              <Grid container sx={{display: "flex"}}>
+              <Grid container sx={{ display: "flex" }}>
                 <Grid item xs={2}>
-                <AppsStarredIcon
-                  item={values}
-                  onChange={handleInputChange}
-                  formOnly={true}
-                  sx={{justifySelf: "flex-start", alignSelf: "flex-start"}}
-                />
+                  <AppsStarredIcon
+                    item={values}
+                    onChange={handleInputChange}
+                    formOnly={true}
+                    sx={{ justifySelf: "flex-start", alignSelf: "flex-start" }}
+                  />
                 </Grid>
-                <Grid item xs={8}/>
+                <Grid item xs={8} />
                 <Grid item xs={2}>
-                <AppsActiveIcon
-                  item={values}
-                  onChange={handleInputChange}
-                  formOnly={true}
-                  sx={{justifySelf: "flex-end", alignSelf: "flex-end"}}
-                />
+                  <AppsActiveIcon
+                    item={values}
+                    onChange={handleInputChange}
+                    formOnly={true}
+                    sx={{ justifySelf: "flex-end", alignSelf: "flex-end" }}
+                  />
                 </Grid>
               </Grid>
               {/* //& Avatar & Name*/}
@@ -233,17 +233,49 @@ const PlayerDialog = (props) => {
                 <input {...getInputProps()} />
                 <label htmlFor="icon-button-file"></label>
                 <AvatarViewWrapper>
-                  <Avatar
-                    sx={{
-                      width: "100%",
-                      height: "auto",
-                      ml: "auto",
-                      mr: "auto",
-                      // mt: 10,
-                      mb: 10,
-                    }}
-                    src={values.avatarImage ? values.avatarImage : ""}
-                  />
+                  {values.avatarImage ? (
+                    <Avatar
+                      sx={{
+                        width: "100%",
+                        height: "auto",
+                        ml: "auto",
+                        mr: "auto",
+                        // mt: 10,
+                        mb: 10,
+                      }}
+                      src={values.avatarImage ? values.avatarImage : ""}
+                    />
+                  ) : values.playerName ? (
+                    <Avatar
+                      sx={{
+                        width: 150,
+                        height: 150,
+                        ml: "auto",
+                        mr: "auto",
+                        // mt: 10,
+                        mb: 10,
+                        backgroundColor: blue[500],
+                        color: "white",
+                        fontSize: "100px"
+                      }}
+                    >
+                      {values.playerName[0].toUpperCase()}
+                    </Avatar>
+                  ) : (
+                    <Avatar
+                      sx={{
+                        width: 150,
+                        height: 150,
+                        ml: "auto",
+                        mr: "auto",
+                        // mt: 10,
+                        mb: 10,
+                        fontSize: "30px"
+                      }}
+                    >
+                      Name
+                    </Avatar>
+                  )}
                   <Box className="edit-icon">
                     <EditIcon />
                   </Box>
@@ -349,11 +381,11 @@ const PlayerDialog = (props) => {
                   </Grid>
                   <Grid item xs={6}>
                     <Controls.Select
-                      name="label"
+                      name="labelId"
                       label="Experience Label"
-                      value={values.label}
+                      value={values.labelId}
                       onChange={handleInputChange}
-                      error={errors.label}
+                      error={errors.labelId}
                       options={labelList}
                     />
                   </Grid>
