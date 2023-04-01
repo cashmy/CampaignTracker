@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-02 12:05:52
- * @modify date 2023-03-17 09:11:36
+ * @modify date 2023-03-31 20:11:27
  * @desc [description]
  */
 
@@ -115,7 +115,7 @@ const CampaignAdvSessTree = (props) => {
           defaultCollapseIcon={<MinusSquare />}
           defaultExpandIcon={<PlusSquare />}
           defaultEndIcon={<CloseSquare />}
-          sx={{ height: 600, flexGrow: 1, maxWidth: 400, overflowY: "auto" }}
+          sx={{ height: 550, flexGrow: 1, maxWidth: 400, overflow: "auto"}}
         >
           <StyledTreeItem nodeId="1" label="Adventures & Sessions">
             <StyledTreeItem nodeId="2" label="Hello" />

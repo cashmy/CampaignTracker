@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-02 12:05:52
- * @modify date 2023-03-10 19:01:56
+ * @modify date 2023-03-31 20:12:50
  * @desc [description]
  */
 
@@ -32,7 +32,7 @@ import PlayerCampaignService from "services/playerCampaign.service";
 //#region //* Styles
 const BackDrop = styled(Paper)(({ theme }) => ({
   width: "100%",
-  height: "100%",
+  height: "95%",
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),

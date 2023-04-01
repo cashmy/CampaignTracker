@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-27 18:10:43
- * @modify date 2023-03-17 09:19:09
+ * @modify date 2023-03-31 19:53:44
  * @desc [description]
  */
 
@@ -17,14 +17,15 @@ import Checkbox from "@mui/material/Checkbox";
 import ListItem from "@mui/material/ListItem";
 import { styled } from "@mui/material/styles";
 import { alpha } from "@mui/material";
-import ActionIconButton from "components/controls/ActionIconButton";
+// * Icons
 import { BiTargetLock } from "react-icons/bi";
 import { GiPistolGun } from "react-icons/gi";
 import { MdCampaign } from "react-icons/md";
 // Components
+import ActionIconButton from "components/controls/ActionIconButton";
 import AppsArchiveIcon from "@/../../lib/components/AppsArchiveIcon";
-import { Fonts } from "@/../../lib/constants/AppEnums";
 import ItemMenu from "../ItemMenu";
+import { Fonts } from "@/../../lib/constants/AppEnums";
 // #endregion
 
 // #region //* Styles

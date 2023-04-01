@@ -2,23 +2,26 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 12:47:54
- * @modify date 2023-03-17 11:37:20
+ * @modify date 2023-03-31 19:55:05
  * @desc [description]
  */
 
 //#region Imports
 import { Fragment } from "react";
 import PropTypes from "prop-types";
+// * Mui
 import Box from "@mui/material/Box";
 import { Hidden } from "@mui/material";
-import AppList from "@/../../lib/components/AppList";
-import AppGrid from "@/../../lib/components/AppGrid";
-import ListEmptyResult from "@/../../lib/components/AppList/ListEmptyResult";
-// TODO: Create & Replace this
-import PlayerListSkeleton from "@/../../lib/components/AppSkeleton/PlayerListSkeleton";
+// * Loca Components
+import AppList from "lib/components/AppList";
+import AppGrid from "lib/components/AppGrid";
 import CampaignGridItem from "./CampaignGridItem";
 import CampaignListItem from "./CampaignListItem";
 // import CampaignDetailListMobile from "./CampaignDetailListMobile";
+import ListEmptyResult from "lib/components/AppList/ListEmptyResult";
+// TODO: Create & Replace this
+import PlayerListSkeleton from "lib/components/AppSkeleton/PlayerListSkeleton";
+// * Services
 import { useCampaignsContext } from "../../CampaignsContextProvider";
 //#endregion
 
