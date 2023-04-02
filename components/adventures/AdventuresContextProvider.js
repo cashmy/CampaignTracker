@@ -14,13 +14,14 @@ export const AdventuresContextProvider = (props) => {
   const { campaign, children } = props
   const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
   const API_URL = baseUrl + `adventures/campaign/${campaign.id}`;
+  const API_URL_BASE = baseUrl + `adventures/`;
   const router = useRouter();
   const { all } = router.query;
   const [pageView, setPageView] = useState("list");
   const [page, setPage] = useState(0);
   const [
     { apiData: adventuresList, loading },
-    { setQueryParams, setData: setRecordsData, reCallAPI },
+    { setQueryParams, setData: setAdventureData, reCallAPI },
   ] = useGetDataApi(API_URL, {}, {}, false);
   useEffect(() => {
     setPage(0);
@@ -58,12 +59,13 @@ export const AdventuresContextProvider = (props) => {
     >
       <AdventuresActionsContext.Provider
         value={{
-          setRecordsData,
+          setAdventureData,
           onPageChange,
           reCallAPI,
           setPageView,
           onChangePageView,
-          API_URL
+          API_URL,
+          API_URL_BASE,
         }}
       >
         {children}

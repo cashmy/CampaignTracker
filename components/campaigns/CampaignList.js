@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-14 20:45:17
- * @modify date 2023-04-02 12:04:45
+ * @modify date 2023-04-02 14:29:41
  * @desc [description]
  */
 
@@ -17,18 +17,18 @@ import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 // * Local Components
 import ActionIconButton from "components/controls/ActionIconButton";
-import TableCard from "@/../../components/controls/TableCard";
+import TableCard from "components/controls/TableCard";
 import CampaignActionItems from "./CampaignActionItems";
-import PageDialog from "../controls/PageDialog";
+import PageDialog from "components/controls/PageDialog";
 import CampaignDialog from "./CampaignDialog";
-import Controls from "../controls/Controls";
-import useTable from "@/../../lib/hooks/useTable";
+import Controls from "components/controls/Controls";
+import useTable from "lib/hooks/useTable";
 // * Icons
 import { BiTargetLock } from "react-icons/bi";
 import { GiPistolGun, GiReloadGunBarrel } from "react-icons/gi";
 import { MdCampaign } from "react-icons/md";
 // * Services
-import CampaignService from "@/../../services/campaign.service";
+import CampaignService from "services/campaign.service";
 import { CampaignRecord as emptyRecord } from "dataModels/campaign";
 import { campaignColumns as columnCells } from "dataModels/campaign";
 //#endregion
@@ -292,7 +292,7 @@ const CampaignList = (props) => {
       </TableCard>
 
       {/* //* Dialogs, Modals, & Popups */}
-      {/* // & Standard RH Form */}
+      {/* // & Standard Form */}
       <PageDialog
         openPopup={openAddEdit}
         setOpenPopup={setOpenAddEdit}

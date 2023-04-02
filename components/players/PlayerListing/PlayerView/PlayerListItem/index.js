@@ -19,7 +19,6 @@ import { currDateDiffByZone } from "/helpers/TimeZones";
 import { Fonts } from "lib/constants/AppEnums";
 import ItemMenu from "../ItemMenu";
 
-
 const PlayerListItemWrapper = styled(ListItem)(({ theme }) => {
   return {
     display: "flex",
@@ -89,6 +88,7 @@ const PlayerListItem = ({
       })}
       onClick={() => onViewPlayerDetail(Player)}
     >
+      {/* //^ Status Icons, Avatar, Name, Discord/Email */}
       <Box
         sx={{
           width: { xs: "75%", sm: "80%", md: "50%" },
@@ -106,6 +106,7 @@ const PlayerListItem = ({
             color="primary"
           />
         </span>
+        {/* //& Starred Icon */}
         <Box
           sx={{
             mr: 2.5,
@@ -115,6 +116,7 @@ const PlayerListItem = ({
         >
           <AppsStarredIcon item={Player} onChange={onChangeStarred} />
         </Box>
+        {/* //& Active Icon */}
         <Box
           sx={{
             mr: 2.5,
@@ -124,6 +126,7 @@ const PlayerListItem = ({
         >
           <AppsActiveIcon item={Player} onChange={onChangeActive} />
         </Box>
+        {/* //& Avatar */}
         <Box
           sx={{
             mr: 3,
@@ -151,7 +154,7 @@ const PlayerListItem = ({
             </Avatar>
           )}
         </Box>
-
+        {/* //& Player Name */}
         <Box
           component="span"
           sx={{
@@ -165,7 +168,7 @@ const PlayerListItem = ({
         >
           {Player.playerName}
         </Box>
-
+        {/* //& DiscordId/Email */}
         <Box
           component="span"
           sx={{
@@ -185,6 +188,7 @@ const PlayerListItem = ({
         </Box>
       </Box>
 
+      {/* //^ Contact, TimeZone, Digital Clock, Action Items */}
       <Box
         sx={{
           display: "flex",
@@ -193,7 +197,7 @@ const PlayerListItem = ({
           width: { xs: "25%", sm: "20%", md: "50%" },
         }}
       >
-        {/* //^ Contact, TimeZone, Digital Clock */}
+        {/* //& Contact TimeZone, Clock */}
         <Box
           sx={{
             transition: "all 0.4s ease",
