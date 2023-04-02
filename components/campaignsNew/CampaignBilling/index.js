@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-31 16:11:03
- * @modify date 2023-03-31 22:15:53
+ * @modify date 2023-04-02 16:54:37
  * @desc [description]
  */
 
@@ -82,7 +82,7 @@ const BillingCard = (props) => {
               <ActionIconButton
                 filled={true}
                 color={orange[500]}
-                tooltipText="Add Player"
+                tooltipText="Work with Billing Details"
                 onClick={handleBilling}
               >
                 <DetailsIcon sx={{ fontSize: 20 }} />

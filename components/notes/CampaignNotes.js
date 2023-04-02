@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-31 16:11:03
- * @modify date 2023-04-01 16:00:49
+ * @modify date 2023-04-02 16:54:14
  * @desc [description]
  */
 
@@ -86,7 +86,7 @@ const CampaignNotes = (props) => {
             <ActionIconButton
               filled={true}
               color={theme.palette.secondary.main}
-              tooltipText="Add Player"
+              tooltipText="Add a new note"
               onClick={handleAdd}
             >
               <AddIcon sx={{ fontSize: 20 }} />

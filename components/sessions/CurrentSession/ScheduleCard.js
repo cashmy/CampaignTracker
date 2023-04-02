@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-31 16:11:03
- * @modify date 2023-03-31 21:29:03
+ * @modify date 2023-04-02 16:53:43
  * @desc [description]
  */
 
@@ -10,13 +10,13 @@
 import PropTypes from "prop-types";
 import moment from "moment";
 // * Mui Components
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography, Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { blue, green, orange, red } from "@mui/material/colors";
 // * Icons
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import CalendarViewWeekIcon from '@mui/icons-material/CalendarViewWeek';
+import CalendarViewWeekIcon from "@mui/icons-material/CalendarViewWeek";
 import EditIcon from "@mui/icons-material/Edit";
 import SendIcon from "@mui/icons-material/Send";
 // * Local Components
@@ -115,7 +115,7 @@ const ScheduleCard = (props) => {
             <ActionIconButton
               filled={true}
               color={green[500]}
-              tooltipText="Add Player"
+              tooltipText="Edit Next Meeting Info"
               onClick={handleEdit}
             >
               <EditIcon sx={{ fontSize: 20 }} />
@@ -204,10 +204,14 @@ const ScheduleCard = (props) => {
           </Grid>
 
           {/* //& Notified */}
-          <Grid item xs={2} sx={{ 
-            textAlign: "center",  
-            color: (record.notified ? green[500] : red[500]),
-            }}>
+          <Grid
+            item
+            xs={2}
+            sx={{
+              textAlign: "center",
+              color: record.notified ? green[500] : red[500],
+            }}
+          >
             {notifiedText(record.notified)}
           </Grid>
           <Grid item xs={5} sx={{ ml: 3.5 }}>
@@ -222,13 +226,15 @@ const ScheduleCard = (props) => {
             </Typography>
           </Grid>
           <Grid item xs={3} sx={{ textAlign: "center" }}>
-            <SendIcon
-              sx={{
-                fontSize: 24,
-                color: orange[500],
-              }}
-              onClick={handleNotify}
-            />
+            <Tooltip title="Send Notification" placement="top">
+              <SendIcon
+                sx={{
+                  fontSize: 24,
+                  color: orange[500],
+                }}
+                onClick={handleNotify}
+              />
+            </Tooltip>
           </Grid>
         </Grid>
       </BackDrop>
