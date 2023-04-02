@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-14 20:45:17
- * @modify date 2023-03-13 20:26:04
+ * @modify date 2023-04-02 12:04:45
  * @desc [description]
  */
 
@@ -263,7 +263,9 @@ const CampaignList = (props) => {
                     onDoubleClick={() => handleRowClick(record)}
                   >
                     <TableCell sx={{ width: 150 }}>{record.name}</TableCell>
-                    <TableCell sx={{ width: 75, padding: '6px 6px !important' }}>
+                    <TableCell
+                      sx={{ width: 75, padding: "6px 6px !important" }}
+                    >
                       {typeText(record.type)}
                     </TableCell>
                     <TableCell>{frequencyText(record.frequency)}</TableCell>
@@ -272,45 +274,13 @@ const CampaignList = (props) => {
                     </TableCell>
 
                     {/* // *Actions */}
-                    <TableCell sx={{ minWidth: 140}}>
-                    <CampaignActionItems
-                          record={record}
-                          handleEdit={handleEdit}
-                          handleDelete={handleDelete}
-                          handleSchedule={handleSchedule}
-                        />
-                      {/* //& Edit */}
-                      {/* <ActionButton
-                        filled={true}
-                        color="darkcyan"
-                        tooltipText={editToolTip}
-                        size="small"
-                        onClick={() => handleEdit(record)}
-                      >
-                        <EditOutlinedIcon fontSize="small" />
-                      </ActionButton> */}
-
-                      {/* //& Delete */}
-                      {/* <ActionButton
-                        filled={true}
-                        color="red"
-                        tooltipText={deleteToolTip}
-                        size="small"
-                        onClick={() => handleDelete(record.id)}
-                      >
-                        <DeleteIcon fontSize="small" />
-                      </ActionButton> */}
-
-                      {/* //& Schedule */}
-                      {/* <ActionButton
-                        filled={true}
-                        color="blue"
-                        tooltipText={scheduleToolTip}
-                        size="small"
-                        onClick={() => handleSchedule(record)}
-                      >
-                        <CalendarMonthIcon />
-                      </ActionButton> */}
+                    <TableCell sx={{ minWidth: 140 }}>
+                      <CampaignActionItems
+                        record={record}
+                        handleEdit={handleEdit}
+                        handleDelete={handleDelete}
+                        handleSchedule={handleSchedule}
+                      />
                     </TableCell>
                   </TableRow>
                 ))

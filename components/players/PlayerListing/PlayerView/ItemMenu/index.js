@@ -1,19 +1,23 @@
+//#region Imports
 import React from "react";
-// import IntlMessages from '@/../../lib/helpers/IntlMessages';
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PropTypes from "prop-types";
+// * Mui
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+// * Icons
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@mui/material/IconButton";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import {HiBolt, HiOutlineBolt} from 'react-icons/hi2';
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+// * Local Components
 import AppTooltip from "@/../../lib/components/AppTooltip";
-import Box from "@mui/material/Box";
 import Controls from "/components/controls/Controls";
+//#endregion
 
-import { styled } from "@mui/material/styles";
-
+//#region //* Styled Components
 const PlayerActionHoverWrapper = styled("div")(() => {
   return {
     display: "flex",
@@ -29,6 +33,7 @@ const PlayerActionHoverWrapper = styled("div")(() => {
     visibility: "hidden",
   };
 });
+//#endregion
 
 const ItemMenu = (props) => {
   const {
@@ -39,25 +44,24 @@ const ItemMenu = (props) => {
     onOpenEditPlayer,
   } = props;
 
+  //#region // * Event Handlers
   const onDeletePlayer = (e) => {
     onSelectPlayersForDelete([Player.id]);
     e.stopPropagation();
   };
-
   const onChangeStarredStatus = (e) => {
     onChangeStarred(!Player.isStarred, Player);
     e.stopPropagation();
   };
-
   const onChangeActiveStatus = (e) => {
     onChangeActive(!Player.active, Player);
     e.stopPropagation();
   };
-
   const onClickEditOption = (e) => {
     onOpenEditPlayer(Player);
     e.stopPropagation();
   };
+  //#endregion
 
   return (
     <Box
