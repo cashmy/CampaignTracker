@@ -2,13 +2,13 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-14 20:45:17
- * @modify date 2023-03-31 19:48:08
+ * @modify date 2023-04-01 21:56:54
  * @desc [description]
  */
 // #region Imports
 import { useState, useEffect } from "react";
 import moment from "moment";
-import Chip from "@mui/material/Chip";
+// * Material UI
 import Paper from "@mui/material/Paper";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -17,24 +17,22 @@ import TableRow from "@mui/material/TableRow";
 import { TimelineDot } from "@mui/lab";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import TableCard from "@/../../components/controls/TableCard";
-// *Services
-import SessionService from "@/../../services/session.service";
-// * Buttons & Data Definitions
+// * Icons
 import LoopIcon from "@mui/icons-material/Loop";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import CheckIcon from "@mui/icons-material/Check";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-
-import { sessionRecord as emptyRecord } from "dataModels/session";
-import { sessionColumns as columnCells } from "dataModels/session";
-import useTable from "@/../../lib/hooks/useTable";
+// * Local Components
+import Controls from "../controls/Controls";
 import PageDialog from "../controls/PageDialog";
 import SessionDialog from "./SessionDialog";
 import SessionStatusDialog from "./SessionStatusDialog";
-import Controls from "../controls/Controls";
-import TextContrast from "lib/helpers/getTextContrast";
-
+import TableCard from "components/controls/TableCard";
+import useTable from "lib/hooks/useTable";
+// * Services/Contexts
+import { sessionColumns as columnCells } from "dataModels/session";
+import { sessionRecord as emptyRecord } from "dataModels/session";
+import SessionService from "services/session.service";
 //#endregion
 
 const SessionList = (props) => {
