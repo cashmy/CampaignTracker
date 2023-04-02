@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-31 16:11:03
- * @modify date 2023-03-31 22:23:48
+ * @modify date 2023-04-01 16:00:49
  * @desc [description]
  */
 
@@ -95,12 +95,9 @@ const CampaignNotes = (props) => {
         </Box>
 
         {/* //^ Body */}
-        <Grid
-          container 
-          sx={{ mb: 3, display: "flex", alignItems: "center" }}
-        >
+        <Grid container sx={{ mb: 3 }}>
           {/* //& Campaign Notes (scrollable) */}
-          <Grid item xs={2} sx={{ textAlign: "center" }}>
+          <Grid item xs={2} sx={{ textAlign: "center", mt: 12 }}>
             <NotesIcon
               sx={{
                 fontSize: 24,
@@ -123,7 +120,7 @@ const CampaignNotes = (props) => {
             }}
           >
             <AppScrollbar>
-              <Typography gutterBottom>{record?.description} </Typography>
+              <Typography>{record?.description}</Typography>
             </AppScrollbar>
           </Grid>
 
