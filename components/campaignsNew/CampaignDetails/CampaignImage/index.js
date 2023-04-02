@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-01 10:49:59
- * @modify date 2023-03-17 11:58:52
+ * @modify date 2023-04-01 16:15:11
  * @desc [description]
  */
 //#region // *Imports
@@ -22,7 +22,6 @@ import AppCard from "@/../../lib/components/AppCard";
 
 const CampaignImage = (props) => {
   const { record } = props;
-  console.log("CampaignImage -> record", record)
   
   return (
     <AppCard

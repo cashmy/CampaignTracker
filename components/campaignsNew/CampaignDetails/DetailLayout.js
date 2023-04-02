@@ -1,28 +1,26 @@
-/**
+/** Author
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-01 10:17:40
- * @modify date 2023-03-31 19:59:20
+ * @modify date 2023-04-01 19:50:41
  * @desc [description]
  */
 
 //#region Imports
-import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import AppGridContainer from "@/../../lib/components/AppGridContainer";
+// * Mui
 import { Grid, Paper } from "@mui/material";
-import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
-// * Components
+// * Local Components
+import AppGridContainer from "lib/components/AppGridContainer";
 import CampaignImage from "./CampaignImage";
 import RecordDisplay from "./RecordDisplay";
 import CampaignPlayers from "../CampaignPlayers";
-import CampaignAdvSessTree from "./CampaignAdvSessTree";
+import CampaignsAdvSessTree from "./CampaignsAdvSessTree/[...all]";
 import CampaignBilling from "../CampaignBilling";
 import CampaignNotes from '/components/notes/CampaignNotes';
 import CurrentSessionCard from '/components/sessions/CurrentSession/CurrentSessionCard';
 import ScheduleCard from '/components/sessions/CurrentSession/ScheduleCard';
-// * Services
 //#endregion
 
 //#region //* Styles
@@ -92,7 +90,7 @@ const DetailLayout = (props) => {
       {/* //^ Tree */}
       <Grid item xs={3} sx={{ height: "auto" }}>
         <Item>
-          <CampaignAdvSessTree />
+          {record.id > 0 && <CampaignsAdvSessTree record={record} />}
         </Item>
       </Grid>
       {/* //^ Curr Sess, Schedule, Notes, Billing? */}
@@ -109,7 +107,7 @@ const DetailLayout = (props) => {
         </Grid>
         {/* //& Notes */}
         <Grid item xs={4}>
-          <CampaignNotes />
+          <CampaignNotes record={record} />
         </Grid>
         {/* //& Billing */}
         <Grid item xs={2}>

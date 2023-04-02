@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-02 12:05:52
- * @modify date 2023-03-31 20:12:50
+ * @modify date 2023-04-01 16:08:36
  * @desc [description]
  */
 
@@ -46,7 +46,7 @@ const CampaignPlayersList = (props) => {
   //#region //* State & local variables
   const { campaign, campaignPlayers, handleReloadPlayers } = props;
   emptyRecord.campaignId = campaign.id;
-  const [record, setRecord] = useState("");
+  const [record, setRecord] = useState({});
   const [openAddEdit, setOpenAddEdit] = useState(false);
   const [loading, setLoading] = useState(false);
   const [notify, setNotify] = useState({

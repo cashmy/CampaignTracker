@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 12:47:54
- * @modify date 2023-03-31 19:55:05
+ * @modify date 2023-04-01 15:25:27
  * @desc [description]
  */
 
@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 // * Mui
 import Box from "@mui/material/Box";
 import { Hidden } from "@mui/material";
-// * Loca Components
+// * Local Components
 import AppList from "lib/components/AppList";
 import AppGrid from "lib/components/AppGrid";
 import CampaignGridItem from "./CampaignGridItem";
@@ -161,7 +161,6 @@ CampaignViewList.defaultProps = {
   pageView: "list",
   loading: false,
 };
-
 CampaignViewList.propTypes = {
   list: PropTypes.array,
   pageView: PropTypes.string.isRequired,

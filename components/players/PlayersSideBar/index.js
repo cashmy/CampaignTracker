@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-29 17:51:58
- * @modify date 2023-03-29 18:41:29
+ * @modify date 2023-04-01 19:32:23
  * @desc [description]
  */
 
@@ -176,7 +176,6 @@ const SideBarContent = () => {
               fontWeight: Fonts.SEMI_BOLD,
             }}
           >
-            {/* <IntlMessages id="common.labels" /> */}
             Labels
           </Box>
 
@@ -210,7 +209,6 @@ const SideBarContent = () => {
               fontWeight: Fonts.SEMI_BOLD,
             }}
           >
-            {/* <IntlMessages id="common.labels" /> */}
             Campaigns
           </Box>
 
