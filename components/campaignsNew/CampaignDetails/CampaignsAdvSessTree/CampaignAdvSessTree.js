@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-02 12:05:52
- * @modify date 2023-04-02 14:36:08
+ * @modify date 2023-04-02 14:41:11
  * @desc [description]
  */
 
@@ -216,7 +216,7 @@ const CampaignAdvSessTree = (props) => {
             <AdventureActionItemMenu
               record={adventure}
               handleEdit={handleAdventureEdit}
-              handleView={handleAdventureView}
+              // handleView={handleAdventureView}
               handleDelete={handleAdventureDelete}
             />
           </Box>

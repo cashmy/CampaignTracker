@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-31 16:11:03
- * @modify date 2023-03-31 22:18:22
+ * @modify date 2023-04-02 16:51:52
  * @desc [description]
  */
 
@@ -84,7 +84,7 @@ const CurrentSessionCard = (props) => {
             <ActionIconButton
               filled={true}
               color={green[500]}
-              tooltipText="Add Player"
+              tooltipText="Edit Current Session"
               onClick={handleEdit}
             >
               <EditIcon sx={{ fontSize: 20 }} />
