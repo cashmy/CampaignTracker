@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 export const sessionRecord = {
   id: 0,
-  campaignId: 1,            // Campaign Id
+  // campaignId: 1,            // Campaign Id
   adventureId: 1,           // Adventure ID
   name: "",                 // Brief title of the session
   description: "",          // Short descript of the session - what is planned to happen
@@ -11,7 +11,7 @@ export const sessionRecord = {
   sessionLength: 0,         // Length in hours
   sideQuest: false,         // Is this a side quest?
   status: "",               // Planned, InProgress/NextUp, Completed (used in Timeline)
-  //scheduledStartTm: "",    // Time of day session is scheduled to start
+  scheduledStartTm: "",     // Time of day session is scheduled to start
   scheduledDow: 0,          // Day of week session is scheduled to start
   baseTimeZone: "",         // Timezone of the campaign/Gm
   notified: false,          // Have the players been notified of the session?

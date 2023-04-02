@@ -13,6 +13,10 @@ class SessionService {
     return axios.get(API_URL + `adventure/${adventureId}`, { headers: authHeader() });
   };
 
+  getAllRecordsByAdventureAndSessionDate = (adventureId) => {
+    return axios.get(API_URL + `adventureByDate/${adventureId}`, { headers: authHeader() });
+  };
+
   getAdventureTimeline = (adventureId) => {
     return axios.get(API_URL + `timeline/${adventureId}`, { headers: authHeader() });
   };
