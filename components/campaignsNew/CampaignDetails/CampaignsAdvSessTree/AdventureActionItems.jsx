@@ -59,7 +59,7 @@ const AdventureActionItemMenu = (props) => {
 
         <ActionHoverWrapper className="conActionHoverRoot">
           {/* //& Delete Item */}
-          <Controls.ActionButton
+          {handleDelete && <Controls.ActionButton
             filled={true}
             color="red"
             tooltipText={"Delete an Adventure"}
@@ -67,9 +67,9 @@ const AdventureActionItemMenu = (props) => {
             onClick={() => handleDelete(record)}
           >
             <DeleteOutlinedIcon fontSize="small" />
-          </Controls.ActionButton>
+          </Controls.ActionButton>}
           {/* //& View Item */}
-          <Controls.ActionButton
+          {handleView && <Controls.ActionButton
             filled={true}
             color="darkblue"
             tooltipText={"View an Adventure"}
@@ -77,9 +77,9 @@ const AdventureActionItemMenu = (props) => {
             onClick={() => handleView(record)}
           >
             <VisibilityIcon fontSize="small" />
-          </Controls.ActionButton>
+          </Controls.ActionButton>}
           {/* //& Edit Item */}
-          <Controls.ActionButton
+          {handleEdit && <Controls.ActionButton
             filled={true}
             color="darkcyan"
             tooltipText={"Edit an Adventure"}
@@ -87,7 +87,7 @@ const AdventureActionItemMenu = (props) => {
             onClick={() => handleEdit(record)}
           >
             <EditOutlinedIcon fontSize="small" />
-          </Controls.ActionButton>
+          </Controls.ActionButton>}
         </ActionHoverWrapper>
       </Box>
   );

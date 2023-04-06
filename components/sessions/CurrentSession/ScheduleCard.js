@@ -2,11 +2,12 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-31 16:11:03
- * @modify date 2023-04-02 16:53:43
+ * @modify date 2023-04-05 12:20:15
  * @desc [description]
  */
 
 //#region //* Imports
+import { useState } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 // * Mui Components
@@ -21,7 +22,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import SendIcon from "@mui/icons-material/Send";
 // * Local Components
 import ActionIconButton from "components/controls/ActionIconButton";
-// * Services
+import PageDialog from "components/controls/PageDialog";
+import NextMeetingDialog from "components/sessions/CurrentSession/NextMeetingDialog";
+import SendMessageDialog from "./SendMessageDialog";
+import { useInfoViewActionsContext } from "lib/context/AppContextProvider/InfoViewContextProvider";
+// * Services/Context
+import { putDataApi } from "lib/hooks/APIHooks";
+// import {
+//   useSessionsActionsContext,
+// } from "components/sessions/SessionsContextProvider";
 //#endregion
 
 //#region //* Styles
@@ -39,15 +48,39 @@ const BackDrop = styled(Paper)(({ theme }) => ({
 
 const ScheduleCard = (props) => {
   //#region //* State & local variables
-  const { record } = props;
+  const { record, campaign } = props;
+  // const { reCallAPI, API_URL } = useSessionsActionsContext();
+  const [sessionRecord, setSessionRecord] = useState([]);
+  const [showSessionSchedule, setShowSessionSchedule] = useState(false);
+  const [showSendMessage, setShowSendMessage] = useState(false);
+  const infoViewActionsContext = useInfoViewActionsContext();
   //#endregion
 
   //#region //* Event Handlers
-  const handleEdit = () => {
-    alert("Edit");
+  const scheduleEdit = (session, resetForm) => {
+    let close = false;
+    putDataApi(API_URL, infoViewActionsContext, session, session.id)
+      .then((data) => {
+        infoViewActionsContext.showMessage("Adventure Updated Successfully");
+        close = true;
+      })
+      .catch((error) => {
+        infoViewActionsContext.fetchError(error.message);
+      });
+    if (close) {
+      resetForm();
+      setSessionRecord(null);
+      setShowSessionSchedule(true);
+    }
+    reCallAPI();
   };
-  const handleNotify = () => {
-    alert("Notify-Send Email or Discord");
+  const handleEditSchedule = (session,) => {
+    setSessionRecord(session);
+    setShowSessionSchedule(true);
+  };
+  const handleSendMessage = (session) => {
+    setSessionRecord(session);
+    setShowSendMessage(true);
   };
   const dowText = (dow) => {
     switch (dow) {
@@ -116,7 +149,7 @@ const ScheduleCard = (props) => {
               filled={true}
               color={green[500]}
               tooltipText="Edit Next Meeting Info"
-              onClick={handleEdit}
+              onClick={() => handleEditSchedule(record)}
             >
               <EditIcon sx={{ fontSize: 20 }} />
             </ActionIconButton>
@@ -232,12 +265,35 @@ const ScheduleCard = (props) => {
                   fontSize: 24,
                   color: orange[500],
                 }}
-                onClick={handleNotify}
+                onClick={() => handleSendMessage(record)}
               />
             </Tooltip>
           </Grid>
         </Grid>
       </BackDrop>
+
+      {/* //* Dialogs, Modals, & Popups */}
+      {/* //& Edit Session Schedule */}
+      <PageDialog
+        openPopup={showSessionSchedule}
+        setOpenPopup={setShowSessionSchedule}
+        title="Edit Session Schedule"
+        titleColor={process.env.NEXT_PUBLIC_NX_PRIMARY_COLOR}
+        size="sm"
+      >
+        <NextMeetingDialog recordForEdit={sessionRecord} processEditRecord={scheduleEdit} />
+      </PageDialog>
+
+      {/* //& Send Message Dialog */}
+      <PageDialog
+        openPopup={showSendMessage}
+        setOpenPopup={setShowSendMessage}
+        title="Send Schedule Message"
+        titleColor={process.env.NEXT_PUBLIC_NX_SECONDARY_COLOR}
+        size="md"
+      >
+        <SendMessageDialog record={sessionRecord} campaign={campaign} />
+      </PageDialog>
     </>
   );
 };
@@ -246,4 +302,5 @@ export default ScheduleCard;
 
 ScheduleCard.propTypes = {
   record: PropTypes.object.isRequired,
+  campaign: PropTypes.object.isRequired,
 };

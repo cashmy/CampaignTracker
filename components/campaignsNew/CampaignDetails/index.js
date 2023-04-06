@@ -2,13 +2,13 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-05 20:38:52
- * @modify date 2023-03-13 21:02:22
+ * @modify date 2023-04-05 08:48:14
  * @desc [description]
  */
 
 //#region //* Imports
 import { useState, useEffect } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import AppContainer from "@/../../lib/components/AppContainer";
 import DetailLayout from "./DetailLayout";
 import CampaignDialog from "components/campaigns/CampaignDialog";
@@ -19,7 +19,6 @@ import { CampaignRecord as emptyRecord } from "dataModels/campaign";
 import CampaignService from "services/campaign.service";
 import PlayerCampaignService from "services/playerCampaign.service";
 //#endregion
-
 
 const CampaignDetails = () => {
   //#region //* State & local variables
@@ -45,7 +44,6 @@ const CampaignDetails = () => {
     subTitle: "",
   });
   //#endregion
-
 
   //#region //* Hooks
   useEffect(() => {
@@ -91,7 +89,7 @@ const CampaignDetails = () => {
     setSelectedRecord(record);
     setDetailTitle("Edit Campaign");
     SetOpenAddEdit(true);
-  }
+  };
   const handleDelete = (id) => {
     setConfirmDialog({
       isOpen: true,
@@ -103,7 +101,7 @@ const CampaignDetails = () => {
         setReloadCampaign(true); // Request reload of data
       },
     });
-  }
+  };
   const onDelete = (id) => {
     setConfirmDialog({
       ...confirmDialog,
@@ -143,13 +141,13 @@ const CampaignDetails = () => {
   };
   const handleReloadCampaign = () => {
     setReloadCampaign(true);
-  }
+  };
   const handleReloadPlayers = () => {
     setReloadPlayers(true);
-  }
+  };
   const handleReloadImage = () => {
     setReloadImage(true);
-  }
+  };
   //#endregion
 
   return (
@@ -158,9 +156,9 @@ const CampaignDetails = () => {
       cardStyle={{ background: "none", boxShadow: "none", border: "0 none" }}
       fullView
     >
-      <DetailLayout 
-        record={record} 
-        campaignPlayers={campaignPlayers} 
+      <DetailLayout
+        record={record}
+        campaignPlayers={campaignPlayers}
         handleReloadCampaign={handleReloadCampaign}
         handleReloadPlayers={handleReloadPlayers}
         handleReloadImage={handleReloadImage}
@@ -168,16 +166,19 @@ const CampaignDetails = () => {
         handleDelete={handleDelete}
       />
 
-            {/* //& Modals & Dialogs */}
-            {/* Create/Edit Record */}
-            <PageDialog
+      {/* //& Modals & Dialogs */}
+      {/* Create/Edit Record */}
+      <PageDialog
         openPopup={openAddEdit}
         setOpenPopup={SetOpenAddEdit}
         title={detailTitle}
         titleColor={process.env.NEXT_PUBLIC_NX_PRIMARY_COLOR}
         size="sm"
       >
-        <CampaignDialog recordForEdit={selectedRecord} addOrEdit={addEditRecord} />
+        <CampaignDialog
+          recordForEdit={selectedRecord}
+          addOrEdit={addEditRecord}
+        />
       </PageDialog>
       <Controls.ConfirmDialog
         confirmDialog={confirmDialog}
@@ -186,7 +187,6 @@ const CampaignDetails = () => {
       {/* Notification */}
       <Controls.Notification notify={notify} setNotify={setNotify} />
     </AppContainer>
-
   );
 };
 
