@@ -12,6 +12,7 @@ import Select from "./Select";
 // import Switch from "./Switch";
 import TextField from "./TextField";
 // import TextareaAuto from "./TextareaAuto";
+import TimePicker from "./TimePicker";
 
 const Controls = {
   ActionButton,
@@ -28,6 +29,7 @@ const Controls = {
   // Switch,
   TextField,
   // TextareaAuto,
+  TimePicker,
 };
 
 export default Controls;

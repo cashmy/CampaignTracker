@@ -1,26 +1,39 @@
-import { Fragment, useEffect } from "react";
-import { Grid, } from "@mui/material";
-import { useForm, Form } from "@/../../lib/hooks/useForm";
-import { sessionRecord as initialFValues } from "dataModels/session";
+/**
+ * @author Cash Myers
+ * @github [https://github.com/cashmy]
+ * @create date 2023-04-06 09:40:44
+ * @modify date 2023-04-10 14:38:28
+ * @desc [description]
+ */
+
+//#region Imports
+import { Fragment, useEffect, useState } from "react";
+// * Mui
+import { Grid } from "@mui/material";
+// * Icons
+import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
+// * Local Components
 import Controls from "../controls/Controls";
+import { useForm, Form } from "@/../../lib/hooks/useForm";
+// * Services/Context
+import { sessionRecord as initialFValues } from "dataModels/session";
+//#endregion
 
 const SessionDialog = (props) => {
+  //#region // * State & Local Variables
   const { addOrEdit, recordForEdit } = props;
-  // Validation function (to be passed as a callback)
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     if ("name" in fieldValues)
       temp.name = fieldValues.name ? "" : "This field is required.";
-      if ("status" in fieldValues)
+    if ("status" in fieldValues)
       temp.status = fieldValues.status ? "" : "This field is required.";
     setErrors({
       ...temp,
     });
-    // Check that every item in the array has a blank result (no errors) else return false.
     if (fieldValues === values)
       return Object.values(temp).every((x) => x === "");
   };
-
   const {
     values,
     setValues,
@@ -30,27 +43,34 @@ const SessionDialog = (props) => {
     handleToggleChange,
     resetForm,
   } = useForm(initialFValues);
+  //#endregion
 
-  // SaveSubmit Callback handler - event driven
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (validate()) addOrEdit(values, resetForm);
-  };
-  const handleReset = () => {
-    if (recordForEdit == null) resetForm();
-    else setValues({ ...recordForEdit });
-  };
+  //#region //* Hooks
   useEffect(() => {
     if (recordForEdit != null)
       setValues({
         ...recordForEdit,
       });
   }, [recordForEdit]);
+  //#endregion
+
+  //#region //* Event Handlers
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (validate()) addOrEdit(values, resetForm);
+  };
+  const handleReset = () => {
+    console.log("Reset Form");
+    if (recordForEdit == null) resetForm();
+    else setValues({ ...recordForEdit });
+  };
+  //#endregion
 
   return (
     <Fragment>
       <Form>
         <Grid container spacing={4}>
+          {/* //& Name */}
           <Grid item xs={12}>
             <Controls.TextField
               name="name"
@@ -60,7 +80,9 @@ const SessionDialog = (props) => {
               error={errors.name}
             />
           </Grid>
-          <Grid item xs={6} >
+
+          {/* //& Description */}
+          <Grid item xs={6}>
             <Controls.TextField
               multiline
               minRows={5}
@@ -75,7 +97,9 @@ const SessionDialog = (props) => {
               error={errors.description}
             />
           </Grid>
-          <Grid item xs={6} >
+
+          {/* //& Activity */}
+          <Grid item xs={6}>
             <Controls.TextField
               multiline
               minRows={5}
@@ -90,7 +114,9 @@ const SessionDialog = (props) => {
               error={errors.activity}
             />
           </Grid>
-          <Grid item xs={3} >
+
+          {/* //& Session Date */}
+          <Grid item xs={3}>
             <Controls.DatePicker
               name="sessionDate"
               label="Session Date"
@@ -99,7 +125,41 @@ const SessionDialog = (props) => {
               error={errors.sessionDate}
             />
           </Grid>
-          <Grid item xs={3} >
+
+          {/* //& Session StartTime */}
+          <Grid item xs={3}>
+            <Controls.TimePicker
+              name="sessionDate"
+              label="Scheduled Start Time"
+              value={values.sessionDate}
+              onChange={handleInputChange}
+              error={errors.sessionDate}
+              minutesStep={5}
+            />
+            {/* <FormControl variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-start-time">Start Time</InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-start-time"
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle timepicker visibility"
+                        onClick={() => setOpenTime(true)}
+                        edge="end"
+                        >
+                          <QueryBuilderIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  name="scheduledStartTm"
+                  label="Start Time"
+                  value={values.scheduledStartTm}
+                />
+              </FormControl> */}
+          </Grid>
+
+          {/* //& Session Length */}
+          <Grid item xs={3}>
             <Controls.TextField
               name="sessionLength"
               label="Session Length (hours)"
@@ -108,7 +168,9 @@ const SessionDialog = (props) => {
               error={errors.sessionLength}
             />
           </Grid>
-          <Grid item xs={3} >
+
+          {/* //& Status */}
+          <Grid item xs={3}>
             <Controls.Select
               name="status"
               label="Status"
@@ -122,22 +184,22 @@ const SessionDialog = (props) => {
               ]}
             />
           </Grid>
-          <Grid 
-            item 
-            xs={3} 
-            >
+
+          {/* //& Side Quest */}
+          <Grid item xs={6}>
             <Controls.Checkbox
               name="sideQuest"
               label="Side Quest"
               value={values.sideQuest}
               onChange={handleInputChange}
               error={errors.sideQuest}
-              style={{ paddingleft: '16px'}}
+              style={{ paddingleft: "16px" }}
             />
           </Grid>
+          {/* //^ Button Row */}
           <Grid
             item
-            xs={12}
+            xs={6}
             sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}
           >
             <Controls.Button

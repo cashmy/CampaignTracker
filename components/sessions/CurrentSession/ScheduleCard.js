@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-31 16:11:03
- * @modify date 2023-04-05 12:20:15
+ * @modify date 2023-04-06 17:18:37
  * @desc [description]
  */
 
@@ -27,6 +27,7 @@ import NextMeetingDialog from "components/sessions/CurrentSession/NextMeetingDia
 import SendMessageDialog from "./SendMessageDialog";
 import { useInfoViewActionsContext } from "lib/context/AppContextProvider/InfoViewContextProvider";
 // * Services/Context
+import SessionService from "services/session.service";
 import { putDataApi } from "lib/hooks/APIHooks";
 // import {
 //   useSessionsActionsContext,
@@ -50,7 +51,7 @@ const ScheduleCard = (props) => {
   //#region //* State & local variables
   const { record, campaign } = props;
   // const { reCallAPI, API_URL } = useSessionsActionsContext();
-  const [sessionRecord, setSessionRecord] = useState([]);
+  const [sessionRecord, setSessionRecord] = useState({});
   const [showSessionSchedule, setShowSessionSchedule] = useState(false);
   const [showSendMessage, setShowSendMessage] = useState(false);
   const infoViewActionsContext = useInfoViewActionsContext();
@@ -58,21 +59,20 @@ const ScheduleCard = (props) => {
 
   //#region //* Event Handlers
   const scheduleEdit = (session, resetForm) => {
+    console.log("scheduleEdit", record);
     let close = false;
-    putDataApi(API_URL, infoViewActionsContext, session, session.id)
-      .then((data) => {
-        infoViewActionsContext.showMessage("Adventure Updated Successfully");
-        close = true;
-      })
-      .catch((error) => {
-        infoViewActionsContext.fetchError(error.message);
-      });
+    SessionService.updateRecord(session);
+    // requestReload();
+    close = true;
+    // setLoadData(true);
+    infoViewActionsContext.showMessage("Session Updated Successfully");
     if (close) {
       resetForm();
       setSessionRecord(null);
       setShowSessionSchedule(true);
     }
-    reCallAPI();
+    infoViewActionsContext.showMessage("Adventure Updated Successfully");
+    // reCallAPI();
   };
   const handleEditSchedule = (session,) => {
     setSessionRecord(session);
@@ -196,14 +196,14 @@ const ScheduleCard = (props) => {
             />
           </Grid>
           <Grid item xs={9} sx={{ ml: 3.5 }}>
-            {record.scheduledStartTime ? (
-              record.scheduledStartTime + " @ " + record.sessionLength + " hrs."
+            {record.sessionDate ? (
+              moment(record.sessionDate).format("h:mm a") + " @ " + record.sessionLength + " hrs."
             ) : (
               <Typography
                 variant="h6"
                 sx={{
                   color: "grey",
-                  fontStyle: record.scheduledStartTime ? "normal" : "italic",
+                  fontStyle: record.sessionDate ? "normal" : "italic",
                 }}
               >
                 Time not set

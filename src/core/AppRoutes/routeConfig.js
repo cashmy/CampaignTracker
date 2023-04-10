@@ -3,6 +3,8 @@ import { BsFillPeopleFill } from "react-icons/bs";
 import { CgRename } from "react-icons/cg";
 import { BsTable } from "react-icons/bs";
 import ImageSearchIcon from "@mui/icons-material/ImageSearch";
+import LanguageIcon from '@mui/icons-material/Language';
+import PublicIcon from '@mui/icons-material/Public';
 import {
   MdCampaign,
   MdOutlineContactPhone,
@@ -96,14 +98,6 @@ const routesConfig = [
           },
         ],
       },
-      // {
-      //   id: "dashTables",
-      //   title: "Tables",
-      //   messageId: "sidebar.app.dashboard.tables",
-      //   type: "item",
-      //   icon: <BsTable />,
-      //   url: "/error-pages/coming-soon",
-      // },
     ],
   },
   {
@@ -115,12 +109,36 @@ const routesConfig = [
       {
         id: "names",
         title: "Names",
-        messageId: "sidebar.app.dashboard.default",
+        messageId: "sidebar.app.dashboard.names",
         type: "item",
         icon: <CgRename />,
         url: "401",
       },
     ],
   },
+  {
+    id: "admin",
+    title: "Admin Only",
+    messageId: "sidebar.admin",
+    type: "group",
+    children: [
+      {
+        id: "timeZones",
+        title: "Time Zones",
+        messageId: "sidebar.app.dashboard.timeZones",
+        type: "item",
+        icon: <LanguageIcon sx={{height: 20, width: 20}} />,
+        url: "401",
+      },
+      {
+        id: "countries",
+        title: "Country Codes",
+        messageId: "sidebar.app.dashboard.contries",
+        type: "item",
+        icon: <PublicIcon sx={{height: 20, width: 20}} />,
+        url: "401",
+      },
+    ]
+  }
 ];
 export default routesConfig;

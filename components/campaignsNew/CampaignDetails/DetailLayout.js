@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-01 10:17:40
- * @modify date 2023-04-05 19:12:01
+ * @modify date 2023-04-06 19:35:01
  * @desc [description]
  */
 
@@ -46,15 +46,15 @@ const DetailLayout = (props) => {
 
   // ! For Testing purposes only - Remove when done
   const tempSessRecord = {
-    name: "Part3: Obtaining the Scarf of Resolve",
-    description: "The party must find the scarf of resolve.",
+    id: 7005,
+    name: "Hobgoblin Wetwork for Ilmater",
+    description: "The 15 paladins and clerics of Ilmater have asked the party to take out the Hobgoblin leaders at the nearby river port.",
     activity: "Working on it ...",
-    sessionDate: new Date(),
-    sessionLength: 3,
-    sideQuest: true,
+    sessionDate: new Date("2023-04-11T21:00:00.000Z"),
+    sessionLength: 4,
+    sideQuest: false,
     status: "ip",
-    scheduledStartTime: "4:00 pm",
-    scheduledDow: 3,
+    scheduledDow: 2,
     baseTimeZone: "CDT",
     notified: false,
   };

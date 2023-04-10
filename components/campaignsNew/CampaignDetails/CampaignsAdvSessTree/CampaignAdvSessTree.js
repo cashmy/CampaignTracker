@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-02 12:05:52
- * @modify date 2023-04-02 14:41:11
+ * @modify date 2023-04-05 20:43:28
  * @desc [description]
  */
 
@@ -252,12 +252,13 @@ const CampaignAdvSessTree = (props) => {
                   return (
                     <>
                       <TreeItem
+                        key={"a-" + adventure.id}
                         nodeId={"a-" + adventure.id}
                         label={adventure.name}
                       >
                         {generateLabel(adventure)}
                         {/* //& Loop through Sessions */}
-                        <SessionNodes adventure={adventure} />
+                        <SessionNodes adventure={adventure} requestReload={reCallAPI} />
                       </TreeItem>
                     </>
                   );

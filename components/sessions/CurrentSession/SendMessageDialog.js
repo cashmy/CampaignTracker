@@ -2,12 +2,12 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-04-05 10:18:28
- * @modify date 2023-04-05 19:05:58
+ * @modify date 2023-04-08 16:01:49
  * @desc [description]
  */
 
 //#region Imports
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 // * Mui Components
@@ -103,6 +103,12 @@ const SendMessageDialog = (props) => {
     resetForm,
   } = useForm(initialFValues);
   //#endregion
+  
+  //#region //* Hooks
+  useEffect(() => {
+    values.discordChannel = campaign.discordChannel;
+  }, [campaign]);
+  //#endregion
 
   //#region //* Event Handlers
   const handleSubmit = (event) => {
@@ -112,6 +118,9 @@ const SendMessageDialog = (props) => {
     // Todo: Update Session record with message sent status
   };
   //#endregion
+
+  console.log("Campaign: ", campaign);
+  console.log ("Values: ", values);
 
   return (
     <Fragment>
@@ -291,8 +300,9 @@ const SendMessageDialog = (props) => {
               approximately {record.sessionLength} hours.
             </Typography>
             <Typography variant="h6" sx={{ ml: 3 }}>
-              We will begin at {record.scheduledStartTime}{" "}
-              {values.includeTimeZones && record.baseTimeZone}.
+              We will begin at 
+              {values.includeTimeZones ? moment(record.sessionDate).utc().format(" h:mm a") + " UTC" : moment(record.sessionDate).format(" h:mm a")}.
+              {/* {values.includeTimeZones && record.baseTimeZone}. */}
             </Typography>
 
             {values.includeTimeZones && (
@@ -301,14 +311,14 @@ const SendMessageDialog = (props) => {
                   Additional time zones are:
                 </Typography>
                 <Typography variant="h6" sx={{ ml: 3 }}>
+                  {moment(record.sessionDate).format(" h:mm a")}{" "}{record.baseTimeZone}{" / "} 
                   {additionalTimeZones}
                 </Typography>
               </>
             )}
-
             {values.includeSessionName && (
-              <Typography variant="h5" sx={{ ml: 3, pt: 3 }}>
-                {record.name}
+              <Typography variant="h6" sx={{ ml: 3, pt: 3 }}>
+                {"> "}{record.name}
               </Typography>
             )}
             {values.includeSessionDescription && (

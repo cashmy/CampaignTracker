@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-04-04 15:36:04
- * @modify date 2023-04-05 12:11:44
+ * @modify date 2023-04-06 18:13:02
  * @desc [description]
  */
 
@@ -93,7 +93,7 @@ const NextMeetingDialog = (props) => {
   };
   //#endregion
 
-  // console.log("NextMeetingDialog: values", recordForEdit);
+  console.log("NextMeetingDialog: values", recordForEdit);
   return (
     <Fragment>
       <Form>
@@ -133,12 +133,13 @@ const NextMeetingDialog = (props) => {
             </Grid>
           </Grid>
           <Grid item xs={6}>
-            <Controls.TextField
-              name="scheduledStartTm"
+            <Controls.TimePicker
+              name="sessionDate"
               label="Start Time"
-              value={values.scheduledStartTime}
+              value={values.sessionDate}
               onChange={handleInputChange}
-              error={errors.scheduledStartTime}
+              error={errors.sessionDate}
+              minutesStep={5}
             />
           </Grid>
           <Grid item xs={6}>

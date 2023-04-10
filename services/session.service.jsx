@@ -30,6 +30,7 @@ class SessionService {
   };
 
   updateRecord = (data) => {
+    console.log("Sessions => updateRecord: ", data.sessionDate)
     axios
       .put(API_URL + `${data.id}/`, data, { headers: authHeader() })
       .then((response) => {
