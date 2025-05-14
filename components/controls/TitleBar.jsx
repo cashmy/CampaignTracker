@@ -7,7 +7,7 @@
  */
 
 //#region [General imports]
-import * as React from 'react';
+import * as React from "react";
 import { useRouter } from "next/router";
 import {
   Avatar,
@@ -20,18 +20,18 @@ import {
   Paper,
   TextField,
   Tooltip,
-  Typography
-} from '@mui/material';
+  Typography,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import Inventory2TwoToneIcon from '@mui/icons-material/Inventory2TwoTone';
-import InventoryTwoToneIcon from '@mui/icons-material/InventoryTwoTone';
-import GridViewRoundedIcon from '@mui/icons-material/GridViewRounded';
-import FormatListNumberedRoundedIcon from '@mui/icons-material/FormatListNumberedRounded';
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import Inventory2TwoToneIcon from "@mui/icons-material/Inventory2TwoTone";
+import InventoryTwoToneIcon from "@mui/icons-material/InventoryTwoTone";
+import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
+import FormatListNumberedRoundedIcon from "@mui/icons-material/FormatListNumberedRounded";
 
 // * Helper functions
-import { stringAvatar } from 'lib/helpers/avatarFn';
+import { stringAvatar } from "lib/helpers/avatarFn";
 
 //#endregion
 
@@ -61,19 +61,19 @@ export default function TitleBar(props) {
     toggleColor,
 
     searchBar,
-  } = props
+  } = props;
 
   const router = useRouter();
   const returnSpace = 2 + (addFab ? 7 : 0);
   const archiveSpace = 2 + (addFab ? 7 : 0) + (returnFab ? 7 : 0);
 
   const returnToParent = () => {
-    router.back()
+    router.back();
   };
 
   const defaultHandleAdd = () => {
     alert("Adding a new item... \nNot yet implemented");
-  }
+  };
 
   return (
     <Paper
@@ -83,52 +83,44 @@ export default function TitleBar(props) {
         // display: "flex",
         flexDirection: "flex-row",
         alignItems: "center",
-        borderRadius: '10px',
-        gridColumn: '1/-1',
+        borderRadius: "10px",
+        gridColumn: "1/-1",
         // bgcolor: 'grey',
-        display: { xs: 'none', sm: 'grid' },
-        gridTemplateColumns: '.1fr 1fr 1fr .5fr .1fr .1fr .1fr',
-        '& > *': {
+        display: { xs: "none", sm: "grid" },
+        gridTemplateColumns: ".1fr 1fr 1fr .5fr .1fr .1fr .1fr",
+        "& > *": {
           p: 2,
-          '&:nth-of-type(n):not(:nth-last-of-type(-n+4))': {
-            borderBottom: '1px solid',
-            borderColor: 'divider',
+          "&:nth-of-type(n):not(:nth-last-of-type(-n+4))": {
+            borderBottom: "1px solid",
+            borderColor: "divider",
           },
         },
       }}
     >
       {/* //& Avatar/Icon/None */}
-      {avatarIcon == "image" &&
-        <Box sx={{width: "85px"}}>
-        <Card >
-          <CardMedia>
-            <img
-              src={`${avatarImage}`} 
-              // width="200px"
-            />
-          </CardMedia>
-        </Card>
-      </Box>
-      }
-
-
-      {avatarIcon == "icon" &&
-        <IconButton
-          size="lg"
-          variant="plain"
-          sx={{ ml: 1 }}
-        >
+      {avatarIcon == "image" && (
+        <Box sx={{ width: "85px" }}>
+          <Card>
+            <CardMedia>
+              <img
+                src={`${avatarImage}`}
+                // width="200px"
+              />
+            </CardMedia>
+          </Card>
+        </Box>
+      )}
+      {avatarIcon == "icon" && (
+        <IconButton size="lg" variant="plain" sx={{ ml: 1 }}>
           {avatarImage}
         </IconButton>
-      }
+      )}
       {avatarIcon == "none" && <Typography />}
-
       {/* //& Component Title */}
-      <Typography variant='h4' sx={{ marginLeft: 1.5, marginTop: .25 }} >
-        {toolTipText && <Tooltip></Tooltip>}
+      <Typography variant="h4" sx={{ marginLeft: 1.5, marginTop: 0.25 }}>
+        {toolTipText && <Tooltip>toolTipText</Tooltip>}
         {componentTitle || "Component Title Goes Here"}
       </Typography>
-
       {/* //& Search Bar */}
       {!searchBar && <Typography />}
       {searchBar && (
@@ -137,48 +129,56 @@ export default function TitleBar(props) {
           placeholder="Search projects by name"
           startDecorator={<SearchRoundedIcon color="primary" />}
           endDecorator={
-            <IconButton variant="outlined" size="sm" color="neutral" onClick={() => alert('/ clicked')}>
+            <IconButton
+              variant="outlined"
+              size="sm"
+              color="neutral"
+              onClick={() => alert("/ clicked")}
+            >
               <Typography fontWeight="lg" fontSize="sm">
                 /
               </Typography>
             </IconButton>
           }
           sx={{
-            flexBasis: '500px',
+            flexBasis: "500px",
             display: {
-              xs: 'none',
-              sm: 'flex',
+              xs: "none",
+              sm: "flex",
             },
           }}
         />
       )}
-
       <Typography /> {/* //& Spacer */}
-
       {/* //& Optional Toggle Button */}
       {toggleFab && (
-        <Tooltip title={"Switch to " + (!toggleStatus ? "Grid" : "List") + " view"} >
+        <Tooltip
+          title={"Switch to " + (!toggleStatus ? "Grid" : "List") + " view"}
+        >
           <Button
-            sx={{ m: 1.5, }}
+            sx={{ m: 1.5 }}
             variant="outlined"
             color={toggleColor || "primary"}
             aria-label="switch display view"
             size="sm"
             onClick={handleDisplay}
           >
-            {!toggleStatus ? <GridViewRoundedIcon /> : <FormatListNumberedRoundedIcon />}
+            {!toggleStatus ? (
+              <GridViewRoundedIcon />
+            ) : (
+              <FormatListNumberedRoundedIcon />
+            )}
             {/* <Inventory2TwoToneIcon /> */}
           </Button>
         </Tooltip>
       )}
-
-      {/* //& Optional Arkcive Button */}
+      {/* //& Optional Archive Button */}
       {archiveFab && (
-        <Tooltip title={"Switch to " + (!archiveStatus ? "Archive" : "Active")} >
+        <Tooltip title={"Switch to " + (!archiveStatus ? "Archive" : "Active")}>
           <Button
             sx={{
               m: 1.5,
-              // position: "absolute", 
+              // position: "absolute",
               // right: theme.spacing(archiveSpace)
             }}
             color={archiveColor || "info"}
@@ -186,19 +186,22 @@ export default function TitleBar(props) {
             size="sm"
             onClick={handleArchive}
           >
-            {!archiveStatus ? <Inventory2TwoToneIcon /> : <InventoryTwoToneIcon />}
+            {!archiveStatus ? (
+              <Inventory2TwoToneIcon />
+            ) : (
+              <InventoryTwoToneIcon />
+            )}
             {/* <Inventory2TwoToneIcon /> */}
           </Button>
         </Tooltip>
       )}
-
       {/* //& Optional Return Button */}
       {returnFab && (
         <Tooltip title="Return to previous display">
           <Button
             sx={{
               m: 1,
-              // position: "absolute", 
+              // position: "absolute",
               // right: theme.spacing(returnSpace)
             }}
             color={secondaryColor || "secondary"}
@@ -210,7 +213,6 @@ export default function TitleBar(props) {
           </Button>
         </Tooltip>
       )}
-
       {/* //& Optional Add Button */}
       {addFab && (
         <Tooltip title={addToolTip || "Add a new item"}>
@@ -229,8 +231,6 @@ export default function TitleBar(props) {
           </Button>
         </Tooltip>
       )}
-
     </Paper>
   );
-};
-
+}

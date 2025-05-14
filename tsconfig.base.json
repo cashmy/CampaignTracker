@@ -10,12 +10,17 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@crema/components": ["libs/components/src/index.js"],
+      "@crema/components": [
+        "libs/components/src/index.js"
+      ],
       "@crema/components/AppAnimate": [
         "libs/components/src/lib/AppAnimate/index.js"
       ],
@@ -34,7 +39,9 @@
       "@crema/components/AppBadge": [
         "libs/components/src/lib/AppBadge/index.js"
       ],
-      "@crema/components/AppCard": ["libs/components/src/lib/AppCard/index.js"],
+      "@crema/components/AppCard": [
+        "libs/components/src/lib/AppCard/index.js"
+      ],
       "@crema/components/AppCircularProgress": [
         "libs/components/src/lib/AppCircularProgress/index.js"
       ],
@@ -62,7 +69,9 @@
       "@crema/components/AppErrorBoundary": [
         "libs/components/src/lib/AppErrorBoundary/index.js"
       ],
-      "@crema/components/AppGrid": ["libs/components/src/lib/AppGrid/index.js"],
+      "@crema/components/AppGrid": [
+        "libs/components/src/lib/AppGrid/index.js"
+      ],
       "@crema/components/AppGridContainer": [
         "libs/components/src/lib/AppGridContainer/index.js"
       ],
@@ -78,7 +87,9 @@
       "@crema/components/AppLinearProgress": [
         "libs/components/src/lib/AppLinearProgress/index.js"
       ],
-      "@crema/components/AppList": ["libs/components/src/lib/AppList/index.js"],
+      "@crema/components/AppList": [
+        "libs/components/src/lib/AppList/index.js"
+      ],
       "@crema/components/AppList/ListEmptyResult": [
         "libs/components/src/lib/AppList/ListEmptyResult.js"
       ],
@@ -97,7 +108,9 @@
       "@crema/components/AppMedialViewer": [
         "libs/components/src/lib/AppMedialViewer/index.js"
       ],
-      "@crema/components/AppMenu": ["libs/components/src/lib/AppMenu/index.js"],
+      "@crema/components/AppMenu": [
+        "libs/components/src/lib/AppMenu/index.js"
+      ],
       "@crema/components/AppMessageView": [
         "libs/components/src/lib/AppMessageView/index.js"
       ],
@@ -176,7 +189,9 @@
       "@crema/components/AppsStarredIcon": [
         "libs/components/src/lib/AppsStarredIcon/index.js"
       ],
-      "@crema/components/AuthRoutes": ["libs/components/src/lib/AuthRoutes.js"],
+      "@crema/components/AuthRoutes": [
+        "libs/components/src/lib/AuthRoutes.js"
+      ],
       "@crema/components/ChartTooltip": [
         "libs/components/src/lib/ChartTooltip/index.js"
       ],
@@ -204,16 +219,30 @@
       "@crema/components/TodoListSkeleton": [
         "libs/components/src/lib/AppSkeleton/TodoListSkeleton.js"
       ],
-      "@crema/constants": ["libs/constants/src/index.js"],
-      "@crema/constants/ActionTypes": ["libs/constants/src/ActionTypes.js"],
-      "@crema/constants/AppConst": ["libs/constants/src/AppConst.js"],
-      "@crema/constants/AppEnums": ["libs/constants/src/AppEnums.js"],
-      "@crema/constants/ColorSets": ["libs/constants/src/ColorSets.js"],
+      "@crema/constants": [
+        "libs/constants/src/index.js"
+      ],
+      "@crema/constants/ActionTypes": [
+        "libs/constants/src/ActionTypes.js"
+      ],
+      "@crema/constants/AppConst": [
+        "libs/constants/src/AppConst.js"
+      ],
+      "@crema/constants/AppEnums": [
+        "libs/constants/src/AppEnums.js"
+      ],
+      "@crema/constants/ColorSets": [
+        "libs/constants/src/ColorSets.js"
+      ],
       "@crema/constants/db/navigationStyle": [
         "libs/mockapi/src/fakedb/navigationStyle.js"
       ],
-      "@crema/constants/defaultConfig": ["libs/constants/src/defaultConfig.js"],
-      "@crema/context": ["libs/context/src/index.ts"],
+      "@crema/constants/defaultConfig": [
+        "libs/constants/src/defaultConfig.js"
+      ],
+      "@crema/context": [
+        "libs/context/src/index.ts"
+      ],
       "@crema/context/AppContextProvider": [
         "libs/context/src/AppContextProvider/index.js"
       ],
@@ -241,11 +270,15 @@
       "@crema/context/ThemeContextProvider": [
         "libs/context/src/AppContextProvider/ThemeContextProvider.js"
       ],
-      "@crema/fakedb": ["libs/fakedb/src/index.js"],
+      "@crema/fakedb": [
+        "libs/fakedb/src/index.js"
+      ],
       "@crema/fakedb/chat/connectionList": [
         "libs/mockapi/src/fakedb/apps/chat/connectionList.js"
       ],
-      "@crema/fakedb/data": ["libs/mockapi/src/fakedb/index.js"],
+      "@crema/fakedb/data": [
+        "libs/mockapi/src/fakedb/index.js"
+      ],
       "@crema/fakedb/ecommerceData": [
         "libs/mockapi/src/fakedb/ecommerce/index.js"
       ],
@@ -258,10 +291,18 @@
       "@crema/fakedb/navigationStyle": [
         "libs/mockapi/src/fakedb/navigationStyle.js"
       ],
-      "@crema/helpers": ["libs/helpers/src/index.js"],
-      "@crema/hooks": ["libs/hooks/src/index.js"],
-      "@crema/mockapi": ["libs/mockapi/src/index.js"],
-      "@crema/modules": ["libs/modules/src/index.js"],
+      "@crema/helpers": [
+        "libs/helpers/src/index.js"
+      ],
+      "@crema/hooks": [
+        "libs/hooks/src/index.js"
+      ],
+      "@crema/mockapi": [
+        "libs/mockapi/src/index.js"
+      ],
+      "@crema/modules": [
+        "libs/modules/src/index.js"
+      ],
       "@crema/modules/ErrorPages/ComingSoon": [
         "libs/modules/src/lib/errorPages/ComingSoon/index.js"
       ],
@@ -286,19 +327,27 @@
       "@crema/modules/MyProfile": [
         "libs/modules/src/lib/account/MyProfile/index.js"
       ],
-      "@crema/modules/apps/Chat": ["libs/modules/src/lib/apps/Chat/index.js"],
+      "@crema/modules/apps/Chat": [
+        "libs/modules/src/lib/apps/Chat/index.js"
+      ],
       "@crema/modules/apps/Contact": [
         "libs/modules/src/lib/apps/Contact/index.js"
       ],
-      "@crema/modules/apps/Mail": ["libs/modules/src/lib/apps/Mail/index.js"],
+      "@crema/modules/apps/Mail": [
+        "libs/modules/src/lib/apps/Mail/index.js"
+      ],
       "@crema/modules/apps/ScrumBoard": [
         "libs/modules/src/lib/apps/ScrumBoard/index.js"
       ],
       "@crema/modules/apps/ScrumBoard/Detail": [
         "libs/modules/src/lib/apps/ScrumBoard/BoardDetail/index.js"
       ],
-      "@crema/modules/apps/ToDo": ["libs/modules/src/lib/apps/ToDo/index.js"],
-      "@crema/modules/apps/Wall": ["libs/modules/src/lib/apps/Wall/index.js"],
+      "@crema/modules/apps/ToDo": [
+        "libs/modules/src/lib/apps/ToDo/index.js"
+      ],
+      "@crema/modules/apps/Wall": [
+        "libs/modules/src/lib/apps/Wall/index.js"
+      ],
       "@crema/modules/auth/ForgetPassword": [
         "libs/modules/src/lib/auth/ForgetPassword/index.js"
       ],
@@ -410,7 +459,9 @@
       "@crema/modules/extraPages/Pricing": [
         "libs/modules/src/lib/extraPages/Pricing/index.js"
       ],
-      "@crema/modules/thirdParty": ["libs/modules/src/lib/thirdParty/index.js"],
+      "@crema/modules/thirdParty": [
+        "libs/modules/src/lib/thirdParty/index.js"
+      ],
       "@crema/modules/userList/Flat": [
         "libs/modules/src/lib/userList/Flat/index.js"
       ],
@@ -420,8 +471,12 @@
       "@crema/modules/userList/Standard": [
         "libs/modules/src/lib/userList/Standard/index.js"
       ],
-      "@crema/modules/userPages": ["libs/modules/src/lib/userPages/index.js"],
-      "@crema/services/auth": ["libs/services/auth/src/index.js"],
+      "@crema/modules/userPages": [
+        "libs/modules/src/lib/userPages/index.js"
+      ],
+      "@crema/services/auth": [
+        "libs/services/auth/src/index.js"
+      ],
       "@crema/services/auth/AWSAuthProvider": [
         "libs/services/auth/src/aws-cognito/AWSAuthProvider.js"
       ],
@@ -431,19 +486,34 @@
       "@crema/services/auth/FirebaseAuthProvider": [
         "libs/services/auth/src/firebase/FirebaseAuthProvider.js"
       ],
-      "@crema/services/auth/JWT": ["libs/services/auth/src/jwt-auth/index.js"],
+      "@crema/services/auth/JWT": [
+        "libs/services/auth/src/jwt-auth/index.js"
+      ],
       "@crema/services/auth/JWTAuthProvider": [
         "libs/services/auth/src/jwt-auth/JWTAuthProvider.js"
       ],
-      "@crema/services/axios": ["libs/services/axios/src/index.js"],
+      "@crema/services/axios": [
+        "libs/services/axios/src/index.js"
+      ],
       "@crema/services/localization": [
         "libs/services/localization/src/index.js"
       ],
-      "@crema/svg-icons": ["libs/svg-icons/src/index.ts"],
-      "@crema/hooks/APIHooks": ["libs/hooks/src/APIHooks.js"],
-      "@crema/hooks/AuthHooks": ["libs/hooks/src/AuthHooks.js"],
-      "@crema/helpers/IntlMessages": ["libs/helpers/src/IntlMessages.js"]
+      "@crema/svg-icons": [
+        "libs/svg-icons/src/index.ts"
+      ],
+      "@crema/hooks/APIHooks": [
+        "libs/hooks/src/APIHooks.js"
+      ],
+      "@crema/hooks/AuthHooks": [
+        "libs/hooks/src/AuthHooks.js"
+      ],
+      "@crema/helpers/IntlMessages": [
+        "libs/helpers/src/IntlMessages.js"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

@@ -323,6 +323,7 @@ const ImageLibrary = (props) => {
             avatarImage={selectAvatarImage(imageType)}
           />
         </Box>
+
         {/* //* Component Pannel */}
         <Box
           id="componentPannel"

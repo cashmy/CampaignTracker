@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-03-29 17:51:58
- * @modify date 2023-04-01 19:32:23
+ * @modify date 2023-04-27 12:49:52
  * @desc [description]
  */
 
@@ -249,7 +249,7 @@ const SideBarContent = () => {
           <PageDialog
             openPopup={isAddPlayer}
             setOpenPopup={handleAddPlayerClose}
-            title={"Edit a Player"}
+            title={"Add a Player"}
             titleColor={process.env.NEXT_PUBLIC_NX_PRIMARY_COLOR}
             size="md"
           >

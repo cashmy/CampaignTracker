@@ -7,13 +7,11 @@
  */
 
 //#region Imports
-import { useEffect, useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 import PropTypes from "prop-types";
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import Image from "mui-image";
-import Controls from "components/controls/Controls";
-import { Form, useForm } from "lib/hooks/useForm";
-import { imageRecord as initialFValues } from "dataModels/images";
+import { Form } from "lib/hooks/useForm";
 //#endregion
 
 const ViewImageDialog = (props) => {
@@ -32,11 +30,11 @@ const ViewImageDialog = (props) => {
           borderRadius: "10px",
         };
       case "a":
-        return ({
+        return {
           aspectRatio: "1/1",
           maxWidth: "50vh",
           borderRadius: "50px",
-        });
+        };
       case "t":
         return {
           aspectRatio: "1/1",

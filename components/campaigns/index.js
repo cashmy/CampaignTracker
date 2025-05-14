@@ -8,7 +8,7 @@ import AdventureList from "../adventures/AdventureList";
 import { CampaignRecord as emptyCampaignRecord } from "dataModels/campaign";
 import { AdventureRecord as emptyAdventureRecord } from "dataModels/adventure";
 import SessionList from "../sessions/SessionList";
-import TimeLineList from "../timelines/TimeLineList";
+import TimeLineList from "../timelines/TimelineList";
 
 const CampaignDashboard = () => {
   const [campaign, setCampaign] = useState(emptyCampaignRecord);
@@ -17,7 +17,7 @@ const CampaignDashboard = () => {
   const handleClear = () => {
     setCampaign(emptyCampaignRecord);
     setAdventure(emptyAdventureRecord);
-  }
+  };
   const selectCampaign = (record) => {
     setCampaign(record);
     setAdventure(emptyAdventureRecord);
@@ -28,8 +28,8 @@ const CampaignDashboard = () => {
 
   return (
     <>
-      <AppGridContainer >
-        <Grid item xs={12} sx={{paddingTop: '5px !important'}} >
+      <AppGridContainer>
+        <Grid item xs={12} sx={{ paddingTop: "5px !important" }}>
           <CampaignHeader title="Campaign Tracker" handleClear={handleClear} />
         </Grid>
 
@@ -53,7 +53,6 @@ const CampaignDashboard = () => {
             )}
             {campaign && <SessionList adventure={adventure} />}
           </Grid>
-          
         </Grid>
 
         <Grid item xs={3}>

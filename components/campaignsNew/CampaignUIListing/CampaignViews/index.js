@@ -2,7 +2,7 @@
  * @author Cash Myers
  * @github [https://github.com/cashmy]
  * @create date 2023-02-28 11:29:57
- * @modify date 2023-03-19 15:16:45
+ * @modify date 2023-05-05 16:41:41
  * @desc [description]
  */
 
@@ -22,7 +22,7 @@ import AppHeader from "lib/components/AppContainer/AppHeader";
 import AppsPagination from "lib/components/AppsPagination";
 import Controls from "components/controls/Controls";
 import PageDialog from "components/controls/PageDialog";
-import RecordDisplay from '../../CampaignDetails/RecordDisplay';
+import RecordDisplay from "../../CampaignDetails/RecordDisplay";
 // * Services
 import { useInfoViewActionsContext } from "lib/context/AppContextProvider/InfoViewContextProvider";
 import {
@@ -31,7 +31,12 @@ import {
 } from "../../CampaignsContextProvider";
 import CampaignService from "services/campaign.service";
 import { CampaignRecord as emptyRecord } from "dataModels/campaign";
-import { useGetDataApi, deleteDataApi, postDataApi, patchDataApiSts } from 'lib/hooks/APIHooks';
+import {
+  useGetDataApi,
+  deleteDataApi,
+  postDataApi,
+  patchDataApiSts,
+} from "lib/hooks/APIHooks";
 //#endregion
 
 const CampaignViews = () => {
@@ -57,7 +62,7 @@ const CampaignViews = () => {
   });
   const { reCallAPI, API_URL } = useCampaignsActionsContext();
   //#endregion
-  
+
   // const [
   //   { apiData: recordList, loading },
   //   { setQueryParams, setData: setCampaignData, reCallAPI },
@@ -72,7 +77,7 @@ const CampaignViews = () => {
   //     page: page,
   //   });
   // }, [all, page]);
-  
+
   //#region //* Event Handlers & Callbacks
   const handleReload = () => {
     setNotify({
@@ -80,8 +85,8 @@ const CampaignViews = () => {
       message: "Data reload requested",
       type: "info",
     });
-    reCallAPI()
-  }
+    reCallAPI();
+  };
   const handleAddRecordOpen = () => {
     setSelectedRecord(emptyRecord);
     setDetailTitle("Add Campaign");
@@ -103,8 +108,7 @@ const CampaignViews = () => {
         type: "error",
       });
       reCallAPI();
-    }
-    else {
+    } else {
       CampaignService.updateRecord(record);
       setNotify({
         isOpen: true,
@@ -136,22 +140,20 @@ const CampaignViews = () => {
         onUpdateSelectedCampaign(data[0]);
         infoViewActionsContext.showMessage(
           data[0].archived
-            ? 'Campaign Marked as Archived Successfully'
-            : 'Campaign Marked as Unarchived Successfully'
+            ? "Campaign Marked as Archived Successfully"
+            : "Campaign Marked as Unarchived Successfully"
         );
       })
       .catch((error) => {
         infoViewActionsContext.fetchError(error.message);
       });
-      // reCallAPI();
+    // reCallAPI();
   };
   const onChangeCheckedRecords = (event, id) => {
     if (event.target.checked) {
       setCheckedRecords(checkedRecords.concat(id));
     } else {
-      setCheckedRecords(
-        checkedRecords.filter((recordId) => recordId !== id),
-      );
+      setCheckedRecords(checkedRecords.filter((recordId) => recordId !== id));
     }
   };
   const onOpenDetails = (record) => {
@@ -169,7 +171,7 @@ const CampaignViews = () => {
     })
       .then((data) => {
         // setRecordData(data);
-        infoViewActionsContext.showMessage('Record Deleted Successfully');
+        infoViewActionsContext.showMessage("Record Deleted Successfully");
       })
       .catch((error) => {
         infoViewActionsContext.fetchError(error.message);
@@ -259,7 +261,10 @@ const CampaignViews = () => {
         titleColor={process.env.NEXT_PUBLIC_NX_PRIMARY_COLOR}
         size="sm"
       >
-        <CampaignDialog recordForEdit={selectedRecord} addOrEdit={addEditRecord} />
+        <CampaignDialog
+          recordForEdit={selectedRecord}
+          addOrEdit={addEditRecord}
+        />
       </PageDialog>
 
       {/* View Detail */}
@@ -270,7 +275,7 @@ const CampaignViews = () => {
         titleColor={process.env.NEXT_PUBLIC_NX_PRIMARY_COLOR}
         size="md"
       >
-        <RecordDisplay record={selectedRecord} showActions={false}/>
+        <RecordDisplay record={selectedRecord} showActions={false} />
       </PageDialog>
 
       {/* Delete Record */}
